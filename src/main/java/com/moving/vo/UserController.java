@@ -1,4 +1,4 @@
-package com.moving.controller;
+package com.moving.vo;
 
 import java.util.List;
 
