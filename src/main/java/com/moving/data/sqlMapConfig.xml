@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<properties resource="com/spring/data/moving.properties" />
+	<properties resource="com/moving/data/moving.properties" />
 	<typeAliases>
-		<typeAlias type="com.spring.vo.UserVo" alias="userVo" />
+		<typeAlias type="com.moving.vo.UserVo" alias="userVo" />
 
 	</typeAliases>
 
@@ -23,6 +23,6 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="com\spring\data\movingMapper.xml" />
+		<mapper resource="com\moving\data\movingMapper.xml" />
 	</mappers>
 </configuration>

@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.moving.vo.UserVo;
+
 
 public class MovingHairManager {
 
@@ -16,18 +18,40 @@ public class MovingHairManager {
 	
 	static{
 		try{
-			Reader reader = Resources.getResourceAsReader("com/spring/data/sqlMapConfig.xml");
+			Reader reader = Resources.getResourceAsReader("com/moving/data/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	public static void surveyList(){
+
+	public static int idJungbokCheck(UserVo userVo) {
+		// TODO Auto-generated method stub
 		SqlSession session = factory.openSession();
 		
-		//List<SurveyVo> list = session.selectList("movingHair.");
+		String userId = userVo.getUserId();
+		int count = session.selectOne("movingHair.idJungbokCheck", userId);
 		
-		//return list;
+		return count;
+	}
+
+	public static int phoneJungbokCheck(UserVo userVo) {
+		
+		SqlSession session = factory.openSession();
+		
+		String userPhone = userVo.getUserPhone();
+		int count = session.selectOne("movingHair.phoneJungbokCheck", userPhone);
+		
+		return count;
+	}
+
+	//TODO 작성만 실행은 아직
+	public static int joinProc(UserVo userVo) {
+		SqlSession session = factory.openSession();
+		
+		
+		int count = session.insert("movingHair.joinProc", userVo);
+		
+		return count;
 	}
 }

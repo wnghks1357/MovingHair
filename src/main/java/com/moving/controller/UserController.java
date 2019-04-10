@@ -12,8 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moving.dao.UserDao;
+import com.moving.vo.UserVo;
+
 @Controller
 public class UserController {
+	
+	@Autowired
+	private UserDao dao;
+	
+	public void setDao(UserDao dao) {
+		this.dao = dao;
+	}
 	
 	@RequestMapping("/customerLoginView.do")
 	public ModelAndView customerMain() {
@@ -50,5 +60,34 @@ public class UserController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/idJungbokCheck.do")
+	@ResponseBody
+	public String idJungbokCheck(UserVo userVo) {
+		
+		int count = dao.idJungbokCheck(userVo);
+		
+		return count+"";
+	}
+	
+	@RequestMapping("/phoneJungbokCheck.do")
+	@ResponseBody
+	public String phoneJungbokCheck(UserVo userVo) {
+		
+		int count = dao.phoneJungbokCheck(userVo);
+		
+		return count+"";
+	}
+	
+	@RequestMapping("/joinProc.do")
+	public ModelAndView joinProc(UserVo userVo) {
+		ModelAndView mav = new ModelAndView();
+		
+		int count = dao.joinProc(userVo);
+		
+		
+		return mav;
+	}
+	
 	
 }

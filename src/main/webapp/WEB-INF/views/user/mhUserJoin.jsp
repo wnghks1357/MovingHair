@@ -25,20 +25,20 @@ $(function () {
 	//저장 버튼클릭시 유효성 검사
 	$("#newMemberJoinBtn").click(function () {
 		
-		// if( $("#idMessageBox").text()=="" || $("#idMessageBox").text() == "중복된 ID가 존재합니다.") {
-		// 	alert("ID 중복검사를 해주세요.");
-		// 	return;
-		// }
+		if( $("#idMessageBox").text()=="" || $("#idMessageBox").text() == "중복된 ID가 존재합니다.") {
+			alert("ID 중복검사를 해주세요.");
+			return;
+		}
 		
-		if( $("#userPassword").val() != $("#repeatPassword").val() ){
+		if( $("#userPwd").val() != $("#repeatPassword").val() ){
 			alert("비밀번호가 일치하지 않습니다.");
 			return;
-    }
+		}
     
-		// if( $("#phoneMessageBox").text() =="" || $("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
-		// 	alert("휴대폰번호 중복확인을 해주세요.");
-		// 	return;			
-    // }
+		if( $("#phoneMessageBox").text() =="" || $("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
+		 	alert("휴대폰번호 중복확인을 해주세요.");
+		 	return;			
+		}
 		
 		//아아디는 입력했는데 도메인을 입력하지 않은 경우
 		if( $("#emailID").val() != "" && $("#emailAddr option:selected").val() == ""){
@@ -55,18 +55,18 @@ $(function () {
 			var emailAddr =$("#emailAddr option:selected").val();
 			var user_email = emailID + "@" + emailAddr;
 			$("#userEmail").val(user_email);
-    }
+    	}
     
-    var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
-    var txtMobile2 = $.trim($("#txtMobile2").val());
-    var txtMobile3 = $.trim($("#txtMobile3").val());
-    var userPhone = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3;
-	  $("#userPhone").val(userPhone);
+    	var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
+	    var txtMobile2 = $.trim($("#txtMobile2").val());
+	    var txtMobile3 = $.trim($("#txtMobile3").val());
+	    var userPhone = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3;
+		$("#userPhone").val(userPhone);
 		
 		// 패스워드 hashing ( sha512.js 사용 )
-		var shaPwd = hex_sha512($('#userPassword').val()).toString();
+		var shaPwd = hex_sha512($('#userPwd').val()).toString();
 		shaPwd = shaPwd.substring(0,20);
-		$("#userPassword").val(shaPwd);
+		$("#userPwd").val(shaPwd);
 		// 패스워드 hashing ( sha512.js 사용 ) //
 		
 		var f = document.form1;
@@ -74,12 +74,12 @@ $(function () {
 	});
 	
 	$("#cancelBtn").click(function () {
-		location.href='/customerMain';
+		history.back();
 	});
 });
 
 function fnPwdCheck(){
-	var usrPwd = $("#userPassword").val();
+	var usrPwd = $("#userPwd").val();
 	var usrPwdCheck = $("#repeatPassword").val();
 	if(usrPwd != usrPwdCheck){
 		$("#pwdMsg").html("<font color='red'>패스워드가 일치하지 않습니다.<font>");
@@ -92,59 +92,60 @@ function fnPwdCheck(){
 
 //아이디 중복 체크를 위한 함수
 function fnJungbokID(){
-  alert("구현 중");
-  // TO do
-	// var f = document.form1;
 	
-	// var result = svcf_Ajax("/app/member/idJungbokCheck.do", f, {
-	// 	async : false,
-	// 	procType : "D"
-	// });
-	// svcf_SyncCallbackFn(result, fnJungbokIdCallback);
+	$.ajax({
+		url : "idJungbokCheck.do",
+		data : { userId : $("#userId").val() },
+		success : function(count){   	
+			// 아이디 사용 가능
+			if(count === "0"){
+				$("#idMessageBox").empty();
+				var msgTag = "<p> 사용 가능한 아이디 입니다.</p>";
+ 				$("#idMessageBox").append(msgTag);
+			// 아이디 중복
+			}else{
+				$("#idMessageBox").empty();
+				var msgTag = "<p style='color:red;'> 이미 사용중인 아이디 입니다.</p>";
+    	   
+				$("#idMessageBox").append(msgTag);
+			}
+		},error : function(responseData){
+			alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+		}
+	});
 }
 
-//아이디 중복 체크 콜백 함수
-function fnJungbokIdCallback(status, data){
-	if(status.code == -1){
-		$("#idMessageBox").addClass("messageBox");
-	}
-	else if(status.code == 0){
-		$("#idMessageBox").removeClass("messageBox");
-	}
-		
-	$("#idMessageBox").text(status.message);
-	
-}
 //휴대폰 번호 중복 체크 함수
 function fnJungbokPhone(){
-  alert("구현 중");
-	// TO do
-	//  var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
-	//  var txtMobile2 = $.trim($("#txtMobile2").val());
-	//  var txtMobile3 = $.trim($("#txtMobile3").val());
-	//  var mob_no = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3
-	//  $("#MOB_NO").val(mob_no);
+	var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
+	var txtMobile2 = $.trim($("#txtMobile2").val());
+	var txtMobile3 = $.trim($("#txtMobile3").val());
+	var mob_no = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3
+	$("#userPhone").val(mob_no);
+	  
+	$.ajax({
+		url : "phoneJungbokCheck.do",
+		data : { userPhone : $("#userPhone").val() },
+		success : function(count){   	
+			// 번호 사용 가능
+			if(count === "0"){
+				$("#phoneMessageBox").empty();
+				var msgTag = "<p> 사용 가능한 번호 입니다.</p>";
+ 				$("#phoneMessageBox").append(msgTag);
+ 
+			// 번호 중복
+			}else{
+				$("#phoneMessageBox").empty();
+				var msgTag = "<p style='color:red;'> 이미 사용중인 번호 입니다.</p>";
+ 				$("#phoneMessageBox").append(msgTag);
+			}
+		},error : function(responseData){
+			alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+		}
+	});
 	 
-	//  var f = document.form1;
-		
-	// 	var result = svcf_Ajax("/app/member/phoneJungbokCheck.do", f, {
-	// 		async : false,
-	// 		procType : "D"
-	// 	});
-	// 	svcf_SyncCallbackFn(result, fnJungbokPhoneCallback);
+	  
  }
-//휴대폰 번호 중복 체크 콜백 함수 
-function fnJungbokPhoneCallback(status, data){
-		if(status.code == -1){
-			$("#phoneMessageBox").addClass("messageBox");
-		}
-		else if(status.code == 0){
-			$("#phoneMessageBox").removeClass("messageBox");
-		}
-			
-		$("#phoneMessageBox").text(status.message);
-		
-}
 
 //숫자만 입력 가능하도록 하기 위한 함수
 function ageChkNumber(event,type) {
@@ -199,17 +200,18 @@ function sample4_execDaumPostcode() {
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Welcome To the Moving Hair</h5>
-            <form class="form-signin" id="form1" name="form1" action="/users/joinProc" method="POST">
+            <form class="form-signin" id="form1" name="form1" action="joinProc.do" method="POST">
 
               <div class="form-label-group">
-                <input type="text" id="userID" name="userID" maxlength="20" minlength="4" size="40" placeholder="ID" required autofocus>
-                <label for="userID">아이디</label>
+                <input type="text" id="userId" name="userId" maxlength="20" minlength="4" size="40" placeholder="ID" required autofocus>
+                <label for="userId">아이디</label>
                 <input type="button" value="중복확인" onclick="fnJungbokID();" class="btn btn-primary" style="margin-bottom:9px; padding-bottom: 15px;"/>
+                <span id="idMessageBox"></span>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="userPassword" name="userPassword" maxlength="20" minlength="7" size="40" placeholder="Password" required>
-                <label for="userPassword">패스워드</label>
+                <input type="password" id="userPwd" name="userPwd" maxlength="20" minlength="7" size="40" placeholder="Password" required>
+                <label for="userPwd">패스워드</label>
               </div>
 
               <div class="form-label-group">
@@ -251,7 +253,7 @@ function sample4_execDaumPostcode() {
                 <span style="text-align: center">-</span>
                 <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
                 <input type="button" value="중복확인" onclick="fnJungbokPhone();" class="btn btn-primary" style="margin-bottom: 20px; padding-bottom: 13px;"/>
-                <span id="phoneMessageBox" class="phoneMessageBox"></span>
+                <span id="phoneMessageBox"></span>
                 <input type="hidden" id="userPhone" name="userPhone"/>
               </div>
               
@@ -283,9 +285,6 @@ function sample4_execDaumPostcode() {
                 <input type="text" class="form-control" id="sample4_jibunAddress" size="50" placeholder="상세주소를 입력해 주세요." name="userAddr2" maxlength="100" required>
                 <label for="sample4_jibunAddress">상세주소</label>
               </div>
-
-              <!-- 가입 완료 후 이동 페이지 -->
-              <input type="hidden" name="reqPage" id="reqPage" value="${reqPage }"/>
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="newMemberJoinBtn">Join !</button>
               <button id="cancelBtn" class="btn btn-lg btn-primary btn-block text-uppercase" type="button">Back</button>

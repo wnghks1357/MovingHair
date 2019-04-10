@@ -5,8 +5,17 @@
 <mapper namespace="movingHair">
 
 	
-  <select id="selectSurveyAll" resultType="surveyVo">
- 	select * from survey
+  <select id="idJungbokCheck" resultType="java.lang.Integer">
+ 	SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId}
+  </select>
+  
+  <select id="phoneJungbokCheck" resultType="java.lang.Integer">
+ 	SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
+  </select>
+  
+  <!-- TODO -->
+  <select id="joinProc" resultType="userVo">
+ 	INSERT INTO mh_user VALUES(#{userID}, #{userPassword}, #{userType}, #{userName}, #{userPhone}, #{userEmail}, 'A', #{userZip}, #{userAddr1}, #{userAddr2}, #{userBirthday},'M', 'Y', 'Y', 'M', 'Y', 'Y',curdate(),curdate())
   </select>
  
 </mapper>

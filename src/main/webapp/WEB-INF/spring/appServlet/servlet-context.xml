@@ -23,6 +23,7 @@
 	
 	<context:component-scan base-package="com.moving.sample" />
 	<context:component-scan base-package="com.moving.controller" />
+	<context:component-scan base-package="com.moving.dao" />
 	
 	
 	
