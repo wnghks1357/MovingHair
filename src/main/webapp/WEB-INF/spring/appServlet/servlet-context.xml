@@ -21,6 +21,21 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<interceptors>
+		<interceptor>
+			
+			<!-- 인터셉터 매핍 url -->
+			<mapping path="/customerMain.do"/>
+			
+			
+			
+			<!-- 로그인 체크 bean -->
+			<beans:bean id="loginInterceptor" class="com.moving.interceptors.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
 	<context:component-scan base-package="com.moving.sample" />
 	<context:component-scan base-package="com.moving.controller" />
 	<context:component-scan base-package="com.moving.dao" />

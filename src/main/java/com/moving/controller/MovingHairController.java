@@ -16,5 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class MovingHairController {
 	
 	
-	
+	@RequestMapping("/customerMain.do")
+	public ModelAndView customerMain() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("layout/layout");
+		return mav;
+	}
 }

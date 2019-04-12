@@ -5,17 +5,62 @@
 <mapper namespace="movingHair">
 
 	
-  <select id="idJungbokCheck" resultType="java.lang.Integer">
- 	SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId}
-  </select>
-  
-  <select id="phoneJungbokCheck" resultType="java.lang.Integer">
- 	SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
-  </select>
-  
-  <!-- TODO -->
-  <select id="joinProc" resultType="userVo">
- 	INSERT INTO mh_user VALUES(#{userID}, #{userPassword}, #{userType}, #{userName}, #{userPhone}, #{userEmail}, 'A', #{userZip}, #{userAddr1}, #{userAddr2}, #{userBirthday},'M', 'Y', 'Y', 'M', 'Y', 'Y',curdate(),curdate())
-  </select>
+	<select id="idJungbokCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="phoneJungbokCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
+	</select>
+	
+	<!-- TODO -->
+	<insert id="joinProc" parameterType="userPvo">
+		INSERT INTO mh_user(
+								USER_ID
+								, USER_PWD
+								, USER_TYPE
+								, USER_NAME
+								, USER_PHONE
+								, USER_EMAIL
+								, USER_STATUS
+								, USER_ZIP
+								, USER_ADDR1
+								, USER_ADDR2
+								, USER_BIRTHDAY
+								, USER_SEX
+								, RECEIVE_EMAIL
+								, RECEIVE_SMS
+								, CREATED_TYPE
+								, REQUIRED_AGREE
+								, SELECT_AGREE
+								, CREATED__DATE
+								, UPDATE_DATE
+							) VALUES (
+									 #{userId}
+									, #{userPwd}
+									, #{userType}
+									, #{userName}
+									, #{userPhone}
+									, #{userEmail}
+									, 'A'
+									, #{userZip}
+									, #{userAddr1}
+									, #{userAddr2}
+									, #{userBirthday}
+									, 'M'
+									, 'Y'
+									, 'Y'
+									, 'M'
+									, 'Y'
+									, 'Y'
+									, NOW()
+									, NOW()
+								)
+								
+	</insert>
+
+	<select id="loginProc" parameterType="com.moving.uservo.UserPVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId} and USER_PWD = #{userPwd}
+	</select>
  
 </mapper>

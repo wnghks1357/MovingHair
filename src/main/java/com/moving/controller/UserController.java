@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.UserDao;
-import com.moving.vo.UserVo;
+import com.moving.uservo.UserPVO;
+import com.moving.uservo.UserRVO;
 
 @Controller
 public class UserController {
@@ -26,8 +29,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/customerLoginView.do")
-	public ModelAndView customerMain() {
+	public ModelAndView customerLoginView() {
 		ModelAndView mav = new ModelAndView();
+		
+		
 		
 		mav.setViewName("user/customerLoginView");
 		
@@ -35,7 +40,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/designerLoginView.do")
-	public ModelAndView designerMain() {
+	public ModelAndView designerLoginView() {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("user/designerLoginView");
@@ -63,31 +68,58 @@ public class UserController {
 	
 	@RequestMapping("/idJungbokCheck.do")
 	@ResponseBody
-	public String idJungbokCheck(UserVo userVo) {
+	public String idJungbokCheck(UserPVO userPvo) {
 		
-		int count = dao.idJungbokCheck(userVo);
+		int count = dao.idJungbokCheck(userPvo);
 		
 		return count+"";
 	}
 	
 	@RequestMapping("/phoneJungbokCheck.do")
 	@ResponseBody
-	public String phoneJungbokCheck(UserVo userVo) {
+	public String phoneJungbokCheck(UserPVO userPvo) {
 		
-		int count = dao.phoneJungbokCheck(userVo);
+		int count = dao.phoneJungbokCheck(userPvo);
 		
 		return count+"";
 	}
 	
-	@RequestMapping("/joinProc.do")
-	public ModelAndView joinProc(UserVo userVo) {
+	//TODO
+	@RequestMapping(value="/joinProc.do", produces="text/plain;charset=UTF-8")
+	public ModelAndView joinProc(UserPVO userPvo) {
 		ModelAndView mav = new ModelAndView();
 		
-		int count = dao.joinProc(userVo);
+		System.out.println("userName : " + userPvo.getUserName());
+		
+		int count = dao.joinProc(userPvo);
+		
+		System.out.println(count);
+		
+		mav.setViewName("user/mhUserJoin");
 		
 		
 		return mav;
 	}
-	
-	
+
+	@RequestMapping("/loginProc.do")
+	public String loginProc(UserPVO userPvo, HttpSession session, HttpServletResponse response) {
+		
+
+		System.out.println(userPvo.getUserId());
+		System.out.println(userPvo.getUserPwd());
+		
+		int count = dao.loginProc(userPvo);
+		
+		System.out.println("count : "+count);
+		
+		if(count != 0) {
+			session.setAttribute("userId", userPvo.getUserId());
+			System.out.println("로그인 성공");
+			
+			return "redirect:/customerMain.do";
+		}else {
+			System.out.println("로그인 실패");
+			return "user/customerLoginView";
+		}	
+	}	
 }

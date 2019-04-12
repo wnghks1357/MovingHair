@@ -1,12 +1,11 @@
-package com.moving.vo;
+package com.moving.uservo;
 
 import java.sql.Timestamp;
 
 import lombok.Data;
 
 @Data
-public class UserVo {
-	private int userNo;
+public class UserVO {
 	private String userId;
 	private String userPwd;
 	private char userType;
@@ -24,9 +23,5 @@ public class UserVo {
 	private char createdType;
 	private char requiredAgree;
 	private char secretAgree;
-	private Timestamp createdDate;
-	private Timestamp updateDate;
-	private Timestamp outDate;
-	private Timestamp loginDate;
 	
 }

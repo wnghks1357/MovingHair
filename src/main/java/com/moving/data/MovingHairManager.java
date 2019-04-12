@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.moving.vo.UserVo;
+import com.moving.uservo.UserPVO;
+import com.moving.uservo.UserRVO;
+import com.moving.uservo.UserVO;
 
 
 public class MovingHairManager {
@@ -25,32 +27,41 @@ public class MovingHairManager {
 		}
 	}
 
-	public static int idJungbokCheck(UserVo userVo) {
+	public static int idJungbokCheck(UserPVO userPvo) {
 		// TODO Auto-generated method stub
 		SqlSession session = factory.openSession();
 		
-		String userId = userVo.getUserId();
+		String userId = userPvo.getUserId();
 		int count = session.selectOne("movingHair.idJungbokCheck", userId);
 		
 		return count;
 	}
 
-	public static int phoneJungbokCheck(UserVo userVo) {
+	public static int phoneJungbokCheck(UserPVO userPvo) {
 		
 		SqlSession session = factory.openSession();
 		
-		String userPhone = userVo.getUserPhone();
+		String userPhone = userPvo.getUserPhone();
 		int count = session.selectOne("movingHair.phoneJungbokCheck", userPhone);
 		
 		return count;
 	}
 
-	//TODO 작성만 실행은 아직
-	public static int joinProc(UserVo userVo) {
+	//TODO 
+	public static int joinProc(UserPVO userPvo) {
+		SqlSession session = factory.openSession(true);
+		
+		
+		int count = session.insert("movingHair.joinProc", userPvo);
+		
+		return count;
+	}
+
+	public static int loginProc(UserPVO userPvo) {
 		SqlSession session = factory.openSession();
 		
 		
-		int count = session.insert("movingHair.joinProc", userVo);
+		int count = session.selectOne("movingHair.loginProc", userPvo);
 		
 		return count;
 	}
