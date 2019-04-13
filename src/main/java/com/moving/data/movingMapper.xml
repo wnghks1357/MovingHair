@@ -3,7 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="movingHair">
-
+	<!-- 
+	<resultMap type="userRvo" id="userRvoMap">
+		<result column="USER_ID" property="userId" />
+	</resultMap>
+	 -->
 	
 	<select id="idJungbokCheck" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId}
@@ -59,8 +63,8 @@
 								
 	</insert>
 
-	<select id="loginProc" parameterType="com.moving.uservo.UserPVO" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId} and USER_PWD = #{userPwd}
+	<select id="loginProc" parameterType="userPvo" resultType="userRvo">
+		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
  
 </mapper>

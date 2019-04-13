@@ -20,6 +20,17 @@ public class MovingHairController {
 	public ModelAndView customerMain() {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("mainContent", "customerMain.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+	}
+	
+	@RequestMapping("/designerMain.do")
+	public ModelAndView designerMain() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.addObject("mainContent", "designerMain.jsp");
 		mav.setViewName("layout/layout");
 		return mav;
 	}

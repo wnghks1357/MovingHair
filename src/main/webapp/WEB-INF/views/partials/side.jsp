@@ -25,7 +25,7 @@
             <div class="phone d-flex flex-row align-items-center justify-content-start"><i class="fa fa-phone" aria-hidden="true"></i><span>02-345-3222</span></div>
             <div class="book_button trans_200"><a href="#">Book Now</a></div>
             
-            <div class="book_button trans_200" id="logoutBtn"><a href="/users/logoutProc">로그아웃</a></div>
+            <div class="book_button trans_200" id="logoutBtn"><a href="logoutProc.do">로그아웃</a></div>
           </div>
           <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
         </div>

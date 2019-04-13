@@ -1,11 +1,14 @@
-package com.moving.uservo;
+package com.moving.vo;
 
 import java.sql.Timestamp;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class UserVO {
+	
 	private String userId;
 	private String userPwd;
 	private char userType;
@@ -23,5 +26,11 @@ public class UserVO {
 	private char createdType;
 	private char requiredAgree;
 	private char secretAgree;
+	private Timestamp createdDate;
+	private Timestamp updateDate;
+	private Timestamp outDate;
+	private Timestamp loginDate;
+	
+	
 	
 }

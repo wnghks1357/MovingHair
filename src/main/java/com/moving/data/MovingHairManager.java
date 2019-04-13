@@ -9,9 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
-import com.moving.uservo.UserVO;
+import com.moving.vo.UserPVO;
+import com.moving.vo.UserRVO;
+import com.moving.vo.UserVO;
 
 
 public class MovingHairManager {
@@ -57,12 +57,11 @@ public class MovingHairManager {
 		return count;
 	}
 
-	public static int loginProc(UserPVO userPvo) {
+	public static UserRVO loginProc(UserPVO userPvo) {
 		SqlSession session = factory.openSession();
 		
+		UserRVO userRvo = session.selectOne("movingHair.loginProc", userPvo);
 		
-		int count = session.selectOne("movingHair.loginProc", userPvo);
-		
-		return count;
+		return userRvo;
 	}
 }

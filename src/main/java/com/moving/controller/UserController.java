@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.UserDao;
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
+import com.moving.vo.UserPVO;
+import com.moving.vo.UserRVO;
+import com.moving.vo.UserVO;
 
 @Controller
 public class UserController {
@@ -84,42 +85,90 @@ public class UserController {
 		return count+"";
 	}
 	
-	//TODO
+	/**
+	 * TODO 협의 후 컬럼 추가 필요
+	 * @description 필수 항목들을 체크하기 위한 requestParam 사용
+	 * @param userId
+	 * @param userPwd
+	 * @param userName
+	 * @param userPvo
+	 * @return
+	 */
 	@RequestMapping(value="/joinProc.do", produces="text/plain;charset=UTF-8")
-	public ModelAndView joinProc(UserPVO userPvo) {
+	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserPVO userPvo) {
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("userName : " + userPvo.getUserName());
 		
 		int count = dao.joinProc(userPvo);
 		
 		System.out.println(count);
+		if( count != 0) {
+			session.setAttribute("userId", userPvo.getUserId());
+		}
 		
-		mav.setViewName("user/mhUserJoin");
+		// 사용자 유형(사용자, 디자이너)에 따라 페이지 이동
+		String requestPage = "";
+		
+		// 사용자이고 회원가입 성공한 경우
+		if( userPvo.getUserType() == 'U' && count != 0) {
+			requestPage=  "redirect:/customerMain.do";
+		//디자이너이고 회원가입 성공한 경우
+		}else if( userPvo.getUserType() == 'D' && count != 0){
+			requestPage =  "redirect:/designerMain.do";
+		//사용자이고 회원가입 실패시 회원가입 페이지로 다시 복귀
+		}else if( userPvo.getUserType() == 'U' && count == 0 ) {
+			requestPage =  "redirect:/mhUserJoin.do";
+		//디자이너이고 회원가입 실패시 회원가입 페이지로 다시 복귀
+		}else if( userPvo.getUserType() == 'D' && count == 0 ) {
+			requestPage =  "redirect:/mhDesignerJoin.do";
+		}//TODO 관리자인 경우 추가 필요
+		else {
+			//전부 해당 안될 시 사용자 로그인 페이지로 이동
+			requestPage =  "redirect:/customerLoginView.do";
+		}
 		
 		
-		return mav;
+		return requestPage;
+		
 	}
 
 	@RequestMapping("/loginProc.do")
 	public String loginProc(UserPVO userPvo, HttpSession session, HttpServletResponse response) {
 		
-
-		System.out.println(userPvo.getUserId());
-		System.out.println(userPvo.getUserPwd());
+		UserRVO userRvo = dao.loginProc(userPvo);
 		
-		int count = dao.loginProc(userPvo);
+		String requestPage ="";
 		
-		System.out.println("count : "+count);
-		
-		if(count != 0) {
-			session.setAttribute("userId", userPvo.getUserId());
-			System.out.println("로그인 성공");
+		//로그인 정상 처리
+		if( userRvo != null ) {
 			
-			return "redirect:/customerMain.do";
+			//로그인 정상 처리시 session 저장
+			session.setAttribute("userId", userPvo.getUserId());
+			
+			
+			//사용자인 경우
+			if(userRvo.getUserType() == 'U') {
+				requestPage =  "redirect:/customerMain.do";
+			//디자이너인 경우
+			}else if(userRvo.getUserType() == 'D') {
+				requestPage =  "redirect:/designerMain.do";
+			}
 		}else {
 			System.out.println("로그인 실패");
-			return "user/customerLoginView";
-		}	
+			//로그인 실패시 customerLoginView로 이동
+			requestPage =  "user/customerLoginView";
+		}
+		
+		return requestPage;
+	}	
+	
+	@RequestMapping("/logoutProc.do")
+	public String logoutProc(UserPVO userPvo, HttpSession session, HttpServletResponse response) {
+		
+
+		session.removeAttribute("userId");
+		session.invalidate();
+		
+		return "user/customerLoginView";
+		
 	}	
 }

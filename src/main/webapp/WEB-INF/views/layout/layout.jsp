@@ -13,7 +13,7 @@
 	
 	
 	<nav>
-		<jsp:include page="../contents/customerMain.jsp"/>
+		<jsp:include page="../contents/${mainContent }"/>
 	</nav>
 	
 	<footer>

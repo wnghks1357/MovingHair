@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import com.moving.data.MovingHairManager;
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
-import com.moving.uservo.UserVO;
+import com.moving.vo.UserPVO;
+import com.moving.vo.UserRVO;
+import com.moving.vo.UserVO;
 
 
 @Repository
@@ -27,7 +27,7 @@ public class UserDao {
 		return MovingHairManager.joinProc(userPvo);
 	}
 
-	public int loginProc(UserPVO userPvo) {
+	public UserRVO loginProc(UserPVO userPvo) {
 		// TODO Auto-generated method stub
 		return MovingHairManager.loginProc(userPvo);
 	}
