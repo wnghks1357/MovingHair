@@ -95,6 +95,7 @@ function fnJungbokID(){
 	
 	$.ajax({
 		url : "idJungbokCheck.do",
+		type: "post",
 		data : { userId : $("#userId").val() },
 		success : function(count){   	
 			// 아이디 사용 가능
@@ -125,6 +126,7 @@ function fnJungbokPhone(){
 	  
 	$.ajax({
 		url : "phoneJungbokCheck.do",
+		type: "post",
 		data : { userPhone : $("#userPhone").val() },
 		success : function(count){   	
 			// 번호 사용 가능

@@ -64,4 +64,11 @@ public class MovingHairManager {
 		
 		return userRvo;
 	}
+
+	public static String idSearchProc(UserPVO userPvo) {
+		SqlSession session = factory.openSession();
+		
+		
+		return session.selectOne("movingHair.idSearchProc", userPvo);
+	}
 }

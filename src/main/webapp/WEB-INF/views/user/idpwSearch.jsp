@@ -17,10 +17,73 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 	function fnFindId(){
-		alert(" 준비 중 ");
+		if( $("#userName").val() =="" ){
+			alert("성명을 입력하세요.");
+			return;
+		}
+		if( $("#txtMobile1 option:selected").val()=="" || $("#txtMobile2").val() =="" || $("#txtMobile3").val() =="" ){
+			alert("휴대폰 번호를 입력하세요");
+			return;
+		}
+		
+		var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
+		var txtMobile2 = $.trim($("#txtMobile2").val());
+		var txtMobile3 = $.trim($("#txtMobile3").val());
+		var userPhone = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3;
+		 $("#userPhone").val(userPhone);
+		
+		var formData = $("#form1").serialize();
+		
+		$.ajax({
+			url: "idSearchProc.do",
+			type: "post",
+			data: formData,
+			success: function(userId){
+				
+				if( userId == "" || userId == null ){
+					$("#idSrchResult").text(" 입력하신 정보와 일치하는 회원 정보를 찾을 수 없습니다. ");
+				}else{
+					$("#idSrchResult").text("회원님의 아이디 | " + userId );	
+				}
+				
+			},error: function(result){
+				alert("서버 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+				console.log(result);
+			}
+		});
+		
+		
 	}
 	function fnFindPwd(){
-		alert(" 준비 중 ");
+		
+		alert("구현 예정");
+		/* if( $("#userName2").val() =="" ){
+			alert("성명을 입력하세요.");
+			return;
+		}
+		if( $("#txt2Mobile1 option:selected").val()=="" || $("#txt2Mobile2").val() =="" || $("#txt2Mobile3").val() =="" ){
+			alert("휴대폰 번호를 입력하세요");
+			return;
+		}
+		
+		var txt2Mobile1 = $.trim($("#txt2Mobile1 option:selected").val());
+		var txt2Mobile2 = $.trim($("#txt2Mobile2").val());
+		var txt2Mobile3 = $.trim($("#txt2Mobile3").val());
+		var userPhone2 = txt2Mobile1 + "-" + txt2Mobile2 + "-" + txt2Mobile3;
+		 $("#userPhone2").val(userPhone2);
+		
+		var f = document.form2;
+		
+		$.ajax({
+			url: "pwdSearchProc.do",
+			data : f,
+			type: "post",
+			success: function(result){
+				//TODO
+			},error: function(result){
+				//TODO
+			}
+		}) */
 	}
 
 </script>
@@ -38,7 +101,7 @@
 					<form id="form1" name="form1" method="post" action="#">
 						
 						<div class="form-label-group">
-							<input type="text" id="userName" name="userName" maxlength="8" size="22"/>
+							<input type="text" id="userName" name="userName" maxlength="10" size="22"/>
 							<label for="userName">성명</label>
 						</div>
 						
@@ -68,12 +131,12 @@
 					<form id="form2" name="form2" method="post" action="#">
 						
 						<div class="form-label-group">
-							<input type="text" id="userName2" name="userName" maxlength="8" size="22"/>
+							<input type="text" id="userName2" name="userName" maxlength="10" size="22"/>
 							<label for="userName2">성명</label>
 						</div>
 						
 						<div class="form-label-group">
-							<input type="text" id="userId" name="userId" maxlength="15" size="22"/>
+							<input type="text" id="userId" name="userId" maxlength="30" size="22"/>
 							<label for="userId">아이디</label>
 						</div>
 						

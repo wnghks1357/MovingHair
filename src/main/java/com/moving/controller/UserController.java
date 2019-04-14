@@ -2,12 +2,13 @@ package com.moving.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,8 @@ import com.moving.uservo.UserVO;
 @Controller
 public class UserController {
 	
-	@Autowired
-	private UserDao dao;
+	@Autowired private UserDao dao;
+	//@Autowired private JavaMailSender mailSender;
 	
 	public void setDao(UserDao dao) {
 		this.dao = dao;
@@ -179,5 +180,36 @@ public class UserController {
 		mav.setViewName("user/idpwSearch");
 		
 		return mav;
+	}
+	
+	@RequestMapping("/idSearchProc.do")
+	@ResponseBody
+	public String idSearchProc(UserPVO userPvo) {
+		
+		String userId = dao.idSearchProc(userPvo);
+		
+		return userId;
+	}
+	
+	@RequestMapping("/pwdSearchProc.do")
+	@ResponseBody
+	public String pwdSearchProc(UserPVO userPvo) {
+		
+//		try {
+//			MimeMessage message = mailSender.createMimeMessage();
+//			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+// 
+//			messageHelper.setFrom("wnghks1357@gmail.com");  // 보내는사람 생략하거나 하면 정상작동을 안함
+//			messageHelper.setTo(userPvo.getUserId());     // 받는사람 이메일
+//			messageHelper.setSubject("asd"); // 메일제목은 생략이 가능하다
+//			messageHelper.setText();  // 메일 내용
+// 
+//			mailSender.send(message);
+//			
+//	    } catch(Exception e){
+//	      System.out.println(e);
+//	    }
+		
+		return null;
 	}
 }

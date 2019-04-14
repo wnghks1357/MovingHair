@@ -32,4 +32,10 @@ public class UserDao {
 		return MovingHairManager.loginProc(userPvo);
 	}
 
+	public String idSearchProc(UserPVO userPvo) {
+
+		return MovingHairManager.idSearchProc(userPvo);
+	}
+
+
 }

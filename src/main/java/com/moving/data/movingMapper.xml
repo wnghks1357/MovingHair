@@ -70,4 +70,9 @@
  	<select id="reservList" resultType="reservRVO">
  		SELECT RESERV_ID AS reservId, DESIGNER_ID AS designerId, RESERV_DATE AS reservDate, CHANGE_COUNT AS changeCount FROM mh_reserv
  	</select>
+ 	
+ 	<select id="idSearchProc" parameterType="userPvo" resultType="java.lang.String">
+ 		SELECT USER_ID AS userId FROM mh_user WHERE USER_NAME = #{userName} AND USER_PHONE = #{userPhone}
+ 	</select>
+ 	
 </mapper>
