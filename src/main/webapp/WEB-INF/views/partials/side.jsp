@@ -15,10 +15,10 @@
           <nav class="main_nav">
             <ul class="d-flex flex-row align-items-center justify-content-start">
               <li class="active"><a href="/home">Home</a></li>
-              <li><a href="/about">About us</a></li>
-              <li><a href="/customerMain">Customer Main</a></li>
-              <li><a href="/designerMain">Designer Main</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/myReservation.do">예약 관리</a></li>
+              <li><a href="/event.do">Event</a></li>
+              <li><a href="/myPage.do">My Page</a></li>
+              <li><a href="#">Contact</a></li>
             </ul>
           </nav>
           <div class="header_extra d-flex flex-row align-items-center justify-content-start ml-auto">
@@ -41,10 +41,10 @@
   <div class="menu_content d-flex flex-column align-items-center justify-content-center">
     <ul class="menu_nav_list text-center">
       <li><a href="/home">Home</a></li>
-      <li><a href="/about">About us</a></li>
-      <li><a href="/customerMain">Customer Main</a></li>
-      <li><a href="/designerMain">Designer Main</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/myReservation.do">예약 관리</a></li>
+      <li><a href="/event.do">Event</a></li>
+      <li><a href="/myPage.do">My Page</a></li>
+      <li><a href="#">Contact</a></li>
     </ul>
     <div class="menu_review"><a href="#">Book Now</a></div>
   </div>
@@ -52,7 +52,7 @@
 
 <!-- Home -->
 
-<div class="home">
+<!-- <div class="home">
   <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="resources/images/bootstrapTemplate/index.jpg" data-speed="0.8"></div>
   <div class="home_container">
     <div class="container">
@@ -66,4 +66,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

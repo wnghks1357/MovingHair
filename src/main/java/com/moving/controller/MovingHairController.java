@@ -34,4 +34,13 @@ public class MovingHairController {
 		mav.setViewName("layout/layout");
 		return mav;
 	}
+	
+	@RequestMapping("/myReservation.do")
+	public ModelAndView myReservation() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("mainContent", "myReservation.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+	}
 }

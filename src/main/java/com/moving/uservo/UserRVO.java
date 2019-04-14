@@ -1,4 +1,4 @@
-package com.moving.vo;
+package com.moving.uservo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

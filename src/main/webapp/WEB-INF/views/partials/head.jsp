@@ -15,6 +15,10 @@
 <link rel="stylesheet" type="text/css" href="resources/stylesheets/bootstrapTemplate/main_styles.css">
 <link rel="stylesheet" type="text/css" href="resources/stylesheets/bootstrapTemplate/responsive.css">
 
+<link rel='stylesheet' href='resources/stylesheets/bootstrap/bootstrap.min.css' />
+<link rel='stylesheet' href='resources/stylesheets/bootstrap/login_boot.css' />
+    
+
 
 <script src="resources/javascripts/bootstrap/jquery-3.2.1.min.js"></script>
 <script src="resources/stylesheets/bootstrapTemplate/bootstrap-4.1.2/popper.js"></script>

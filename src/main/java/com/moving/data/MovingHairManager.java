@@ -9,9 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.moving.vo.UserPVO;
-import com.moving.vo.UserRVO;
-import com.moving.vo.UserVO;
+import com.moving.uservo.UserPVO;
+import com.moving.uservo.UserRVO;
+import com.moving.uservo.UserVO;
 
 
 public class MovingHairManager {

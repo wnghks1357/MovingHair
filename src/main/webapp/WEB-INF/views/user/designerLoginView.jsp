@@ -66,7 +66,7 @@
                 </div> -->
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="signInBtn">Sign in</button>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float:left;" onclick="location.href='mhDesignerJoin.do'">Join Us</button>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float: right;"  onclick="location.href='findUser.do'">Find ID/PASSWORD</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float: right;"  onclick="location.href='idpwSearch.do'">Find ID/PASSWORD</button>
                 <hr class="my-4" style="clear: both;">
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="background-color: #1DDB16"><i></i> Sign in with Naver</button>
                 <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>

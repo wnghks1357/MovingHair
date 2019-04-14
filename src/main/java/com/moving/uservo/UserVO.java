@@ -1,4 +1,4 @@
-package com.moving.vo;
+package com.moving.uservo;
 
 import java.sql.Timestamp;
 
@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class UserVO {
 	
+	private int userNo;
 	private String userId;
 	private String userPwd;
 	private char userType;

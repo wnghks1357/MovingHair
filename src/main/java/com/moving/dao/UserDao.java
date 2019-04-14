@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import com.moving.data.MovingHairManager;
-import com.moving.vo.UserPVO;
-import com.moving.vo.UserRVO;
-import com.moving.vo.UserVO;
+import com.moving.uservo.UserPVO;
+import com.moving.uservo.UserRVO;
+import com.moving.uservo.UserVO;
 
 
 @Repository

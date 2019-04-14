@@ -229,6 +229,11 @@ function sample4_execDaumPostcode() {
                 <input type="text" id="userBirthday" onkeypress="return ageChkNumber(event,'numbers');" name="userBirthday" maxlength="20" minlength="2" size="40" placeholder="주민번호 앞자리" required>
                 <label for="userBirthday">생년월일  Ex) 19900721</label>
               </div>
+              
+              <div class="form-label-group" style="margin-left:10px;">
+				<input type="radio" name="userSex" value="M">남
+				<input type="radio" name="userSex" value="W">여
+              </div>
 
               <div class="form-label-group">
                 <select id="userCls" name="userType" class="form-control" required>

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.UserDao;
-import com.moving.vo.UserPVO;
-import com.moving.vo.UserRVO;
-import com.moving.vo.UserVO;
+import com.moving.uservo.UserPVO;
+import com.moving.uservo.UserRVO;
+import com.moving.uservo.UserVO;
 
 @Controller
 public class UserController {
@@ -171,4 +171,13 @@ public class UserController {
 		return "user/customerLoginView";
 		
 	}	
+	
+	@RequestMapping("/idpwSearch.do")
+	public ModelAndView idpwSearch() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("user/idpwSearch");
+		
+		return mav;
+	}
 }

@@ -1,4 +1,4 @@
-package com.moving.vo;
+package com.moving.reservo;
 
 import java.sql.Timestamp;
 
@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class UserPVO extends UserVO{
+public class ReservRVO extends ReservVO {
 
 }
