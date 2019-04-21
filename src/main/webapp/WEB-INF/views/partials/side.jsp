@@ -14,7 +14,7 @@
           </div>
           <nav class="main_nav">
             <ul class="d-flex flex-row align-items-center justify-content-start">
-              <li class="active"><a href="/home">Home</a></li>
+              <li class="active"><a href="/home.do">Home</a></li>
               <li><a href="/myReservation.do">예약 관리</a></li>
               <li><a href="/event.do">Event</a></li>
               <li><a href="/myPage.do">My Page</a></li>
