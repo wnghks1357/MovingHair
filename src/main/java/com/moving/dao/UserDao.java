@@ -35,5 +35,14 @@ public class UserDao {
 		return MovingHairManager.idSearchProc(userVo);
 	}
 
+	public String pwdSearchProc(UserVO userVo) {
+		return MovingHairManager.pwdSearchProc(userVo);
+	}
+
+	public int updatePwd(UserVO param) {
+
+		return MovingHairManager.updatePwd(param);
+	}
+
 
 }

@@ -1,7 +1,12 @@
 package com.moving.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -191,7 +196,7 @@ public class UserController {
 		return mav;
 	}
 	
-	@RequestMapping("/idSearchProc.do")
+	@RequestMapping(value="/idSearchProc.do", produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String idSearchProc(UserVO userVo) {
 		
@@ -200,13 +205,63 @@ public class UserController {
 		return userId;
 	}
 	
-	@RequestMapping("/pwdSearchProc.do")
+	@RequestMapping(value = "/pwdSearchProc.do", produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String pwdSearchProc(UserVO userVo) {
 		
+		String message = "";
 		
-		mainSenderUtil.send(userVo.getUserId());
+		String userId = dao.pwdSearchProc(userVo);
+	
 		
-		return "임시 비밀번호를 메일로 발송했습니다.";
+		//회원정보 일치 시
+		if(userId != null && !userId.equals("")) {
+			
+			String tempPwd = "";
+			//임시 비밀번호 생성 
+			for (int i = 0; i < 5; i++) { 
+				tempPwd = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+				tempPwd = tempPwd.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌. 
+			}
+			
+			String tempPwdHash = "";
+			//password sha512 Hashing
+			try {
+				
+				MessageDigest digest = MessageDigest.getInstance("SHA-512");
+				digest.reset();
+				
+				digest.update(tempPwd.getBytes("utf8"));
+				
+				tempPwdHash = String.format("%040x", new BigInteger(1, digest.digest()));
+				//0~20자 까지만 입력
+				tempPwdHash = tempPwdHash.substring(0,20);
+				
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+			
+			UserVO param = new UserVO();
+			param.setUserId(userId);
+			param.setUserPwd(tempPwdHash);
+			
+			//password 임시 패스워드로 변경
+			int result = dao.updatePwd(param);
+			
+			//패스워드 변경 완료
+			if(result > 0) {
+				
+				//사용자에게 임시 비밀번호 전송
+				mainSenderUtil.send(userVo.getUserId(), tempPwd);
+				
+				message = "임시 비밀번호를 메일로 발송했습니다.";
+			}else {
+				message = "서버 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+			}		
+		}else {
+			message = "일치하는 회원정보를 찾을 수 없습니다.";
+		}
+		return message;
 	}
 }

@@ -26,7 +26,7 @@
 		<interceptor>
 			
 			<!-- 인터셉터 매핍 url -->
-			<mapping path="/customerMain.do"/>
+			<mapping path="/**/"/>
 		
 			<!-- 로그인 체크 bean -->
 			<beans:bean id="loginInterceptor" class="com.moving.interceptors.LoginInterceptor"/>

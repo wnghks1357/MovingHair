@@ -14,6 +14,28 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//세션 객체 생성
 		HttpSession session = request.getSession();
 		
+		String requestUrl = request.getRequestURI().toString();
+		
+		//spring 3.1에서는 exclude-mapping 대신 이렇게 처리해야 함. 3.2 이상부터 exclude-mapping 사용가능
+		if(requestUrl.contains("/customerLoginView.do") || requestUrl.contains("/designerLoginView.do")) {
+			return true;
+		}
+		if(requestUrl.contains("/mhUserJoin.do") || requestUrl.contains("/mhDesignerJoin.do")) {
+			return true;
+		}
+		if(requestUrl.contains("/joinProc.do") ) {
+			return true;
+		}
+		if(requestUrl.contains("/idJungbokCheck.do") || requestUrl.contains("/phoneJungbokCheck.do")) {
+			return true;
+		}
+		if(requestUrl.contains("/idpwSearch.do") || requestUrl.contains("/idSearchProc.do")) {
+			return true;
+		}
+		if(requestUrl.contains("/pwdSearchProc.do") || requestUrl.contains("/loginProc.do")) {
+			return true;
+		}
+	
 		//세션에 id가 null이면
 		if (session.getAttribute("userId") == null){
 			

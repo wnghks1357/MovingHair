@@ -17,7 +17,6 @@
 		SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
 	</select>
 	
-	<!-- TODO -->
 	<insert id="joinProc" parameterType="userVo">
 		INSERT INTO mh_user(
 								USER_ID
@@ -75,8 +74,18 @@
  		SELECT USER_ID AS userId FROM mh_user WHERE USER_NAME = #{userName} AND USER_PHONE = #{userPhone}
  	</select>
  	
+ 	<select id="pwdSearchProc" parameterType="userVo" resultType="java.lang.String">
+ 		SELECT USER_ID AS userId FROM mh_user WHERE USER_NAME = #{userName} AND USER_PHONE = #{userPhone} AND USER_ID = #{userId}
+ 	</select>
+ 	
  	<select id="getUserInfo" parameterType="java.lang.String" resultType="userVo">
  		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId}
  	</select>
+ 	
+ 	<update id="updatePwd" parameterType="userVo">
+ 		UPDATE mh_user SET USER_PWD = #{userPwd} WHERE USER_ID = #{userId}
+ 	</update>
+ 	
+ 	
  	
 </mapper>

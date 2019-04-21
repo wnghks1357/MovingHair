@@ -16,22 +16,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MailSenderUtil {
 
-	public String send(String recipient) {
+	public String send(String recipient, String tempPwd) {
 		
 		final String userName = "wnghks1357";
 		final String password = "likeFirst!1";
 		String title = "MovingHair 임시 비밀번호 입니다.";
 		String contents = "";
 		
-		
-		String uuid = "";
-		//임시 비밀번호 생성 
-		for (int i = 0; i < 5; i++) { 
-			uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
-			uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌. 
-		} 
 	 
-	    contents = "고객님의 임시 비밀번호는 '" + uuid +"' 입니다.";
+	    contents = "고객님의 임시 비밀번호는 '" + tempPwd +"' 입니다.";
 	    contents += "반드시 로그인 후 패스워드를 변경해 주세요.";
 		
 		// 네이버일 경우 smtp.naver.com 을 입력합니다.  

@@ -60,11 +60,16 @@
 			alert("성명을 입력하세요.");
 			return;
 		}
+		
+		if( $("#userId").val() =="" ){
+			alert("아이디를 입력하세요.");
+			return;
+		}
+		
 		if( $("#txt2Mobile1 option:selected").val()=="" || $("#txt2Mobile2").val() =="" || $("#txt2Mobile3").val() =="" ){
 			alert("휴대폰 번호를 입력하세요");
 			return;
 		}
-		alert("test");
 		var txt2Mobile1 = $.trim($("#txt2Mobile1 option:selected").val());
 		var txt2Mobile2 = $.trim($("#txt2Mobile2").val());
 		var txt2Mobile3 = $.trim($("#txt2Mobile3").val());
@@ -78,9 +83,11 @@
 			data : formData,
 			type: "post",
 			success: function(result){
-				alert(result);
+				
+				$("#pwdSrchResult").text(result);
+				
 			},error: function(result){
-				alert(result);
+				$("#pwdSrchResult").text(result);
 			}
 		});
 	}
@@ -165,15 +172,7 @@
 					</form>
 						
 					<div id="pwdSrchResult"></div>
-					
-					
-					<div class="form-label-group">
-						<form action="/app/member/updateMember.do" method="post" id="pwdChangeForm">
-							<input type="hidden" name="findUsrid" id="findUsrid"/>
-							<input type="hidden" name="usrNo" id="usrNo"/>
-							<input type="hidden" name="pwdChangePage" value="ok"/>
-						</form>	
-					</div>
+
 				
 				</div>
 			</div>

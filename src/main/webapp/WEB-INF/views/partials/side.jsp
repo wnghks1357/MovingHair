@@ -40,7 +40,7 @@
   <div class="background_image" style="background-image:url(resources/images/bootstrapTemplate/menu.jpg)"></div>
   <div class="menu_content d-flex flex-column align-items-center justify-content-center">
     <ul class="menu_nav_list text-center">
-      <li><a href="/home">Home</a></li>
+      <li><a href="/home.do">Home</a></li>
       <li><a href="/myReservation.do">예약 관리</a></li>
       <li><a href="/event.do">Event</a></li>
       <li><a href="/myPage.do">My Page</a></li>

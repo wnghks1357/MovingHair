@@ -76,4 +76,18 @@ public class MovingHairManager {
 		
 		return session.selectOne("movingHair.getUserInfo", userId);
 	}
+
+	public static String pwdSearchProc(UserVO userVo) {
+		SqlSession session = factory.openSession();
+		return session.selectOne("movingHair.pwdSearchProc", userVo);
+	}
+
+	public static int updatePwd(UserVO param) {
+		SqlSession session = factory.openSession(true);
+		
+		
+		int count = session.insert("movingHair.updatePwd", param);
+		
+		return count;
+	}
 }
