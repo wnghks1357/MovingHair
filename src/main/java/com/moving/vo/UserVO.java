@@ -1,4 +1,4 @@
-package com.moving.uservo;
+package com.moving.vo;
 
 import java.sql.Timestamp;
 

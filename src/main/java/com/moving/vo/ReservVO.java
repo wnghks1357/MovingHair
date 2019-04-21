@@ -1,4 +1,4 @@
-package com.moving.reservo;
+package com.moving.vo;
 
 import java.sql.Timestamp;
 

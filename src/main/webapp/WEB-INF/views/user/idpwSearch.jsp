@@ -56,8 +56,7 @@
 	}
 	function fnFindPwd(){
 		
-		alert("구현 예정");
-		/* if( $("#userName2").val() =="" ){
+		if( $("#userName2").val() =="" ){
 			alert("성명을 입력하세요.");
 			return;
 		}
@@ -65,26 +64,34 @@
 			alert("휴대폰 번호를 입력하세요");
 			return;
 		}
-		
+		alert("test");
 		var txt2Mobile1 = $.trim($("#txt2Mobile1 option:selected").val());
 		var txt2Mobile2 = $.trim($("#txt2Mobile2").val());
 		var txt2Mobile3 = $.trim($("#txt2Mobile3").val());
 		var userPhone2 = txt2Mobile1 + "-" + txt2Mobile2 + "-" + txt2Mobile3;
 		 $("#userPhone2").val(userPhone2);
 		
-		var f = document.form2;
+		 var formData = $("#form2").serialize();
 		
 		$.ajax({
 			url: "pwdSearchProc.do",
-			data : f,
+			data : formData,
 			type: "post",
 			success: function(result){
-				//TODO
+				alert(result);
 			},error: function(result){
-				//TODO
+				alert(result);
 			}
-		}) */
+		});
 	}
+	
+	//숫자만 입력 가능하도록 하기 위한 함수
+	function ageChkNumber(event,type) {
+		  if(type == "numbers") {
+	           if(event.keyCode < 48 || event.keyCode > 57) return false;
+	           //onKeyDown일 경우 좌, 우, tab, backspace, delete키 허용 정의 필요
+	       }
+	} 
 
 </script>
 
@@ -125,7 +132,7 @@
 						
 					<hr style="margin-top:60px; margin-bottom: 50px;">
 					
-					<h2 class="card-title text-center"> 패스워드 찾기</h2>
+					<h2 class="card-title text-center"> 패스워드 찾기 </h2>
 					
 					
 					<form id="form2" name="form2" method="post" action="#">

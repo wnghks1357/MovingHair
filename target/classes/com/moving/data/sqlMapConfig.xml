@@ -6,11 +6,8 @@
 
 	<properties resource="com/moving/data/moving.properties" />
 	<typeAliases>
-		<typeAlias type="com.moving.uservo.UserPVO" alias="userPvo" />
-		<typeAlias type="com.moving.uservo.UserRVO" alias="userRvo" />
-		<typeAlias type="com.moving.uservo.UserVO" alias="userVo" />
-		
-		<typeAlias type="com.moving.reservo.ReservRVO" alias="reservRVO" />
+		<typeAlias type="com.moving.vo.UserVO" alias="userVo" />
+		<typeAlias type="com.moving.vo.ReservRVO" alias="reservRVO" />
 
 	</typeAliases>
 

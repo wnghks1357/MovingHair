@@ -4,37 +4,35 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import com.moving.data.MovingHairManager;
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
-import com.moving.uservo.UserVO;
+import com.moving.vo.UserVO;
 
 
 @Repository
 public class UserDao {
 
-	public int idJungbokCheck(UserPVO userPvo) {
+	public int idJungbokCheck(UserVO userVo) {
 		
-		return MovingHairManager.idJungbokCheck(userPvo);
+		return MovingHairManager.idJungbokCheck(userVo);
 	}
 
-	public int phoneJungbokCheck(UserPVO userPvo) {
+	public int phoneJungbokCheck(UserVO userVo) {
 		// TODO Auto-generated method stub
-		return MovingHairManager.phoneJungbokCheck(userPvo);
+		return MovingHairManager.phoneJungbokCheck(userVo);
 	}
 
-	public int joinProc(UserPVO userPvo) {
+	public int joinProc(UserVO userVo) {
 		
-		return MovingHairManager.joinProc(userPvo);
+		return MovingHairManager.joinProc(userVo);
 	}
 
-	public UserRVO loginProc(UserPVO userPvo) {
+	public UserVO loginProc(UserVO userVo) {
 		// TODO Auto-generated method stub
-		return MovingHairManager.loginProc(userPvo);
+		return MovingHairManager.loginProc(userVo);
 	}
 
-	public String idSearchProc(UserPVO userPvo) {
+	public String idSearchProc(UserVO userVo) {
 
-		return MovingHairManager.idSearchProc(userPvo);
+		return MovingHairManager.idSearchProc(userVo);
 	}
 
 

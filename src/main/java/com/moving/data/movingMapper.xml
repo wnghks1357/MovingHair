@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- TODO -->
-	<insert id="joinProc" parameterType="userPvo">
+	<insert id="joinProc" parameterType="userVo">
 		INSERT INTO mh_user(
 								USER_ID
 								, USER_PWD
@@ -63,7 +63,7 @@
 								
 	</insert>
 
-	<select id="loginProc" parameterType="userPvo" resultType="userRvo">
+	<select id="loginProc" parameterType="userVo" resultType="userVo">
 		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
  
@@ -71,8 +71,12 @@
  		SELECT RESERV_ID AS reservId, DESIGNER_ID AS designerId, RESERV_DATE AS reservDate, CHANGE_COUNT AS changeCount FROM mh_reserv
  	</select>
  	
- 	<select id="idSearchProc" parameterType="userPvo" resultType="java.lang.String">
+ 	<select id="idSearchProc" parameterType="userVo" resultType="java.lang.String">
  		SELECT USER_ID AS userId FROM mh_user WHERE USER_NAME = #{userName} AND USER_PHONE = #{userPhone}
+ 	</select>
+ 	
+ 	<select id="getUserInfo" parameterType="java.lang.String" resultType="userVo">
+ 		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId}
  	</select>
  	
 </mapper>

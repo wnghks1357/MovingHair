@@ -1,12 +1,19 @@
 package com.moving.controller;
 
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -16,18 +23,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.UserDao;
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
-import com.moving.uservo.UserVO;
+import com.moving.util.MailSenderUtil;
+import com.moving.vo.UserVO;
 
 @Controller
 public class UserController {
 	
 	@Autowired private UserDao dao;
-	//@Autowired private JavaMailSender mailSender;
+	@Autowired private MailSenderUtil mainSenderUtil;
 	
 	public void setDao(UserDao dao) {
 		this.dao = dao;
+	}
+	public void setMailSenderUtil(MailSenderUtil mainSenderUtil) {
+		this.mainSenderUtil = mainSenderUtil;
 	}
 	
 	@RequestMapping("/customerLoginView.do")
@@ -70,18 +79,18 @@ public class UserController {
 	
 	@RequestMapping("/idJungbokCheck.do")
 	@ResponseBody
-	public String idJungbokCheck(UserPVO userPvo) {
+	public String idJungbokCheck(UserVO userVo) {
 		
-		int count = dao.idJungbokCheck(userPvo);
+		int count = dao.idJungbokCheck(userVo);
 		
 		return count+"";
 	}
 	
 	@RequestMapping("/phoneJungbokCheck.do")
 	@ResponseBody
-	public String phoneJungbokCheck(UserPVO userPvo) {
+	public String phoneJungbokCheck(UserVO userVo) {
 		
-		int count = dao.phoneJungbokCheck(userPvo);
+		int count = dao.phoneJungbokCheck(userVo);
 		
 		return count+"";
 	}
@@ -92,34 +101,34 @@ public class UserController {
 	 * @param userId
 	 * @param userPwd
 	 * @param userName
-	 * @param userPvo
+	 * @param UserVO
 	 * @return
 	 */
 	@RequestMapping(value="/joinProc.do", produces="text/plain;charset=UTF-8")
-	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserPVO userPvo) {
+	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserVO userVo) {
 		ModelAndView mav = new ModelAndView();
 		
-		int count = dao.joinProc(userPvo);
+		int count = dao.joinProc(userVo);
 		
 		System.out.println(count);
 		if( count != 0) {
-			session.setAttribute("userId", userPvo.getUserId());
+			session.setAttribute("userId", userVo.getUserId());
 		}
 		
 		// 사용자 유형(사용자, 디자이너)에 따라 페이지 이동
 		String requestPage = "";
 		
 		// 사용자이고 회원가입 성공한 경우
-		if( userPvo.getUserType() == 'U' && count != 0) {
+		if( userVo.getUserType() == 'U' && count != 0) {
 			requestPage=  "redirect:/customerMain.do";
 		//디자이너이고 회원가입 성공한 경우
-		}else if( userPvo.getUserType() == 'D' && count != 0){
+		}else if( userVo.getUserType() == 'D' && count != 0){
 			requestPage =  "redirect:/designerMain.do";
 		//사용자이고 회원가입 실패시 회원가입 페이지로 다시 복귀
-		}else if( userPvo.getUserType() == 'U' && count == 0 ) {
+		}else if( userVo.getUserType() == 'U' && count == 0 ) {
 			requestPage =  "redirect:/mhUserJoin.do";
 		//디자이너이고 회원가입 실패시 회원가입 페이지로 다시 복귀
-		}else if( userPvo.getUserType() == 'D' && count == 0 ) {
+		}else if( userVo.getUserType() == 'D' && count == 0 ) {
 			requestPage =  "redirect:/mhDesignerJoin.do";
 		}//TODO 관리자인 경우 추가 필요
 		else {
@@ -133,9 +142,9 @@ public class UserController {
 	}
 
 	@RequestMapping("/loginProc.do")
-	public String loginProc(UserPVO userPvo, HttpSession session, HttpServletResponse response) {
+	public String loginProc(UserVO userVo, HttpSession session, HttpServletResponse response) {
 		
-		UserRVO userRvo = dao.loginProc(userPvo);
+		UserVO userRvo = dao.loginProc(userVo);
 		
 		String requestPage ="";
 		
@@ -143,7 +152,7 @@ public class UserController {
 		if( userRvo != null ) {
 			
 			//로그인 정상 처리시 session 저장
-			session.setAttribute("userId", userPvo.getUserId());
+			session.setAttribute("userId", userRvo.getUserId());
 			
 			
 			//사용자인 경우
@@ -163,7 +172,7 @@ public class UserController {
 	}	
 	
 	@RequestMapping("/logoutProc.do")
-	public String logoutProc(UserPVO userPvo, HttpSession session, HttpServletResponse response) {
+	public String logoutProc(UserVO userVo, HttpSession session, HttpServletResponse response) {
 		
 
 		session.removeAttribute("userId");
@@ -184,32 +193,20 @@ public class UserController {
 	
 	@RequestMapping("/idSearchProc.do")
 	@ResponseBody
-	public String idSearchProc(UserPVO userPvo) {
+	public String idSearchProc(UserVO userVo) {
 		
-		String userId = dao.idSearchProc(userPvo);
+		String userId = dao.idSearchProc(userVo);
 		
 		return userId;
 	}
 	
 	@RequestMapping("/pwdSearchProc.do")
 	@ResponseBody
-	public String pwdSearchProc(UserPVO userPvo) {
+	public String pwdSearchProc(UserVO userVo) {
 		
-//		try {
-//			MimeMessage message = mailSender.createMimeMessage();
-//			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-// 
-//			messageHelper.setFrom("wnghks1357@gmail.com");  // 보내는사람 생략하거나 하면 정상작동을 안함
-//			messageHelper.setTo(userPvo.getUserId());     // 받는사람 이메일
-//			messageHelper.setSubject("asd"); // 메일제목은 생략이 가능하다
-//			messageHelper.setText();  // 메일 내용
-// 
-//			mailSender.send(message);
-//			
-//	    } catch(Exception e){
-//	      System.out.println(e);
-//	    }
 		
-		return null;
+		mainSenderUtil.send(userVo.getUserId());
+		
+		return "임시 비밀번호를 메일로 발송했습니다.";
 	}
 }

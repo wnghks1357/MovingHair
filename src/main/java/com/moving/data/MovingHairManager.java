@@ -9,9 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.moving.uservo.UserPVO;
-import com.moving.uservo.UserRVO;
-import com.moving.uservo.UserVO;
+import com.moving.vo.UserVO;
+
 
 
 public class MovingHairManager {
@@ -27,48 +26,54 @@ public class MovingHairManager {
 		}
 	}
 
-	public static int idJungbokCheck(UserPVO userPvo) {
+	public static int idJungbokCheck(UserVO userVo) {
 		// TODO Auto-generated method stub
 		SqlSession session = factory.openSession();
 		
-		String userId = userPvo.getUserId();
+		String userId = userVo.getUserId();
 		int count = session.selectOne("movingHair.idJungbokCheck", userId);
 		
 		return count;
 	}
 
-	public static int phoneJungbokCheck(UserPVO userPvo) {
+	public static int phoneJungbokCheck(UserVO userVo) {
 		
 		SqlSession session = factory.openSession();
 		
-		String userPhone = userPvo.getUserPhone();
+		String userPhone = userVo.getUserPhone();
 		int count = session.selectOne("movingHair.phoneJungbokCheck", userPhone);
 		
 		return count;
 	}
 
-	//TODO 
-	public static int joinProc(UserPVO userPvo) {
+	public static int joinProc(UserVO userVo) {
 		SqlSession session = factory.openSession(true);
 		
 		
-		int count = session.insert("movingHair.joinProc", userPvo);
+		int count = session.insert("movingHair.joinProc", userVo);
 		
 		return count;
 	}
 
-	public static UserRVO loginProc(UserPVO userPvo) {
+	public static UserVO loginProc(UserVO userVo) {
 		SqlSession session = factory.openSession();
 		
-		UserRVO userRvo = session.selectOne("movingHair.loginProc", userPvo);
+		UserVO userRvo = session.selectOne("movingHair.loginProc", userVo);
 		
 		return userRvo;
 	}
 
-	public static String idSearchProc(UserPVO userPvo) {
+	public static String idSearchProc(UserVO userVo) {
 		SqlSession session = factory.openSession();
 		
 		
-		return session.selectOne("movingHair.idSearchProc", userPvo);
+		return session.selectOne("movingHair.idSearchProc", userVo);
+	}
+
+	public static UserVO getUserInfo(String userId) {
+		SqlSession session = factory.openSession();
+		
+		
+		return session.selectOne("movingHair.getUserInfo", userId);
 	}
 }
