@@ -1,37 +1,26 @@
 package com.moving.controller;
 
-import java.util.List;
-
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.moving.dao.MovingHairDao;
-import com.moving.dao.UserDao;
+import com.moving.service.UserService;
 import com.moving.vo.UserVO;
 
 @Controller
 public class MovingHairController {
 	
-	@Autowired private MovingHairDao dao;
-	
-	public void setDao(MovingHairDao dao) {
-		this.dao = dao;
-	}
+	@Autowired private UserService userService;
 	
 	@RequestMapping("/home.do")
 	public String home(HttpSession session) {
 		
 		String userId = (String)session.getAttribute("userId");
 		
-		UserVO userVo = dao.getUserInfo(userId);
+		UserVO userVo = userService.getUserInfo(userId);
 		
 		// 사용자 유형(사용자, 디자이너)에 따라 페이지 이동
 		String requestPage = "";
@@ -41,8 +30,6 @@ public class MovingHairController {
 		}else {
 			requestPage =  "redirect:/designerMain.do";
 		}
-		
-		
 		return requestPage;
 	}
 	

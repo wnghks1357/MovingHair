@@ -1,54 +1,33 @@
 package com.moving.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.moving.dao.UserDao;
+import com.moving.service.UserService;
 import com.moving.util.MailSenderUtil;
 import com.moving.vo.UserVO;
 
 @Controller
 public class UserController {
 	
-	@Autowired private UserDao dao;
+	@Autowired private UserService userService;
 	@Autowired private MailSenderUtil mainSenderUtil;
 	
-	public void setDao(UserDao dao) {
-		this.dao = dao;
-	}
-	public void setMailSenderUtil(MailSenderUtil mainSenderUtil) {
-		this.mainSenderUtil = mainSenderUtil;
-	}
 	
 	@RequestMapping("/customerLoginView.do")
 	public ModelAndView customerLoginView() {
 		ModelAndView mav = new ModelAndView();
-		
-		
 		
 		mav.setViewName("user/customerLoginView");
 		
@@ -86,7 +65,7 @@ public class UserController {
 	@ResponseBody
 	public String idJungbokCheck(UserVO userVo) {
 		
-		int count = dao.idJungbokCheck(userVo);
+		int count = userService.idJungbokCheck(userVo);
 		
 		return count+"";
 	}
@@ -95,7 +74,7 @@ public class UserController {
 	@ResponseBody
 	public String phoneJungbokCheck(UserVO userVo) {
 		
-		int count = dao.phoneJungbokCheck(userVo);
+		int count = userService.phoneJungbokCheck(userVo);
 		
 		return count+"";
 	}
@@ -113,7 +92,7 @@ public class UserController {
 	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserVO userVo) {
 		ModelAndView mav = new ModelAndView();
 		
-		int count = dao.joinProc(userVo);
+		int count = userService.joinProc(userVo);
 		
 		System.out.println(count);
 		if( count != 0) {
@@ -149,7 +128,7 @@ public class UserController {
 	@RequestMapping("/loginProc.do")
 	public String loginProc(UserVO userVo, HttpSession session, HttpServletResponse response) {
 		
-		UserVO userRvo = dao.loginProc(userVo);
+		UserVO userRvo = userService.loginProc(userVo);
 		
 		String requestPage ="";
 		
@@ -200,7 +179,7 @@ public class UserController {
 	@ResponseBody
 	public String idSearchProc(UserVO userVo) {
 		
-		String userId = dao.idSearchProc(userVo);
+		String userId = userService.idSearchProc(userVo);
 		
 		return userId;
 	}
@@ -211,7 +190,7 @@ public class UserController {
 		
 		String message = "";
 		
-		String userId = dao.pwdSearchProc(userVo);
+		String userId = userService.pwdSearchProc(userVo);
 	
 		
 		//회원정보 일치 시
@@ -247,7 +226,7 @@ public class UserController {
 			param.setUserPwd(tempPwdHash);
 			
 			//password 임시 패스워드로 변경
-			int result = dao.updatePwd(param);
+			int result = userService.updatePwd(param);
 			
 			//패스워드 변경 완료
 			if(result > 0) {
