@@ -243,4 +243,23 @@ public class UserController {
 		}
 		return message;
 	}
+	
+	@RequestMapping("/myPage.do")
+	public ModelAndView myPage(HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		String userId = "";
+		
+		if(session.getAttribute("userId") != null) {
+			userId = (String)session.getAttribute("userId");	
+		}		
+		
+		UserVO userInfo = userService.getUserInfo(userId);
+		
+		mav.addObject("userInfo", userInfo);
+		mav.addObject("mainContent", "myPage.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+		
+	}	
 }

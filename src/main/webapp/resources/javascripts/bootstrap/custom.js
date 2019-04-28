@@ -44,7 +44,7 @@ $(document).ready(function()
 	initMenu();
 	initSearch();
 	initGallery();
-	initGoogleMap();
+	//initGoogleMap();
 
 	/* 
 
@@ -199,7 +199,8 @@ $(document).ready(function()
 	6. Init Google Map
 
 	*/
-
+	/*
+	 * 에러 발생으로 인한 주석처리
 	function initGoogleMap()
 	{
 		var myLatlng = new google.maps.LatLng(34.063685,-118.272936);
@@ -247,5 +248,5 @@ $(document).ready(function()
 			}, 1400);
 		});
 	}
-
+*/
 });

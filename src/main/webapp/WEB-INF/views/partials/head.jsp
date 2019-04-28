@@ -33,5 +33,10 @@
 <script src="resources/plugins/progressbar/progressbar.min.js"></script>
 <script src="resources/plugins/colorbox/jquery.colorbox-min.js"></script>
 <script src="resources/plugins/parallax-js-master/parallax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBImjP5_hRVIzJ8eFEGpBS_GcBgkl5M_7E"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBImjP5_hRVIzJ8eFEGpBS_GcBgkl5M_7E"></script> -->
 <script src="resources/javascripts/bootstrap/custom.js"></script>
+
+<!-- 패스워드 hashing libarary -->
+<script src="resources/javascripts/sha512.js"></script>
+<!-- 주소 검색 library -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

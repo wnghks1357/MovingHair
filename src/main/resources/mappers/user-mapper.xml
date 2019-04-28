@@ -79,7 +79,18 @@
  	</select>
  	
  	<select id="getUserInfo" parameterType="java.lang.String" resultType="userVo">
- 		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId}
+ 		SELECT 
+ 			  USER_ID AS userId
+ 			, USER_TYPE AS userType
+ 			, USER_NAME AS userName
+ 			, USER_PWD AS userPwd
+ 			, USER_PHONE AS userPhone
+ 			, USER_EMAIL AS userEmail
+ 			, USER_ZIP AS userZip
+ 			, USER_ADDR1 AS userAddr1
+ 			, USER_ADDR2 AS userAddr2
+ 			FROM mh_user 
+ 			WHERE USER_ID = #{userId}
  	</select>
  	
  	<update id="updatePwd" parameterType="userVo">

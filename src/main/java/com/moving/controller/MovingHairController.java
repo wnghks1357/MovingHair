@@ -18,7 +18,11 @@ public class MovingHairController {
 	@RequestMapping("/home.do")
 	public String home(HttpSession session) {
 		
-		String userId = (String)session.getAttribute("userId");
+		String userId = "";
+		
+		if(session.getAttribute("userId") != null) {
+			userId = (String)session.getAttribute("userId");	
+		}		
 		
 		UserVO userVo = userService.getUserInfo(userId);
 		
