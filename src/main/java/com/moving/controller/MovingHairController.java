@@ -2,6 +2,8 @@ package com.moving.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,8 @@ import com.moving.vo.UserVO;
 public class MovingHairController {
 	
 	@Autowired private UserService userService;
+	
+	private static Logger logger = LoggerFactory.getLogger(MovingHairController.class);
 	
 	@RequestMapping("/home.do")
 	public String home(HttpSession session) {

@@ -22,6 +22,12 @@
 		var loginForm =	document.loginForm;
 		loginForm.submit();
       }
+	function fnEnter(){
+		
+		if(event.keyCode == 13){
+			fnLoginSubmit();
+		}	
+	}
 	
     </script>
   </head>
@@ -43,7 +49,7 @@
                 </div>
   
                 <div class="form-label-group">
-                  <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="Password" required>
+                  <input type="password" id="userPwd" onkeydown="fnEnter();" name="userPwd" class="form-control" placeholder="Password" required>
                   <label for="userPwd">Password</label>
                 </div>
 
