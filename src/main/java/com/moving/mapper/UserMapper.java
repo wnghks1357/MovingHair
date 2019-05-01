@@ -23,4 +23,6 @@ public interface UserMapper {
 	
 	public UserVO getUserInfo(String userId);
 
+	public int myInfoUpdate(UserVO userVo);
+
 }

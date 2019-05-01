@@ -60,4 +60,9 @@ public class UserService {
 		return userMapper.getUserInfo(userId);
 	}
 
+	public int myInfoUpdate(UserVO userVo) {
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.myInfoUpdate(userVo);
+	}
+
 }

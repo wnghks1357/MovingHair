@@ -9,12 +9,27 @@
 	</resultMap>
 	 -->
 	
-	<select id="idJungbokCheck" resultType="java.lang.Integer">
+	<select id="idJungbokCheck" parameterType="userVo" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM mh_user WHERE USER_ID = #{userId}
 	</select>
 	
-	<select id="phoneJungbokCheck" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
+	<select id="phoneJungbokCheck" parameterType="userVo" resultType="java.lang.Integer">
+		
+		<!-- 사용자 정보 수정인 경우 -->
+		<if test="userId != null">
+		<!-- 사용자 번호가 아닌 번호 중에 파라미터 번호와 일치하는 번호의 개수 -->
+			SELECT COUNT(*)
+			FROM mh_user
+			WHERE USER_PHONE IN (SELECT USER_PHONE FROM mh_user WHERE USER_ID != #{userId})
+			AND USER_PHONE = #{userPhone}
+		</if>
+		
+		<!-- 회원가입인 경우 -->
+		<if test="userId == null">
+			SELECT COUNT(*) FROM mh_user WHERE USER_PHONE = #{userPhone}
+		</if>
+		
+		
 	</select>
 	
 	<insert id="joinProc" parameterType="userVo">
@@ -95,6 +110,22 @@
  	
  	<update id="updatePwd" parameterType="userVo">
  		UPDATE mh_user SET USER_PWD = #{userPwd} WHERE USER_ID = #{userId}
+ 	</update>
+ 	
+ 	<update id="myInfoUpdate" parameterType="userVo">
+ 	
+		UPDATE
+		    mh_user
+		    <trim prefix="SET" suffixOverrides=",">
+		        <if test='userName        != null'>USER_NAME        = #{userName},       </if>
+		        <if test='userPhone       != null'>USER_PHONE       = #{userPhone},      </if>
+		        <if test='userEmail        != null'>USER_EMAIL        = #{userEmail},       </if>
+		        <if test='userZip       != null'>USER_ZIP       = #{userZip},      </if>
+		        <if test='userAddr1      != null'>USER_ADDR1      = #{userAddr1},     </if>
+		        <if test='userAddr2     != null'>USER_ADDR2     = #{userAddr2},    </if>
+		    </trim>
+		WHERE   USER_ID = #{userId}
+ 	
  	</update>
  	
  	

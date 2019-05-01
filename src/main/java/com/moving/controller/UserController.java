@@ -7,6 +7,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moving.interceptors.MovingInterceptors;
 import com.moving.service.UserService;
 import com.moving.util.MailSenderUtil;
 import com.moving.vo.UserVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 public class UserController {
 	
 	@Autowired private UserService userService;
 	@Autowired private MailSenderUtil mainSenderUtil;
+	
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	
 	@RequestMapping("/customerLoginView.do")
@@ -43,6 +50,7 @@ public class UserController {
 		return mav;
 	}
 	
+	//고객 회원가입 페이지 이동
 	@RequestMapping("/mhUserJoin.do")
 	public ModelAndView customerJoinView() {
 		ModelAndView mav = new ModelAndView();
@@ -52,6 +60,7 @@ public class UserController {
 		return mav;
 	}
 	
+	//디자이너 회원가입 페이지 이동
 	@RequestMapping("/mhDesignerJoin.do")
 	public ModelAndView designerJoinView() {
 		ModelAndView mav = new ModelAndView();
@@ -61,6 +70,7 @@ public class UserController {
 		return mav;
 	}
 	
+	//아이디 중복 체크 ajax 요청
 	@RequestMapping("/idJungbokCheck.do")
 	@ResponseBody
 	public String idJungbokCheck(UserVO userVo) {
@@ -70,11 +80,14 @@ public class UserController {
 		return count+"";
 	}
 	
+	//휴대폰 중복 체크 ajax 요청
 	@RequestMapping("/phoneJungbokCheck.do")
 	@ResponseBody
 	public String phoneJungbokCheck(UserVO userVo) {
 		
 		int count = userService.phoneJungbokCheck(userVo);
+		
+		logger.info("phone jungbok check : " + count);
 		
 		return count+"";
 	}
@@ -94,7 +107,8 @@ public class UserController {
 		
 		int count = userService.joinProc(userVo);
 		
-		System.out.println(count);
+		logger.debug("join proc result : " + count);
+		
 		if( count != 0) {
 			session.setAttribute("userId", userVo.getUserId());
 		}
@@ -147,7 +161,9 @@ public class UserController {
 				requestPage =  "redirect:/designerMain.do";
 			}
 		}else {
-			System.out.println("로그인 실패");
+
+			logger.info("로그인 실패");
+			logger.debug("id : " + userVo.getUserId());
 			//로그인 실패시 customerLoginView로 이동
 			requestPage =  "user/customerLoginView";
 		}
@@ -244,6 +260,7 @@ public class UserController {
 		return message;
 	}
 	
+	//마이페이지
 	@RequestMapping("/myPage.do")
 	public ModelAndView myPage(HttpSession session) {
 
@@ -260,6 +277,19 @@ public class UserController {
 		mav.addObject("mainContent", "myPage.jsp");
 		mav.setViewName("layout/layout");
 		return mav;
-		
 	}	
+	
+	//마이페이지에서 정보 수정
+	@RequestMapping("/userInfoUpdate.do")
+	public String myInfoUpdate(UserVO userVo) {
+
+		ModelAndView mav = new ModelAndView();
+		
+		int cnt = userService.myInfoUpdate(userVo);
+		
+		logger.debug("update user info result : " + cnt);
+		
+		return "redirect:/myPage.do";
+	}	
+	
 }

@@ -28,6 +28,69 @@
 		$("#emailAddr").val(emailArr[1]).prop("selected", true);
 		//이메일 값 넣기//
 		
+		
+		//정보 수정 버튼 클릭 이벤트
+		$("#myInfoUpdateBtn").click(function(){
+			
+			
+			if( $("#userName").val() =="" ){
+				alert("성명을 입력하세요.");
+				return;
+			}
+			
+			if( $("#txtMobile1 option:selected").val()=="" || $("#txtMobile2").val() =="" || $("#txtMobile3").val() =="" ){
+				alert("휴대폰 번호를 입력하세요.");
+				return;
+			}
+			if( $("#sample4_postcode").val()=="" ){
+				alert("우편번호를 입력해주세요.");
+				return;
+			}
+			if($("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
+				alert("휴대폰번호 중복확인을 해주세요.");
+				return;			
+			}
+			if($("#emailAddr option:selected").val() == ""){
+				$("#userEmail").val("");
+			}
+			else{
+				var emailID = $("#emailID").val();
+				var emailAddr =$("#emailAddr option:selected").val();
+				var user_email = emailID +"@"+ emailAddr;
+				$("#userEmail").val(user_email);
+			}
+			
+			
+			var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
+			var txtMobile2 = $.trim($("#txtMobile2").val());
+			var txtMobile3 = $.trim($("#txtMobile3").val());
+			var mob_no = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3
+			$("#userPhone").val(mob_no);
+			
+			//휴대폰 번호 중복 체크
+			$.ajax({
+				url : "phoneJungbokCheck.do",
+				type: "post",
+				data : { userPhone : $("#userPhone").val(), userId: $("#userId").text() },
+				async : false,	// 중복 count로 submit 여부를 결정하기 위한 동기 처리
+				success : function(count){  
+					
+					//번호 중복
+					if(count > 0){
+						$("#phoneMessageBox").empty();
+						var msgTag = "<p style='color:red;'> 이미 사용중인 번호 입니다.</p>";
+		 				$("#phoneMessageBox").append(msgTag);
+		 				
+	 				//중복된 핸드폰 번호가 없을떄만 submit
+					}else{
+						var f = document.form1;
+						f.submit();	
+					}
+				},error : function(responseData){
+					alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+				}
+			});
+		})
 	});
 	
 	//숫자만 입력 가능하도록 하기 위한 함수
@@ -84,9 +147,10 @@
 			<div class="card-body">
 				<h5 class="card-title text-center">내 정보 관리</h5>
 				
-				<form action="/app/member/updateMember.do" name="form1" id="form1" method="post">
+				<form action="userInfoUpdate.do" name="form1" id="form1" method="post">
 					<div class="form-label-group">
 						<strong><span id="userId">${userInfo.userId }</span></strong>
+						<input type="hidden" name="userId" value="${userInfo.userId }">
 						<span>고객님 정보</span>
 					</div>
 					<br/>
@@ -108,6 +172,7 @@
 		                <span style="text-align: center">-</span>
 		                <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
 						<input type="hidden" id="userPhone" name="userPhone" value="${userInfo.userPhone }"/>
+						<span id="phoneMessageBox"></span>
 					</div>
 					
 					<div class="form-label-group">
