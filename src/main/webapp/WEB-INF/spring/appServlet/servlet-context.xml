@@ -35,7 +35,7 @@
 			<mvc:mapping path="/myReservation.do"/>
 	
 			
-			<beans:bean id="movingInterceptor" class="com.moving.interceptors.MovingInterceptors"></beans:bean>
+			<beans:bean id="movingInterceptors" class="com.moving.interceptors.MovingInterceptors"></beans:bean>
 		</mvc:interceptor>
 		
 	</mvc:interceptors>	

@@ -292,4 +292,25 @@ public class UserController {
 		return "redirect:/myPage.do";
 	}	
 	
+	
+	//패스워드 일치 여부 체크
+	@RequestMapping("/checkUserPwd.do")
+	@ResponseBody
+	public String checkUserPwd(UserVO userVo) {
+		
+		int count = userService.checkUserPwd(userVo);
+		
+		logger.info("password check result : " + count);
+		
+		return count+"";
+	}
+	
+	@RequestMapping("/updateUserPwd.do")
+	public String updateUserPwd(UserVO userVo) {
+		
+		int result = userService.updatePwd(userVo);
+		logger.info("update user pwd result : " + result);
+		return "redirect:/myPage.do";
+	}
+	
 }

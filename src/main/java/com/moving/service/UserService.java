@@ -65,4 +65,9 @@ public class UserService {
 		return userMapper.myInfoUpdate(userVo);
 	}
 
+	public int checkUserPwd(UserVO userVo) {
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.checkUserPwd(userVo);
+	}
+
 }

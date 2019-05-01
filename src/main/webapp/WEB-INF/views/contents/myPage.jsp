@@ -36,21 +36,16 @@
 			if( $("#userName").val() =="" ){
 				alert("성명을 입력하세요.");
 				return;
-			}
-			
-			if( $("#txtMobile1 option:selected").val()=="" || $("#txtMobile2").val() =="" || $("#txtMobile3").val() =="" ){
+			}else if( $("#txtMobile1 option:selected").val()=="" || $("#txtMobile2").val() =="" || $("#txtMobile3").val() =="" ){
 				alert("휴대폰 번호를 입력하세요.");
 				return;
-			}
-			if( $("#sample4_postcode").val()=="" ){
+			}else if( $("#sample4_postcode").val()=="" ){
 				alert("우편번호를 입력해주세요.");
 				return;
-			}
-			if($("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
+			}else if($("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
 				alert("휴대폰번호 중복확인을 해주세요.");
 				return;			
-			}
-			if($("#emailAddr option:selected").val() == ""){
+			}else if($("#emailAddr option:selected").val() == ""){
 				$("#userEmail").val("");
 			}
 			else{
@@ -90,7 +85,61 @@
 					alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 				}
 			});
-		})
+		});
+		
+		//패스워드 변경 버튼 클릭시 함수
+		$("#pwdConfirmBtn").click(function () {
+			
+			var oldUserPwd = $("#oldUserPwd").val();
+			
+			var userPwd = $("#userPwd").val();
+			var userPwdCheck = $("#userPwdCheck").val();
+			
+			if(oldUserPwd == null){
+				alert("기존 패스워드를 입력해 주세요.");
+				return;
+			}else if(userPwd == null){
+				alert("신규 패스워드를 입력해 주세요.");
+				return;
+			}else if(userPwd != userPwdCheck){
+				alert("신규 패스워드가 일치하지 않습니다.");
+				return;
+			}
+			
+			var oldUserPwd = hex_sha512($('#oldUserPwd').val()).toString();
+			oldUserPwd = oldUserPwd.substring(0,20);
+		
+			$.ajax({
+				url : "checkUserPwd.do",
+				type: "post",
+				data : { userId: $("#userId").text(), oldUserPwd: oldUserPwd },
+				async : false,
+				success : function(data){  
+					
+					data = Number(data);
+					
+					if( data > 0 ){
+						var newPwd = hex_sha512($('#userPwd').val()).toString();
+						newPwd = newPwd.substring(0,20);
+						$("#userPwd").val(newPwd);
+						
+						var f = document.form2;
+						f.submit();	
+					}else{
+						alert("기존 패스워드가 일치하지 않습니다.");
+					}
+					
+					
+				},error : function(responseData){
+					alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+				}
+			});
+			
+			
+			
+			
+			
+		});
 	});
 	
 	//숫자만 입력 가능하도록 하기 위한 함수
@@ -209,25 +258,26 @@
 				
 				
 			
-				<form action="/app/member/updateMember.do" name="form2" id="form2" method="post" style="clear: both; margin-top: 20px;">
+				<form action="updateUserPwd.do" name="form2" id="form2" method="post" style="clear: both; margin-top: 20px;">
 					<div class="form-label-group">
 						<span>비밀번호 변경</span>
 					</div>
 					<div class="form-label-group">
-						<input type="password" id="oldUsrPwdCheck" maxlength="15"/><br/>
-						<label for="oldUsrPwdCheck">기존 비밀번호</label>
+						<input type="password" id="oldUserPwd" name="oldUserPwd" maxlength="15"/><br/>
+						<label for="oldUserPwd">기존 비밀번호</label>
 					</div>
 					
 					<div class="form-label-group"> 
-						<input type="password" id="USR_PWD" name="usrPwd" maxlength="15"/><br/>
-						<label for="USR_PWD">신규 비밀번호</label> 
+						<input type="password" id="userPwd" name="userPwd" maxlength="15"/><br/>
+						<label for="usrPwd">신규 비밀번호</label> 
 					</div>
 					
 					<div class="form-label-group">
 					
-						<input type="password" id="USR_PWD_check" maxlength="15"/>
-						<label for="USR_PWD_check">비밀번호 확인</label>
+						<input type="password" id="userPwdCheck" maxlength="15"/>
+						<label for="userPwdCheck">비밀번호 확인</label>
 					</div>
+					<input type="hidden" name="userId" value="${userInfo.userId }">
 					<button type="button" id="pwdConfirmBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
 				</form>
 				

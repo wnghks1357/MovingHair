@@ -44,7 +44,7 @@
               <h5 class="card-title text-center">Sign In</h5>
               <form class="form-signin" action="loginProc.do" method="POST" id="loginForm" name="loginForm" onsubmit="return false;">
                 <div class="form-label-group">
-                  <input type="email" id="userId" name="userId" class="form-control" placeholder="Email address" required autofocus>
+                  <input type="text" id="userId" name="userId" class="form-control" placeholder="Email address" required autofocus>
                   <label for="userId">Email address</label>
                 </div>
   

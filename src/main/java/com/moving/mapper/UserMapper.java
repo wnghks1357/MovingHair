@@ -25,4 +25,6 @@ public interface UserMapper {
 
 	public int myInfoUpdate(UserVO userVo);
 
+	public int checkUserPwd(UserVO userVo);
+
 }

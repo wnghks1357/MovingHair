@@ -108,10 +108,17 @@
  			WHERE USER_ID = #{userId}
  	</select>
  	
+ 	<!-- 패스워드 변경시 기존 패스워드 일치여부 확인 -->
+ 	<select id="checkUserPwd" parameterType="userVo" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS userId FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{oldUserPwd}
+ 	</select>
+ 	
+ 	<!-- 패스워드 변경 -->
  	<update id="updatePwd" parameterType="userVo">
  		UPDATE mh_user SET USER_PWD = #{userPwd} WHERE USER_ID = #{userId}
  	</update>
  	
+ 	<!-- 회원정보 수정 -->
  	<update id="myInfoUpdate" parameterType="userVo">
  	
 		UPDATE
