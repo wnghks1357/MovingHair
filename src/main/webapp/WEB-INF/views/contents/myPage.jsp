@@ -1,10 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 	$(function(){
@@ -188,101 +182,96 @@
 	}
 </script>
 
-</head>
-<body>
-
-	<div class="col-sm-9 col-md-7">
-		<div class="card card-signin my-5" style="width:550px;">
-			<div class="card-body">
-				<h5 class="card-title text-center">내 정보 관리</h5>
+<div class="col-sm-9 col-md-7">
+	<div class="card card-signin my-5" style="width:550px;">
+		<div class="card-body">
+			<h5 class="card-title text-center">내 정보 관리</h5>
+			
+			<form action="userInfoUpdate.do" name="form1" id="form1" method="post">
+				<div class="form-label-group">
+					<strong><span id="userId">${userInfo.userId }</span></strong>
+					<input type="hidden" name="userId" value="${userInfo.userId }">
+					<span>고객님 정보</span>
+				</div>
+				<br/>
+				<div class="form-label-group">
+					<input type="text" id="userName" name="userName" maxlength="8" value="${userInfo.userName }"/>
+					<label for="USR_NM">성명</label>
+				</div>
+			 	<div class="form-label-group">
+	                <div style="margin-bottom: 5px;">휴대폰 번호</div>
+	                <select id="txtMobile1" required style="float: left; display: block; width: 28%; padding:  .75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+	                    <option value="010">010</option>
+	                    <option value="011">011</option>
+	                    <option value="016">016</option>
+	                    <option value="017">017</option>
+	                    <option value="019">019</option>
+	                </select>
+	                <span style="text-align: center">-</span>
+	                <input type="text" id="txtMobile2" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
+	                <span style="text-align: center">-</span>
+	                <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
+					<input type="hidden" id="userPhone" name="userPhone" value="${userInfo.userPhone }"/>
+					<span id="phoneMessageBox"></span>
+				</div>
 				
-				<form action="userInfoUpdate.do" name="form1" id="form1" method="post">
-					<div class="form-label-group">
-						<strong><span id="userId">${userInfo.userId }</span></strong>
-						<input type="hidden" name="userId" value="${userInfo.userId }">
-						<span>고객님 정보</span>
-					</div>
-					<br/>
-					<div class="form-label-group">
-						<input type="text" id="userName" name="userName" maxlength="8" value="${userInfo.userName }"/>
-						<label for="USR_NM">성명</label>
-					</div>
-				 	<div class="form-label-group">
-		                <div style="margin-bottom: 5px;">휴대폰 번호</div>
-		                <select id="txtMobile1" required style="float: left; display: block; width: 28%; padding:  .75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
-		                    <option value="010">010</option>
-		                    <option value="011">011</option>
-		                    <option value="016">016</option>
-		                    <option value="017">017</option>
-		                    <option value="019">019</option>
-		                </select>
-		                <span style="text-align: center">-</span>
-		                <input type="text" id="txtMobile2" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
-		                <span style="text-align: center">-</span>
-		                <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
-						<input type="hidden" id="userPhone" name="userPhone" value="${userInfo.userPhone }"/>
-						<span id="phoneMessageBox"></span>
-					</div>
-					
-					<div class="form-label-group">
-						<div style="margin-bottom: 5px;">이메일</div>
-		                <input type="text" id="emailID" maxlength="15" size="30" style="float:left;" required/>
-		                
-		                <span style="float:left; padding-top:12px;">@</span>
-		                <select id="emailAddr" style="float: left; display: block; width: 28%; padding:  .75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
-							<option value="">선택</option>
-							<option value="naver.com">naver.com</option>
-							<option value="hanmail.com">hanmail.com</option>
-							<option value="daum.com">daum.com</option>
-							<option value="gmail.com">gmail.com</option>
-						</select>
-		                <input type="hidden" id="userEmail" name="userEmail" value="${userInfo.userEmail }"/>
-					</div>
-					<div class="form-label-group" style="clear: both; margin-top: 70px;">
-						<input type="text" value="${userInfo.userZip }" id="sample4_postcode" size="6" placeholder="우편번호" name="userZip" required="required" readonly="readonly">
-						<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-primary" style="margin-bottom: 10px;">우편번호 찾기</button><br>
-						<label for="sample4_postcode">우편번호</label>
-					</div>
-					<div class="form-label-group">
-						<input type="text" value="${userInfo.userAddr1 }" class="form-control" id="sample4_roadAddress" size="50" placeholder="도로명주소" name="userAddr1" readonly="readonly" maxlength="100" required>
-						<label for="sample4_roadAddress">주소</label>
-					</div>
-					<div class="form-label-group">
-						<input type="text" value="${userInfo.userAddr2 }" class="form-control" id="sample4_jibunAddress" size="50" name="userAddr2" maxlength="100" required>
-						<label for="sample4_jibunAddress">상세주소</label>
-					</div>
-					<button type="button" id="myInfoUpdateBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
-					
-				
-				</form>
-				
+				<div class="form-label-group">
+					<div style="margin-bottom: 5px;">이메일</div>
+	                <input type="text" id="emailID" maxlength="15" size="30" style="float:left;" required/>
+	                
+	                <span style="float:left; padding-top:12px;">@</span>
+	                <select id="emailAddr" style="float: left; display: block; width: 28%; padding:  .75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+						<option value="">선택</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hanmail.com">hanmail.com</option>
+						<option value="daum.com">daum.com</option>
+						<option value="gmail.com">gmail.com</option>
+					</select>
+	                <input type="hidden" id="userEmail" name="userEmail" value="${userInfo.userEmail }"/>
+				</div>
+				<div class="form-label-group" style="clear: both; margin-top: 70px;">
+					<input type="text" value="${userInfo.userZip }" id="sample4_postcode" size="6" placeholder="우편번호" name="userZip" required="required" readonly="readonly">
+					<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-primary" style="margin-bottom: 10px;">우편번호 찾기</button><br>
+					<label for="sample4_postcode">우편번호</label>
+				</div>
+				<div class="form-label-group">
+					<input type="text" value="${userInfo.userAddr1 }" class="form-control" id="sample4_roadAddress" size="50" placeholder="도로명주소" name="userAddr1" readonly="readonly" maxlength="100" required>
+					<label for="sample4_roadAddress">주소</label>
+				</div>
+				<div class="form-label-group">
+					<input type="text" value="${userInfo.userAddr2 }" class="form-control" id="sample4_jibunAddress" size="50" name="userAddr2" maxlength="100" required>
+					<label for="sample4_jibunAddress">상세주소</label>
+				</div>
+				<button type="button" id="myInfoUpdateBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
 				
 			
-				<form action="updateUserPwd.do" name="form2" id="form2" method="post" style="clear: both; margin-top: 20px;">
-					<div class="form-label-group">
-						<span>비밀번호 변경</span>
-					</div>
-					<div class="form-label-group">
-						<input type="password" id="oldUserPwd" name="oldUserPwd" maxlength="15"/><br/>
-						<label for="oldUserPwd">기존 비밀번호</label>
-					</div>
-					
-					<div class="form-label-group"> 
-						<input type="password" id="userPwd" name="userPwd" maxlength="15"/><br/>
-						<label for="usrPwd">신규 비밀번호</label> 
-					</div>
-					
-					<div class="form-label-group">
-					
-						<input type="password" id="userPwdCheck" maxlength="15"/>
-						<label for="userPwdCheck">비밀번호 확인</label>
-					</div>
-					<input type="hidden" name="userId" value="${userInfo.userId }">
-					<button type="button" id="pwdConfirmBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
-				</form>
+			</form>
+			
+			
+		
+			<form action="updateUserPwd.do" name="form2" id="form2" method="post" style="clear: both; margin-top: 20px;">
+				<div class="form-label-group">
+					<span>비밀번호 변경</span>
+				</div>
+				<div class="form-label-group">
+					<input type="password" id="oldUserPwd" name="oldUserPwd" maxlength="15"/><br/>
+					<label for="oldUserPwd">기존 비밀번호</label>
+				</div>
 				
-			</div>
+				<div class="form-label-group"> 
+					<input type="password" id="userPwd" name="userPwd" maxlength="15"/><br/>
+					<label for="usrPwd">신규 비밀번호</label> 
+				</div>
+				
+				<div class="form-label-group">
+				
+					<input type="password" id="userPwdCheck" maxlength="15"/>
+					<label for="userPwdCheck">비밀번호 확인</label>
+				</div>
+				<input type="hidden" name="userId" value="${userInfo.userId }">
+				<button type="button" id="pwdConfirmBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
+			</form>
+			
 		</div>
 	</div>
-</body>
-</html>
+</div>

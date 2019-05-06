@@ -611,8 +611,8 @@ section
 	left: -15px;
 	width: 0%;
 	height: 3px;
-	background: #FFFFFF;
 	content: '';
+	background
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
 	-ms-transition: all 400ms ease;

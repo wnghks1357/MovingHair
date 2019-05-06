@@ -1,0 +1,13 @@
+/* 이벤트 페이지 페이징 번호 css */
+.eventContainer {
+	background-color: white;
+}
+
+.eventContainer th {
+	text-align: center;
+}
+
+.eventContainer .titleTd {
+	text-align: center;
+}
+/* 이벤트 페이지 페이징 css */

@@ -1,5 +1,7 @@
 package com.moving.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,13 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moving.service.MovingHairService;
 import com.moving.service.UserService;
+import com.moving.vo.EventVO;
+import com.moving.vo.PagingVO;
 import com.moving.vo.UserVO;
 
 @Controller
 public class MovingHairController {
 	
 	@Autowired private UserService userService;
+	@Autowired private MovingHairService movinghairService;
 	
 	private static Logger logger = LoggerFactory.getLogger(MovingHairController.class);
 	
@@ -67,6 +73,43 @@ public class MovingHairController {
 		
 		mav.addObject("mainContent", "myReservation.jsp");
 		mav.setViewName("layout/layout");
+		return mav;
+	}
+	
+	@RequestMapping("/event.do")
+	public ModelAndView event(PagingVO paging) {
+		
+		ModelAndView mav = new ModelAndView();
+
+		logger.info("paging : " + paging);
+		
+		List<EventVO> list = movinghairService.eventList(paging);
+		paging.setTotal(movinghairService.eventListCnt());
+		
+		mav.addObject("list", list);
+		mav.addObject("p", paging);
+
+		mav.addObject("mainContent", "eventPage.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/eventDetail.do")
+	public ModelAndView eventDetail(int eventId) {
+		
+		ModelAndView mav = new ModelAndView();
+
+		logger.info("eventId : " + eventId);
+		
+		EventVO eventVo = movinghairService.eventDetail(eventId);
+		
+		logger.info("eventVo : " + eventVo.toString());
+		
+		mav.addObject("eventVo", eventVo);
+
+		mav.setViewName("contents/eventDetailPopup");
+		
 		return mav;
 	}
 }

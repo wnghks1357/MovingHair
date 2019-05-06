@@ -4,7 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moving.mapper.MovingMapper">
 
+ 	<select id="eventList" parameterType="pagingVo" resultType="eventVo">
  	
+ 			SELECT
+				EVENT_ID AS eventId
+				, EVENT_TITLE AS eventTitle
+				, EVENT_CONTENT AS eventContent
+				, EVENT_START_DT AS eventStartDt
+				, EVENT_END_DT AS eventEndDt
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_event
+<!-- 				ORDER BY WRITE_DATE DESC -->
+				LIMIT #{start}, #{listCnt}
+	</select>
+	
+	<!-- 페이징 처리를 위한 count 조회 -->
+	<select id="eventListCnt" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM mh_event
+	</select>
+	
+	<select id="eventDetail" parameterType="java.lang.Integer" resultType="eventVo">
+		SELECT 
+				EVENT_ID AS eventId
+				, EVENT_TITLE AS eventTitle
+				, EVENT_CONTENT AS eventContent
+				, EVENT_START_DT AS eventStartDt
+				, EVENT_END_DT AS eventEndDt
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_event
+		WHERE EVENT_ID = #{eventId}
+	</select>
  	
  	
 </mapper>

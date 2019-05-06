@@ -613,7 +613,6 @@ section
 	left: -15px;
 	width: 0%;
 	height: 3px;
-	background: #FFFFFF;
 	content: '';
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
@@ -737,7 +736,6 @@ section
 	cursor: pointer;
 	padding-left: 28px;
 	padding-right: 16px;
-	background: #FFFFFF;
 }
 .search_form_list > li:not(:last-child)
 {
@@ -784,7 +782,6 @@ section
 	left: 0;
 	top: 100%;
 	width: 100%;
-	background: #FFFFFF;
 	padding-left: 28px;
 	padding-top: 20px;
 	padding-bottom: 20px;
