@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moving.mapper.MovingMapper;
-import com.moving.mapper.UserMapper;
 import com.moving.vo.EventVO;
+import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
 
 
@@ -30,5 +30,20 @@ public class MovingHairService {
 		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
 		return movingMapper.eventDetail(eventId);
 	}
+
+	public List<NoticeVO> noticeList(PagingVO paging) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.noticeList(paging);
+	}
+
+	public int noticeListCnt() {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.noticeListCnt();
+	}
+
+	/*public int eventUpdateHitCnt(int eventId) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.eventUpdateHitCnt(eventId);
+	}*/
 
 }

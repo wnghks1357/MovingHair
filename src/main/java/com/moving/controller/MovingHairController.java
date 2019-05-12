@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moving.service.MovingHairService;
 import com.moving.service.UserService;
 import com.moving.vo.EventVO;
+import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
 import com.moving.vo.UserVO;
 
@@ -76,7 +77,7 @@ public class MovingHairController {
 		return mav;
 	}
 	
-	@RequestMapping("/event.do")
+	@RequestMapping("/eventList.do")
 	public ModelAndView event(PagingVO paging) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -102,6 +103,9 @@ public class MovingHairController {
 
 		logger.info("eventId : " + eventId);
 		
+		//TODO 조회수 증가
+		//movinghairService.eventUpdateHitCnt(eventId);
+		
 		EventVO eventVo = movinghairService.eventDetail(eventId);
 		
 		logger.info("eventVo : " + eventVo.toString());
@@ -109,6 +113,23 @@ public class MovingHairController {
 		mav.addObject("eventVo", eventVo);
 
 		mav.setViewName("contents/eventDetailPopup");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/csNotice.do")
+	public ModelAndView csNotice(PagingVO paging) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<NoticeVO> list = movinghairService.noticeList(paging);
+		paging.setTotal(movinghairService.noticeListCnt());
+		
+		mav.addObject("list", list);
+		mav.addObject("p", paging);
+
+		mav.addObject("mainContent", "csNotice.jsp");
+		mav.setViewName("layout/layout");
 		
 		return mav;
 	}

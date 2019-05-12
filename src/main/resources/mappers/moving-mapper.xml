@@ -44,6 +44,34 @@
 				FROM mh_event
 		WHERE EVENT_ID = #{eventId}
 	</select>
+	
+<!-- 	<select id="eventDetail" parameterType="java.lang.Integer" resultType="eventVo">
+		UPDATE mh_event
+		SET
+			HIT_CNT = IFNULL(HIT_CNT, 0) + 1
+		WHERE EVENT_ID = #{eventId}
+	</select> -->
+	
+	<select id="noticeList" parameterType="pagingVo" resultType="noticeVo">
+ 	
+ 			SELECT
+				NOTICE_ID AS noticeId
+				, NOTICE_TITLE AS noticeTitle
+				, NOTICE_CONTENT AS noticeContent
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_notice
+				LIMIT #{start}, #{listCnt}
+	</select>
+	
+	<select id="noticeListCnt" resultType="java.lang.Integer">
+ 	
+ 		SELECT COUNT(*) FROM mh_notice
+	</select>
  	
  	
 </mapper>

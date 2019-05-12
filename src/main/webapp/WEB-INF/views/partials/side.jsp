@@ -16,9 +16,14 @@
             <ul class="d-flex flex-row align-items-center justify-content-start">
               <li class="active"><a href="/home.do">홈</a></li>
               <li><a href="/myReservation.do">예약 관리</a></li>
-              <li><a href="/event.do">이벤트</a></li>
+              <li><a href="/eventList.do">이벤트</a></li>
               <li><a href="/myPage.do">마이페이지</a></li>
-              <li><a href="#">고객센터</a></li>
+              <li><a href="#">고객센터</a>
+              	<ul>
+          			<li><a href="/csNotice.do">공지사항</a></li>
+              		<li><a href="/csFaq.do">FAQ</a></li>
+              	</ul>
+              </li>
             </ul>
           </nav>
           <div class="header_extra d-flex flex-row align-items-center justify-content-start ml-auto">
@@ -42,9 +47,10 @@
     <ul class="menu_nav_list text-center">
       <li><a href="/home.do">홈</a></li>
       <li><a href="/myReservation.do">예약 관리</a></li>
-      <li><a href="/event.do">이벤트</a></li>
+      <li><a href="/eventList.do">이벤트</a></li>
       <li><a href="/myPage.do">마이페이지</a></li>
-      <li><a href="#">고객센터</a></li>
+      <li><a href="/csNotice.do">공지사항</a></li>
+      <li><a href="/csFaq.do">FAQ</a></li>      
     </ul>
     <div class="menu_review"><a href="#">Book Now</a></div>
   </div>

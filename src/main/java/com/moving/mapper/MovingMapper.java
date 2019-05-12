@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.moving.vo.EventVO;
+import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
-import com.moving.vo.UserVO;
 
 @Repository
 public interface MovingMapper {
@@ -16,6 +16,12 @@ public interface MovingMapper {
 	int eventListCnt();
 
 	EventVO eventDetail(int eventId);
+
+	List<NoticeVO> noticeList(PagingVO paging);
+
+	int noticeListCnt();
+
+	//int eventUpdateHitCnt(int eventId);
 	
 
 

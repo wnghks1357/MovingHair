@@ -1,6 +1,12 @@
 /* 이벤트 페이지 페이징 번호 css */
 .eventContainer {
 	background-color: white;
+	margin-top: 50px;
+}
+
+.eventContainer h2 {
+	padding-top:15px;
+	text-align: center;
 }
 
 .eventContainer th {
@@ -11,3 +17,17 @@
 	text-align: center;
 }
 /* 이벤트 페이지 페이징 css */
+
+/* 네비게이션 바 */
+.main_nav a {
+	text-decoration: none;
+}
+
+.main_nav ul ul{
+	display: none;
+}
+
+.main_nav ul li:hover >ul{
+	display: block;
+}
+/* 네비게이션 바 */

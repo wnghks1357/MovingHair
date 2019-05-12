@@ -18,40 +18,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 
-$(function () {
-
-}
-
 </script>
 </head>
 <body>
-  <table border="1" style="margin-top: 30px;" id="eventListTb" class="table table-striped" >
-		<colgroup>
-			<col width="15%"/>
-			<col width="*"/>
-			<col width="15%"/>
-			<col width="15%"/>
-		</colgroup>
-		<thead>
-			<tr>
-				<th>등록 날짜</th>
-				<th style="text-align: center;">이벤트</th>
-				<th>종료 날짜</th>
-				<th>작성자</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<fmt:formatDate value="${eventVo.eventStartDt }" pattern="yyyy.MM.dd"/>
-				</td>
-				<td class="titleTd">${eventVo.eventTitle }</td>
-				<td>
-					<fmt:formatDate value="${eventVo.eventEndDt }" pattern="yyyy.MM.dd"/>
-				</td>
-				<td>${eventVo.userName }</td>
-			</tr>
-		</tbody>
-	</table>
+  <p>
+  	${eventVo.eventContent }
+  </p>
 </body>
 </html>

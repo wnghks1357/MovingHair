@@ -82,16 +82,16 @@
 	
 	//디테일 팝업창 함수
 	function fnDetailPopup(eventId){
-		window.open('eventDetail.do?eventId=' + eventId, "_black",
+		window.open('noticeDetail.do?noticeId=' + noticeId, "_black",
 				"toolbar=yes,menubar=yes,width=700,height=500").focus();
 	}
 </script>
 
 
 
-<div class="eventContainer">
+<div class="noticeContainer">
 
-	<h2>무빙 헤어 Event</h2>
+	<h2>무빙 헤어 공지사항</h2>
 	<table border="1" style="margin-top: 30px;" id="eventListTb" class="table table-striped" >
 		<colgroup>
 			<col width="15%"/>
@@ -102,8 +102,7 @@
 		<thead>
 			<tr>
 				<th>등록 날짜</th>
-				<th style="text-align: center;">이벤트</th>
-				<th>종료 날짜</th>
+				<th style="text-align: center;">공지</th>
 				<th>작성자</th>
 			</tr>
 		</thead>
@@ -112,12 +111,9 @@
 				<c:forEach var="e" items="${list }">
 					<tr>
 						<td>
-							<fmt:formatDate value="${e.eventStartDt }" pattern="yyyy.MM.dd"/>
+							<fmt:formatDate value="${e.writeDate }" pattern="yyyy.MM.dd"/>
 						</td>
-						<td class="titleTd" onclick="fnDetailPopup(${e.eventId});">${e.eventTitle }</td>
-						<td>
-							<fmt:formatDate value="${e.eventEndDt }" pattern="yyyy.MM.dd"/>
-						</td>
+						<td class="titleTd" onclick="fnDetailPopup(${e.noticeId});">${e.noticeTitle }</td>
 						<td>${e.userName }</td>
 					</tr>
 				</c:forEach>
@@ -154,7 +150,7 @@
 						<li class="page-item"><a class="page-link" onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>끝으로</a></li>
 					</c:if>
 				</ul>
-				<form action="eventList.do" method="post" id='frmPaging'>
+				<form action="noticeList.do" method="post" id='frmPaging'>
 					<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 					<input type='hidden' name='index' id='index' value='${p.index}'>
 					<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'>

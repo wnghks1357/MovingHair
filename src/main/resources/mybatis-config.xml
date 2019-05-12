@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.vo.UserVO" alias="userVo"/>
 		<typeAlias type="com.moving.vo.ReservVO" alias="reservVo"/>
 		<typeAlias type="com.moving.vo.EventVO" alias="eventVo"/>
+		<typeAlias type="com.moving.vo.NoticeVO" alias="noticeVo"/>
 		<typeAlias type="com.moving.vo.PagingVO" alias="pagingVo"/>
 	</typeAliases>
 	
