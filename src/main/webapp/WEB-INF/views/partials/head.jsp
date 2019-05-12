@@ -35,6 +35,8 @@
 <script src="resources/plugins/parallax-js-master/parallax.min.js"></script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBImjP5_hRVIzJ8eFEGpBS_GcBgkl5M_7E"></script> -->
 <script src="resources/javascripts/bootstrap/custom.js"></script>
+<!-- 지도 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c14e46aa468051d736ae4ad82186074c&libraries=services,clusterer,drawing"></script>
 
 <!-- 패스워드 hashing libarary -->
 <script src="resources/javascripts/sha512.js"></script>

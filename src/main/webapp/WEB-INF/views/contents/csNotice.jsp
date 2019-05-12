@@ -94,27 +94,26 @@
 	<h2>무빙 헤어 공지사항</h2>
 	<table border="1" style="margin-top: 30px;" id="eventListTb" class="table table-striped" >
 		<colgroup>
-			<col width="15%"/>
+			<col width="10%"/>
 			<col width="*"/>
-			<col width="15%"/>
 			<col width="15%"/>
 		</colgroup>
 		<thead>
 			<tr>
+				<th>번호</th>
 				<th>등록 날짜</th>
 				<th style="text-align: center;">공지</th>
-				<th>작성자</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:if test="${!empty list}">
 				<c:forEach var="e" items="${list }">
 					<tr>
+						<td>${e.noticeId }</td>
+						<td class="titleTd" onclick="fnDetailPopup(${e.noticeId});">${e.noticeTitle }</td>
 						<td>
 							<fmt:formatDate value="${e.writeDate }" pattern="yyyy.MM.dd"/>
 						</td>
-						<td class="titleTd" onclick="fnDetailPopup(${e.noticeId});">${e.noticeTitle }</td>
-						<td>${e.userName }</td>
 					</tr>
 				</c:forEach>
 			</c:if>

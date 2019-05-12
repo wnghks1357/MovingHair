@@ -2,6 +2,7 @@ package com.moving.mapper;
 
 import org.springframework.stereotype.Repository;
 
+import com.moving.vo.DesignLoungeVO;
 import com.moving.vo.UserVO;
 
 @Repository
@@ -26,5 +27,7 @@ public interface UserMapper {
 	public int myInfoUpdate(UserVO userVo);
 
 	public int checkUserPwd(UserVO userVo);
+
+	public int regDesignLounge(DesignLoungeVO designLoungeVO);
 
 }

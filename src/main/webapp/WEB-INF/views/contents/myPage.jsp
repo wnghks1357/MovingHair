@@ -56,7 +56,11 @@
 			var mob_no = txtMobile1 + "-" + txtMobile2 + "-" + txtMobile3
 			$("#userPhone").val(mob_no);
 			
-			//휴대폰 번호 중복 체크
+			//회원정보 수정
+			var f = document.form1;
+			f.submit();	
+			
+			/* //휴대폰 번호 중복 체크
 			$.ajax({
 				url : "phoneJungbokCheck.do",
 				type: "post",
@@ -78,7 +82,7 @@
 				},error : function(responseData){
 					alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 				}
-			});
+			}); */
 		});
 		
 		//패스워드 변경 버튼 클릭시 함수
@@ -112,13 +116,24 @@
 					
 					data = Number(data);
 					
+					//기존 패스워드 일치 시
 					if( data > 0 ){
+						
 						var newPwd = hex_sha512($('#userPwd').val()).toString();
 						newPwd = newPwd.substring(0,20);
-						$("#userPwd").val(newPwd);
 						
-						var f = document.form2;
-						f.submit();	
+						//기존 패스워드와 신규 패스워드가 동일하지 않은 경우
+						if(oldUserPwd != newPwd){
+							$("#userPwd").val(newPwd);
+							
+							var f = document.form2;
+							f.submit();
+							//기존, 신규 패스워드가 동일한 경우 변경 요청
+						}else{
+							alert("신규 패스워드를 기존 패스워드와 다르게 설정해 주세요.");
+							return;
+						}
+						
 					}else{
 						alert("기존 패스워드가 일치하지 않습니다.");
 					}
@@ -194,6 +209,12 @@
 					<span>고객님 정보</span>
 				</div>
 				<br/>
+				
+				<!-- 사진 표시 및 첨부 기능 -->
+				<div class="form-label-group">
+						사진  공간
+				</div>
+				
 				<div class="form-label-group">
 					<input type="text" id="userName" name="userName" maxlength="8" value="${userInfo.userName }"/>
 					<label for="USR_NM">성명</label>

@@ -69,7 +69,7 @@
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float: right;"  onclick="location.href='idpwSearch.do'">Find ID/PASSWORD</button>
                 <hr class="my-4" style="clear: both;">
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="background-color: #1DDB16"><i></i> Sign in with Naver</button>
-                <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                <!-- <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                 <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit" style="background-color: #ffe812; color:black;"><i class="fab fa-facebook-f mr-2"></i> Sign in with Kakao</button>
               </form>
             </div>

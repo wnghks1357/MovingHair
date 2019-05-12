@@ -97,14 +97,12 @@
 			<col width="15%"/>
 			<col width="*"/>
 			<col width="15%"/>
-			<col width="15%"/>
 		</colgroup>
 		<thead>
 			<tr>
 				<th>등록 날짜</th>
 				<th style="text-align: center;">이벤트</th>
 				<th>종료 날짜</th>
-				<th>작성자</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -118,7 +116,6 @@
 						<td>
 							<fmt:formatDate value="${e.eventEndDt }" pattern="yyyy.MM.dd"/>
 						</td>
-						<td>${e.userName }</td>
 					</tr>
 				</c:forEach>
 			</c:if>

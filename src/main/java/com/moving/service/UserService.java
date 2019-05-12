@@ -1,13 +1,11 @@
 package com.moving.service;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.moving.mapper.UserMapper;
+import com.moving.vo.DesignLoungeVO;
 import com.moving.vo.UserVO;
 
 
@@ -68,6 +66,12 @@ public class UserService {
 	public int checkUserPwd(UserVO userVo) {
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		return userMapper.checkUserPwd(userVo);
+	}
+
+	public int regDesignLounge(DesignLoungeVO designLoungeVO) {
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.regDesignLounge(designLoungeVO);
+		
 	}
 
 }

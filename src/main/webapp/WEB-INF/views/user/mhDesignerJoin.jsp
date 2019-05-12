@@ -20,6 +20,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 
+//선호 지역 추가 버튼 클릭시 증가 시킬 변수
+var preferCnt = 1;
+
 $(function () {
 
 	//저장 버튼클릭시 유효성 검사
@@ -35,10 +38,10 @@ $(function () {
 			return;
 		}
     
-		if( $("#phoneMessageBox").text() =="" || $("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
+	/* 	if( $("#phoneMessageBox").text() =="" || $("#phoneMessageBox").text() =="중복된 번호가 존재합니다."){
 		 	alert("휴대폰번호 중복확인을 해주세요.");
 		 	return;			
-		}
+		} */
 		
 		//아아디는 입력했는데 도메인을 입력하지 않은 경우
 		if( $("#emailID").val() != "" && $("#emailAddr option:selected").val() == ""){
@@ -116,7 +119,7 @@ function fnJungbokID(){
 }
 
 //휴대폰 번호 중복 체크 함수
-function fnJungbokPhone(){
+/* function fnJungbokPhone(){
 	var txtMobile1 = $.trim($("#txtMobile1 option:selected").val());
 	var txtMobile2 = $.trim($("#txtMobile2").val());
 	var txtMobile3 = $.trim($("#txtMobile3").val());
@@ -145,7 +148,7 @@ function fnJungbokPhone(){
 	});
 	 
 	  
- }
+ } */
 
 //숫자만 입력 가능하도록 하기 위한 함수
 function ageChkNumber(event,type) {
@@ -192,6 +195,25 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
+/* 선호지역 입력칸 추가 */
+function fnAddPreferLoc(){
+	
+	//선호지역 추가 초과시
+	if(preferCnt == 5){
+		alert('선호지역은 최대 5지역 까지만 설정 가능합니다.');
+		return;
+	}
+	
+	//선호 지역 id값 1 증가
+	preferCnt++;
+	
+	var preferBox = '<input type="text" placeholder="Ex) 서울특별시 양천구 신정2동" id="preferAddr'+preferCnt+'" name="preferAddr'+preferCnt+'" style="width: 80%;" maxlength="20">';
+	preferBox += '<label for="preferAddr'+preferCnt+'" style="width:80%;>Ex) 서울특별시 양천구 신정2동</label>';
+	
+	$("#preferLocDiv").append(preferBox);
+	
+}
+
 </script>
 </head>
 <body id="newMember">
@@ -201,6 +223,11 @@ function sample4_execDaumPostcode() {
           <div class="card-body">
             <h5 class="card-title text-center">Welcome To the Moving Hair</h5>
             <form class="form-signin" id="form1" name="form1" action="joinProc.do" method="POST">
+
+              <!-- 사진 표시 및 첨부 기능 -->
+              <div class="form-label-group">
+              	사진  공간
+              </div>
 
               <div class="form-label-group">
                 <input type="text" id="userId" name="userId" maxlength="20" minlength="4" size="40" placeholder="ID" required autofocus>
@@ -257,8 +284,8 @@ function sample4_execDaumPostcode() {
                 <input type="text" id="txtMobile2" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
                 <span style="text-align: center">-</span>
                 <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
-                <input type="button" value="중복확인" onclick="fnJungbokPhone();" class="btn btn-primary" style="margin-bottom: 20px; padding-bottom: 13px;"/>
-                <span id="phoneMessageBox"></span>
+                <!-- <input type="button" value="중복확인" onclick="fnJungbokPhone();" class="btn btn-primary" style="margin-bottom: 20px; padding-bottom: 13px;"/>
+                <span id="phoneMessageBox"></span> -->
                 <input type="hidden" id="userPhone" name="userPhone"/>
               </div>
               
@@ -290,7 +317,17 @@ function sample4_execDaumPostcode() {
                 <input type="text" class="form-control" id="sample4_jibunAddress" size="50" placeholder="상세주소를 입력해 주세요." name="userAddr2" maxlength="100" required>
                 <label for="sample4_jibunAddress">상세주소</label>
               </div>
-
+              
+              <div style="margin-bottom: 5px;">선호 지역</div>
+              <div class="form-label-group" id="preferLocDiv">
+              	
+                <input type="text" placeholder="Ex) 서울특별시 양천구 신정2동" id="preferAddr1" name="preferAddr1" style="width: 80%;" maxlength="20" required>
+                <label for="preferAddr1" style="width:80%;">Ex) 서울특별시 양천구 신정2동</label>
+                <button type="button" onclick="fnAddPreferLoc();" class="btn btn-primary" style="padding-bottom: 15px;">추가</button><br>
+              </div>
+              
+              
+              
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="newMemberJoinBtn">Join !</button>
               <button id="cancelBtn" class="btn btn-lg btn-primary btn-block text-uppercase" type="button">Back</button>
             </form>

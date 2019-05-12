@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.moving.interceptors.MovingInterceptors;
 import com.moving.service.UserService;
 import com.moving.util.MailSenderUtil;
+import com.moving.vo.DesignLoungeVO;
 import com.moving.vo.UserVO;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 public class UserController {
@@ -102,14 +100,22 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/joinProc.do", produces="text/plain;charset=UTF-8")
-	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserVO userVo) {
-		ModelAndView mav = new ModelAndView();
+	public String joinProc(HttpSession session, @RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName, UserVO userVo, DesignLoungeVO designLoungeVO) {
 		
 		int count = userService.joinProc(userVo);
 		
 		logger.debug("join proc result : " + count);
 		
-		if( count != 0) {
+		int loungeCnt =0;
+		
+		//회원정보 테이블 insert 성공 and user가 디자이너인 경우
+		if(count > 0 && userVo.getUserType() == 'D') {
+			
+			loungeCnt = userService.regDesignLounge(designLoungeVO);
+			logger.debug("regDesignLounge result : " + loungeCnt);
+		}
+		
+		if( count > 0 ) {
 			session.setAttribute("userId", userVo.getUserId());
 		}
 		
@@ -282,8 +288,6 @@ public class UserController {
 	//마이페이지에서 정보 수정
 	@RequestMapping("/userInfoUpdate.do")
 	public String myInfoUpdate(UserVO userVo) {
-
-		ModelAndView mav = new ModelAndView();
 		
 		int cnt = userService.myInfoUpdate(userVo);
 		
