@@ -49,6 +49,11 @@ $(function () {
 			return;
 		}
 		
+		if( $("#preferAddr1").val() =="" || $("#preferAddr1").val() == null){
+			alert("선호 지역을 최소 1개 이상 입력해 주세요.");
+			return;
+		}
+		
 		//이메일을 입력을 생략한 경우
 		if($("#emailAddr option:selected").val() == ""){
 			$("#userEmail").val("");
@@ -200,7 +205,7 @@ function fnAddPreferLoc(){
 	
 	//선호지역 추가 초과시
 	if(preferCnt == 5){
-		alert('선호지역은 최대 5지역 까지만 설정 가능합니다.');
+		alert('선호지역은 최대 5개 지역 까지만 설정 가능합니다.');
 		return;
 	}
 	

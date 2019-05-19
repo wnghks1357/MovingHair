@@ -87,74 +87,76 @@
 	}
 </script>
 
-
-
-<div class="noticeContainer">
-
-	<h2>무빙 헤어 공지사항</h2>
-	<table border="1" style="margin-top: 30px;" id="eventListTb" class="table table-striped" >
-		<colgroup>
-			<col width="10%"/>
-			<col width="*"/>
-			<col width="15%"/>
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>등록 날짜</th>
-				<th style="text-align: center;">공지</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${!empty list}">
-				<c:forEach var="e" items="${list }">
+<div class="card card-signin my-5" style="width:1000px;">
+	<div class="card-body">
+		<div class="noticeContainer">
+		
+			<h2>무빙 헤어 공지사항</h2>
+			<table border="1" style="margin-top: 30px;" id="eventListTb" class="table table-striped" >
+				<colgroup>
+					<col width="10%"/>
+					<col width="*"/>
+					<col width="15%"/>
+				</colgroup>
+				<thead>
 					<tr>
-						<td>${e.noticeId }</td>
-						<td class="titleTd" onclick="fnDetailPopup(${e.noticeId});">${e.noticeTitle }</td>
-						<td>
-							<fmt:formatDate value="${e.writeDate }" pattern="yyyy.MM.dd"/>
-						</td>
+						<th>번호</th>
+						<th>등록 날짜</th>
+						<th style="text-align: center;">공지</th>
 					</tr>
-				</c:forEach>
-			</c:if>
-			<c:if test="${empty list}">
-				<tr>
-					<td colspan="6" style="text-align: center;">등록된 이벤트가 없습니다.</td>
-				</tr>
-			</c:if>
-		</tbody>
-	</table>
-
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<!-- 5. paging view -->    
-				<ul class="pagination justify-content-center">
-					<c:if test="${p.pageStartNum ne 1}">
-						<!--맨 첫페이지 이동 -->
-						<li class="page-item"><a class="page-link" onclick='pagePre(${p.pageCnt+1},${p.pageCnt});'>처음으로</a></li>
-						<!--이전 페이지 이동 -->
-						<li class="page-item"><a class="page-link" onclick='pagePre(${p.pageStartNum},${p.pageCnt});'>이전</a></li>
+				</thead>
+				<tbody>
+					<c:if test="${!empty list}">
+						<c:forEach var="e" items="${list }">
+							<tr>
+								<td>${e.noticeId }</td>
+								<td class="titleTd" onclick="fnDetailPopup(${e.noticeId});">${e.noticeTitle }</td>
+								<td>
+									<fmt:formatDate value="${e.writeDate }" pattern="yyyy.MM.dd"/>
+								</td>
+							</tr>
+						</c:forEach>
 					</c:if>
-			          
-					<!--페이지번호 -->
-					<c:forEach var='i' begin="${p.pageStartNum}" end="${p.pageLastNum}" step="1">
-						<li class='page-item pageIndex${i}'><a class="page-link" onclick='pageIndex(${i});'>${i}</a></li>
-					</c:forEach>
-			          
-					<c:if test="${p.lastChk}">
-						<!--다음 페이지 이동 -->
-						<li class="page-item"><a class="page-link" onclick='pageNext(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>다음</a></li>
-						<!--마지막 페이지 이동 -->
-						<li class="page-item"><a class="page-link" onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>끝으로</a></li>
+					<c:if test="${empty list}">
+						<tr>
+							<td colspan="6" style="text-align: center;">등록된 이벤트가 없습니다.</td>
+						</tr>
 					</c:if>
-				</ul>
-				<form action="noticeList.do" method="post" id='frmPaging'>
-					<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
-					<input type='hidden' name='index' id='index' value='${p.index}'>
-					<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'>
-					<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'>    
-				</form>
+				</tbody>
+			</table>
+		
+			<div class="pagingContainer">
+				<div class="row">
+					<div class="col">
+						<!-- 5. paging view -->    
+						<ul class="pagination justify-content-center">
+							<c:if test="${p.pageStartNum ne 1}">
+								<!--맨 첫페이지 이동 -->
+								<li class="page-item"><a class="page-link" onclick='pagePre(${p.pageCnt+1},${p.pageCnt});'>처음으로</a></li>
+								<!--이전 페이지 이동 -->
+								<li class="page-item"><a class="page-link" onclick='pagePre(${p.pageStartNum},${p.pageCnt});'>이전</a></li>
+							</c:if>
+					          
+							<!--페이지번호 -->
+							<c:forEach var='i' begin="${p.pageStartNum}" end="${p.pageLastNum}" step="1">
+								<li class='page-item pageIndex${i}'><a class="page-link" onclick='pageIndex(${i});'>${i}</a></li>
+							</c:forEach>
+					          
+							<c:if test="${p.lastChk}">
+								<!--다음 페이지 이동 -->
+								<li class="page-item"><a class="page-link" onclick='pageNext(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>다음</a></li>
+								<!--마지막 페이지 이동 -->
+								<li class="page-item"><a class="page-link" onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>끝으로</a></li>
+							</c:if>
+						</ul>
+						<form action="noticeList.do" method="post" id='frmPaging'>
+							<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
+							<input type='hidden' name='index' id='index' value='${p.index}'>
+							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'>
+							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'>    
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

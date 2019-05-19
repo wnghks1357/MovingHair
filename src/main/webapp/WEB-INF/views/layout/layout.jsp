@@ -20,7 +20,9 @@
 					<div class="row">
 						<div class="col">
 							<nav>
-								<jsp:include page="../contents/${mainContent }"/>
+								<div class="col-sm-9 col-md-7">
+									<jsp:include page="../contents/${mainContent }"/>
+								</div>
 							</nav>
 						</div>
 					</div>

@@ -1,30 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<div class="card card-signin my-5" style="width:1000px;">
+	<div class="card-body">
 
-<div class="col-sm-9 col-md-7">
-	<div class="card card-signin my-5" style="width:1000px;">
-		<div class="card-body">
-			<h2 style="margin-bottom: 20px;">희망 지역 검색</h2>
-			<div class="map_wrap">
-			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-			
-			    <div id="menu_wrap" class="bg_white">
-			        <div class="option">
-			            <div>
-			                <form onsubmit="searchPlaces(); return false;">
-		                    	키워드 : <input type="text" value="이태원 맛집" placeholder="장소 검색"  id="keyword" size="15"> 
-			                    <button class="btn btn-outline-info waves-effect" type="submit">검색하기</button> 
-			                </form>
-			            </div>
-			        </div>
-			        <hr>
-			        <ul id="placesList"></ul>
-			        <div id="pagination"></div>
-			    </div>
-			</div>
+		<h2 style="margin-bottom: 20px;">희망 지역 검색</h2>
+		<div class="map_wrap">
+		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+		
+		    <div id="menu_wrap" class="bg_white">
+		        <div class="option">
+		            <div>
+		                <form onsubmit="searchPlaces(); return false;">
+	                    	<input type="text" value="" placeholder="예) 신정동"  id="keyword" size="15"> 
+		                    <button class="btn btn-outline-info waves-effect" type="submit">검색하기</button> 
+		                </form>
+		            </div>
+		        </div>
+		        <hr>
+		        <ul id="placesList"></ul>
+		        <div id="pagination"></div>
+		    </div>
 		</div>
+		<table border="1" style="margin-top: 30px; margin-left: auto; margin-right: auto; width: 95%;" id="designerListTb" class="table table-striped" >
+			<colgroup>
+				<col width="*"/>
+				<col width="7%"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th id="designerListThead"></th>
+					<th>신청</th>
+				</tr>
+			</thead>
+			<tbody id="designerListTbody">
+				
+			</tbody>
+		</table>
+		
 	</div>
 </div>
+
 
 <script>
 //마커를 담을 배열입니다
@@ -40,7 +55,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
 // 장소 검색 객체를 생성합니다
-var ps = new daum.maps.services.Places();  
+var ps = new daum.maps.services.Places(); 
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new daum.maps.InfoWindow({zIndex:1});
@@ -54,9 +69,51 @@ function searchPlaces() {
     var keyword = document.getElementById('keyword').value;
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
+        
+        $("#designerListThead").html("디자이너 검색 결과");
         return false;
     }
+    
+    $("#designerListThead").html(keyword + " 인근 디자이너 검색 결과");
+    
+    
+    //디자이너 검색 결과 리스트 초기화
+    $("#designerListTbody").empty();
+    
+    //디자이너 선호 지역 검색 결과 Ajax
+    $.ajax({
+    	url : "designerLoungeList.do",
+    	type:"post",
+    	data: { keyword: keyword },
+    	dataType: "json",
+    	success : function(data){
+    		
+    		//디자이너 ID 리스트
+    		var designerList = data.designerList;
+    		
+    		if(designerList.length != 0){
+    			var designerEl;
+    			
+	    		for( var i = 0; i < designerList.length; i++){
+	    			designerEl += "<tr>";
+	    			designerEl += "<td>"+designerList[i]+"</td>";
+	    			designerEl += "<td><button>신청</button></td>";
+	    			designerEl += "</tr>";
+	    		}
+	    	
+    		}else{
+    			designerEl += "<tr>";
+    			designerEl += "<td>해당 지역의 디자이너를 찾을 수 없습니다.</td>";
+    			designerEl += "<td></td>";
+    			designerEl += "</tr>";
+    		}
+    		
+    		$("#designerListTbody").append(designerEl);
+    		
+    	},error: function(data){
+    		alert("처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    	}
+    })
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
@@ -66,6 +123,8 @@ function searchPlaces() {
 function placesSearchCB(data, status, pagination) {
     if (status === daum.maps.services.Status.OK) {
 
+    	
+    	//console.log(JSON.stringify(data));
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data);
@@ -138,6 +197,7 @@ function displayPlaces(places) {
 
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
+    
     menuEl.scrollTop = 0;
 
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다

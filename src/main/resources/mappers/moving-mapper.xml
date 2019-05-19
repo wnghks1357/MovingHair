@@ -69,8 +69,18 @@
 	</select>
 	
 	<select id="noticeListCnt" resultType="java.lang.Integer">
- 	
  		SELECT COUNT(*) FROM mh_notice
+	</select>
+	
+	<select id="designerLoungeList" parameterType="java.lang.String" resultType="java.lang.String">
+ 		SELECT 
+ 			USER_ID AS userId
+ 		FROM mh_design_lounge
+ 		WHERE ADDR1 LIKE CONCAT('%',#{keyword},'%') 
+ 		OR
+ 		ADDR2 LIKE CONCAT('%',#{keyword},'%')
+ 		OR
+ 	ADDR3 LIKE CONCAT('%',#{keyword},'%')
 	</select>
  	
  	

@@ -1,3 +1,12 @@
+a {
+	text-decoration: none;
+	color:#000;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
 /* 이벤트 페이지 페이징 번호 css */
 .eventContainer {
 	background-color: white;
@@ -19,9 +28,6 @@
 /* 이벤트 페이지 페이징 css */
 
 /* 네비게이션 바 */
-.main_nav a {
-	text-decoration: none;
-}
 
 .main_nav ul ul{
 	display: none;

@@ -1,6 +1,8 @@
 package com.moving.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.service.MovingHairService;
@@ -110,9 +113,12 @@ public class MovingHairController {
 		
 		logger.info("eventVo : " + eventVo.toString());
 		
+		
 		mav.addObject("eventVo", eventVo);
-
-		mav.setViewName("contents/eventDetailPopup");
+		
+		mav.addObject("mainContent", "eventDetail.jsp");
+		
+		mav.setViewName("layout/layout");
 		
 		return mav;
 	}
@@ -132,5 +138,18 @@ public class MovingHairController {
 		mav.setViewName("layout/layout");
 		
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/designerLoungeList.do")
+	public Object designerLoungeList(String keyword) {
+		List<String> designerList = movinghairService.designerLoungeList(keyword);
+		
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		
+		resMap.put("designerList", designerList);
+		
+		
+		return resMap;
 	}
 }

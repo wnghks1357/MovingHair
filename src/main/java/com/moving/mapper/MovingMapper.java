@@ -21,6 +21,8 @@ public interface MovingMapper {
 
 	int noticeListCnt();
 
+	List<String> designerLoungeList(String keyword);
+
 	//int eventUpdateHitCnt(int eventId);
 	
 

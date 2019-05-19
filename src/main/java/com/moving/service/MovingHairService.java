@@ -41,6 +41,11 @@ public class MovingHairService {
 		return movingMapper.noticeListCnt();
 	}
 
+	public List<String> designerLoungeList(String keyword) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.designerLoungeList(keyword);
+	}
+
 	/*public int eventUpdateHitCnt(int eventId) {
 		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
 		return movingMapper.eventUpdateHitCnt(eventId);
