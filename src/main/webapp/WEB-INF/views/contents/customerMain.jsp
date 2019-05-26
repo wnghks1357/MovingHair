@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="card card-signin my-5" style="width:1000px;">
+<div class="card card-signin my-5" style="width:1300px;">
 	<div class="card-body">
+	
+		<section id="search">
+		   <div class="wrap">
+		      <div class="left">
+		         <h2>희망 지역 검색</h2>
+		         <select class="radius10" id="Sel도시분류"><option value='1' >희망 도시</option><option value='2' >서울특별시</option><option value='3' >부산광역시</option><option value='4' >대구광역시</option><option value='5' >인천광역시</option><option value='6' >광주광역시</option><option value='7' >대전광역시</option><option value='8' >울산광역시</option><option value='9' >세종특별자치시</option><option value='10' >경기도</option><option value='11' >강원도</option><option value='12' >충청북도</option><option value='13' >충청남도</option><option value='14' >경상북도</option><option value='15' >경상남도</option><option value='16' >전라북도</option><option value='17' >전라남도</option><option value='18' >제주도</option></select>
+		         <select class="radius10" id="Sel구군분류"><option>시/구/군</option></select>
+		         <input type="text" class="radius10" id="Txt동" style="ime-mode:active;" placeholder="동/읍/면" />
+		      </div>
+		      <button class="radius10" id="Btn조회하기">조회하기</button>
+		   </div>
+		</section>
 
-		<h2 style="margin-bottom: 20px;">희망 지역 검색</h2>
+		
 		<div class="map_wrap">
 		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 		

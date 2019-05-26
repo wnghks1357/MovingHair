@@ -7,6 +7,66 @@ a:hover{
 	text-decoration: none;
 }
 
+/* customer main */
+.wrap {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#search {
+	width: 100%;
+	background: #4C5C7E;
+	padding: 5px 0 35px 0;
+	color: white;
+	height: 130px;
+	margin-bottom: 30px;
+}
+
+#search .left h2 {
+    display: block;
+    color: #fff;
+}
+
+#search .left {
+    position: relative;
+    width: 78%;
+    float: left;
+}
+
+#search .left select {
+	float: left;
+    width: 32.5%;
+    height: 50px;
+    background: url(select_arrow.png) no-repeat 90% 50% #fff;
+    font-weight: bold;
+    color: #4C5C7E;
+    margin: 0 5px 5px 0;
+}
+
+#search .left input {
+    float: right;
+    width: 33%;
+    height: 50px;
+    margin: 0;
+}
+
+.radius10 {
+    border-radius: 10px;
+}
+
+#search button {
+    width: 20%;
+    height: 50px;
+    background: #4C5C7E;
+    color: #fff;
+    padding: 0;
+    float: left;
+    margin-top: 45px;
+    margin-left: 20px;
+}
+/* customer main// */
+
+
 /* 이벤트 페이지 페이징 번호 css */
 .eventContainer {
 	background-color: white;
