@@ -1,9 +1,16 @@
 package com.moving.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -151,5 +159,37 @@ public class MovingHairController {
 		
 		
 		return resMap;
+	}
+	
+	
+	@RequestMapping(value="/getGugun", produces="application/xml;charset=utf-8")
+	@ResponseBody
+	public String getGugun(@RequestParam Map params, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		//구군 가져올 api 호출
+		URL url = new URL("http://api.openapi.io/gvia/interfaceAPI_gvia.jsp?gungucd="+params.get("gungucd"));
+		
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8;");
+		con.setRequestProperty("x-waple-authorization", "MS0xMzY1NjY2MTAyNDk0LTA2MWE4ZDgyLTZhZmMtNGU5OS05YThkLTgyNmFmYzVlOTkzZQ==");
+		
+		int responseCode = con.getResponseCode();
+		System.out.println("responseCOde : " + responseCode);
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+		
+		String inputLine;
+		StringBuffer sb = new StringBuffer();
+		
+		while ((inputLine = in.readLine()) != null){
+			sb.append(inputLine);
+			System.out.println("input line : " + inputLine);
+		}
+		
+		in.close();
+		con.disconnect();
+
+		logger.info("gugun : " + sb.toString());
+		return sb.toString();
 	}
 }

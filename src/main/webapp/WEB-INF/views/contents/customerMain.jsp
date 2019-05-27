@@ -5,13 +5,15 @@
 	
 		<section id="search">
 		   <div class="wrap">
-		      <div class="left">
-		         <h2>희망 지역 검색</h2>
-		         <select class="radius10" id="Sel도시분류"><option value='1' >희망 도시</option><option value='2' >서울특별시</option><option value='3' >부산광역시</option><option value='4' >대구광역시</option><option value='5' >인천광역시</option><option value='6' >광주광역시</option><option value='7' >대전광역시</option><option value='8' >울산광역시</option><option value='9' >세종특별자치시</option><option value='10' >경기도</option><option value='11' >강원도</option><option value='12' >충청북도</option><option value='13' >충청남도</option><option value='14' >경상북도</option><option value='15' >경상남도</option><option value='16' >전라북도</option><option value='17' >전라남도</option><option value='18' >제주도</option></select>
-		         <select class="radius10" id="Sel구군분류"><option>시/구/군</option></select>
-		         <input type="text" class="radius10" id="Txt동" style="ime-mode:active;" placeholder="동/읍/면" />
+		      <form onsubmit="searchPlaces(); return false;">
+	      		<div class="left">
+			         <h2>희망 지역 검색</h2>
+			         <select class="radius10" id="selCity" onchange="fnChangeCity();"><option value='1' >희망 도시</option><option value='1100000000' >서울특별시</option><option value='2600000000' >부산광역시</option><option value='2700000000' >대구광역시</option><option value='2800000000' >인천광역시</option><option value='2900000000' >광주광역시</option><option value='3000000000' >대전광역시</option><option value='3100000000' >울산광역시</option><option value='3600000000' >세종특별자치시</option><option value='4100000000' >경기도</option><option value='4200000000' >강원도</option><option value='4300000000' >충청북도</option><option value='4400000000' >충청남도</option><option value='4700000000' >경상북도</option><option value='4800000000' >경상남도</option><option value='4500000000' >전라북도</option><option value='4600000000' >전라남도</option><option value='5000000000' >제주특별자치도</option></select>
+			         <select class="radius10" id="selGugun"><option>시/구/군</option></select>
+			         <input type="text" class="radius10" id="keyword" style="ime-mode:active;" placeholder="동/읍/면"/>
 		      </div>
-		      <button class="radius10" id="Btn조회하기">조회하기</button>
+      				<button type="submit" class="radius10" id="Btn조회하기">조회하기</button>
+		      </form>
 		   </div>
 		</section>
 
@@ -20,14 +22,14 @@
 		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 		
 		    <div id="menu_wrap" class="bg_white">
-		        <div class="option">
+		        <!-- <div class="option">
 		            <div>
 		                <form onsubmit="searchPlaces(); return false;">
 	                    	<input type="text" value="" placeholder="예) 신정동"  id="keyword" size="15"> 
 		                    <button class="btn btn-outline-info waves-effect" type="submit">검색하기</button> 
 		                </form>
 		            </div>
-		        </div>
+		        </div> -->
 		        <hr>
 		        <ul id="placesList"></ul>
 		        <div id="pagination"></div>
@@ -54,6 +56,59 @@
 
 
 <script>
+
+//도시 select box 변경시
+function fnChangeCity(){
+	
+	var selCityCode = $("#selCity").val();	
+	
+	$.ajax({
+		url : "getGugun.do",
+		data : {gungucd : selCityCode},
+		type : "GET",
+		dataType : "text",
+		success : function(data){
+			
+			//text를 xml로 parsing
+			var xmlDoc=null;
+			if (window.DOMParser)
+			{
+				parser=new DOMParser();
+				xmlDoc=parser.parseFromString(data,"text/xml");
+			}
+			else // Internet Explorer
+			{
+				xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async="false";
+				xmlDoc.loadXML(data);
+			}
+			
+			//구군을 담을 변수
+			var gugun ="";
+			
+			//반복문으로 가져오기
+			$(xmlDoc).find("regioninfo").each(function(){
+				
+				$(this).find("ri_rep").each(function(){
+					
+					gugun += "<option>" + $(this).find("ri_regionnm").text() + "</option>";
+				
+				})
+			});
+			
+			//select box 초기화
+			$("#selGugun").empty();
+			
+			$("#selGugun").append(gugun);
+			
+			 
+		},error : function(err){
+			alert("에러");
+		}
+	});
+
+}
+
 //마커를 담을 배열입니다
 var markers = [];
 
