@@ -9,28 +9,25 @@
     <script src="resources/javascripts/bootstrap/jquery-3.2.1.min.js" charset="utf-8"></script>
     <script src="resources/javascripts/sha512.js"></script>
     <script>
-      $(function () {
-
-        //패스워드 불일치 alert
-        if( $("#pwConfirm").val() == 'false'){
-          var message = "<span style='color: red; margin-left: 10px;'>패스워드를 확인해 주세요.</span>";
-          $("#messageBox").html(message);
-        }
-
-        $("#signInBtn").on("click", function() {
-
-          // 패스워드 hashing ( sha512.js 사용 )
-          var shaPwd = hex_sha512($('#userPassword').val()).toString();
-          shaPwd = shaPwd.substring(0,20);
-          $("#userPassword").val(shaPwd);
-          // 패스워드 hashing ( sha512.js 사용 ) //
-
-          var f = document.loginForm;
-		      f.submit();
-
-        });
-        
-      });
+    
+    function fnLoginSubmit(){
+  	  
+		// 패스워드 hashing ( sha512.js 사용 )
+		var shaPwd = hex_sha512($('#userPwd').val()).toString();
+		shaPwd = shaPwd.substring(0,20);
+		$("#userPwd").val(shaPwd);
+		// 패스워드 hashing ( sha512.js 사용 ) //
+		
+		
+		var loginForm =	document.loginForm;
+		loginForm.submit();
+      }
+	function fnEnter(){
+		
+		if(event.keyCode == 13){
+			fnLoginSubmit();
+		}	
+	}
     </script>
   </head>
 
@@ -44,27 +41,26 @@
           <div class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">Sign In</h5>
-              <form class="form-signin" action="/users/loginProc" method="POST" id="loginForm" name="loginForm">
+              <form class="form-signin" action="loginProc.do" method="POST" id="loginForm" name="loginForm" onsubmit="return false;">
                 <div class="form-label-group">
-                  <input type="email" id="userID" name="userID" class="form-control" placeholder="Email address" required autofocus>
-                  <label for="userID">Email address</label>
+                  <input type="text" id="userId" name="userId" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="userId">Email address</label>
                 </div>
   
                 <div class="form-label-group">
-                  <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="Password" required>
-                  <label for="userPassword">Password</label>
+                  <input type="password" id="userPwd" onkeydown="fnEnter();" name="userPwd" class="form-control" placeholder="Password" required>
+                  <label for="userPwd">Password</label>
                 </div>
 
                 <div id="messageBox">
 
                 </div>
   
-                <input type="hidden" name="reqPage" value="${reqPage }">
                 <!-- <div class="custom-control custom-checkbox mb-3">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Remember password</label>
                 </div> -->
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="signInBtn">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" onclick="fnLoginSubmit();">Sign in</button>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float:left;" onclick="location.href='mhDesignerJoin.do'">Join Us</button>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float: right;"  onclick="location.href='idpwSearch.do'">Find ID/PASSWORD</button>
                 <hr class="my-4" style="clear: both;">
