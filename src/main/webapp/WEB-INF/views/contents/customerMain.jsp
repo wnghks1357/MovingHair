@@ -57,6 +57,10 @@
 
 <script>
 
+function fnReserv(designerId){
+	location.href='reservPage.do?designerId='+designerId;
+}
+
 //도시 select box 변경시
 function fnChangeCity(){
 	
@@ -162,17 +166,17 @@ function searchPlaces() {
     			var designerEl;
     			
 	    		for( var i = 0; i < designerList.length; i++){
-	    			designerEl += "<tr>";
-	    			designerEl += "<td>"+designerList[i]+"</td>";
-	    			designerEl += "<td><button>신청</button></td>";
-	    			designerEl += "</tr>";
+	    			designerEl += '<tr>';
+	    			designerEl += '<td>'+designerList[i]+'</td>';
+	    			designerEl += '<td><button class="btn btn-primary btn-rounded" onclick="fnReserv(\''+designerList[i]+'\');">신청</button></td>';
+	    			designerEl += '</tr>';
 	    		}
 	    	
     		}else{
-    			designerEl += "<tr>";
-    			designerEl += "<td>해당 지역의 디자이너를 찾을 수 없습니다.</td>";
-    			designerEl += "<td></td>";
-    			designerEl += "</tr>";
+    			designerEl += '<tr>';
+    			designerEl += '<td>해당 지역의 디자이너를 찾을 수 없습니다.</td>';
+    			designerEl += '<td></td>';
+    			designerEl += '</tr>';
     		}
     		
     		$("#designerListTbody").append(designerEl);

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<footer class="footer" style="margin-top: 300px;">
+<footer class="footer" style=" position:absolute; bottom:-450px; width:100%;">
     <div class="container">
         <div class="row">
             <div class="col">

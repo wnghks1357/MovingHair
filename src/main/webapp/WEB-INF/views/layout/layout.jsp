@@ -14,13 +14,13 @@
 	</nav>
 	
 	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="resources/images/bootstrapTemplate/index.jpg" data-speed="0.8"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="resources/images/bootstrapTemplate/index.jpg" data-speed="0.8">
 			<div class="home_container">
 				<div class="container" style="margin-left: 100px;">
 					<div class="row">
 						<div class="col">
 							<nav>
-								<div class="col-sm-9 col-md-7">
+								<div class="col-sm-9 col-md-7" style="position: relative;">
 									<jsp:include page="../contents/${mainContent }"/>
 								</div>
 							</nav>

@@ -1,6 +1,6 @@
 package com.moving.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,10 +11,12 @@ public class ReservVO {
 	
 	private int reservId;
 	private String userId;
-	private Timestamp reservDate;
+	private Date reservDate;
 	private String designerId;
-	private Timestamp createdDate;
-	private Timestamp updateDate;
+	private String reservLoc;
+	private String reservMsg;
+	private Date createdDate;
+	private Date updateDate;
 	private int changeCount;
 	
 }

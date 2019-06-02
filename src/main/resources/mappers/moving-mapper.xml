@@ -82,6 +82,29 @@
  		OR
  	ADDR3 LIKE CONCAT('%',#{keyword},'%')
 	</select>
+	
+	<insert id="insertReservInfo" parameterType="reservVo">
+		INSERT INTO mh_reserv(
+			USER_ID,
+			RESERV_DATE,
+			DESIGNER_ID,
+			RESERV_LOC,
+			RESERV_MSG,
+			CREATED_DATE,
+			UPDATE_DATE,
+			CHANGE_COUNT
+			)
+		VALUES(
+			#{userId },
+			#{reservDate },
+			#{designerId },
+			#{reservLoc },
+			#{reservMsg },
+			NOW(),
+			NOW(),
+			0
+		);
+	</insert>
  	
  	
 </mapper>

@@ -27,6 +27,7 @@ import com.moving.service.UserService;
 import com.moving.vo.EventVO;
 import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
+import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
 @Controller
@@ -191,5 +192,36 @@ public class MovingHairController {
 
 		logger.info("gugun : " + sb.toString());
 		return sb.toString();
+	}
+	
+	@RequestMapping("/reservPage.do")
+	public ModelAndView reservPage(@RequestParam String designerId, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("designerId", designerId);
+		mav.addObject("userId", session.getAttribute("userId"));
+
+		mav.addObject("mainContent", "reservPage.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/reservProc.do")
+	public ModelAndView reservProc(ReservVO reservVo) {
+		
+		ModelAndView mav = new ModelAndView();
+	
+		logger.info("reservVo : " + reservVo.toString());
+		
+		int i = movinghairService.insertReservInfo(reservVo);
+		
+		logger.info("insert result : "+ i);
+
+		mav.addObject("mainContent", "myReservation.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
 	}
 }

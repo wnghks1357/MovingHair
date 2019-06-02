@@ -10,6 +10,7 @@ import com.moving.mapper.MovingMapper;
 import com.moving.vo.EventVO;
 import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
+import com.moving.vo.ReservVO;
 
 
 @Service
@@ -44,6 +45,11 @@ public class MovingHairService {
 	public List<String> designerLoungeList(String keyword) {
 		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
 		return movingMapper.designerLoungeList(keyword);
+	}
+
+	public int insertReservInfo(ReservVO reservVo) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.insertReservInfo(reservVo);
 	}
 
 	/*public int eventUpdateHitCnt(int eventId) {

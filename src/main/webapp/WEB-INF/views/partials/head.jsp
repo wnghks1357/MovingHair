@@ -21,8 +21,8 @@
 <link rel='stylesheet' href='resources/stylesheets/movingStyles/moving.css' />    
 
 <!-- For Fullcalendar css-->
-<link rel='stylesheet' href='resources/stylesheets/fullcalendar/core/main.min.css' />
-<link rel='stylesheet' href='resources/stylesheets/fullcalendar/daygrid/main.min.css' />
+<link rel='stylesheet' href='resources/plugins/fullcalendar/core/main.min.css' />
+<link rel='stylesheet' href='resources/plugins/fullcalendar/daygrid/main.min.css' />
 
 <script src="resources/javascripts/bootstrap/jquery-3.2.1.min.js"></script>
 <script src="resources/stylesheets/bootstrapTemplate/bootstrap-4.1.2/popper.js"></script>
@@ -46,8 +46,11 @@
 <script src="resources/javascripts/sha512.js"></script>
 <!-- 주소 검색 library -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- moment.js 날짜 -->
+<script src="resources/javascripts/moment.js"></script>
 <!-- For Fullcalendar js-->
-<script src="resources/javascripts/fullcalendar/moment.min.js"></script>
-<script src="resources/javascripts/fullcalendar/core/main.min.js"></script>
-<script src="resources/javascripts/fullcalendar/daygrid/main.min.js"></script>
+<!-- <script src="resources/plugins/fullcalendar/moment/main.js"></script> -->
+<script src="resources/plugins/fullcalendar/core/main.min.js"></script>
+<script src="resources/plugins/fullcalendar/daygrid/main.min.js"></script>
+<script src="resources/plugins/fullcalendar/interaction/main.min.js"></script>
 

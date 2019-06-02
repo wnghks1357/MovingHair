@@ -24,9 +24,11 @@ DROP TABLE IF EXISTS `mh_reserv`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `mh_reserv` (
   `RESERV_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `USER_ID` varchar(45) DEFAULT NULL,
-  `RESERV_DATE` datetime DEFAULT NULL,
-  `DESIGNER_ID` varchar(45) DEFAULT NULL,
+  `USER_ID` varchar(45) NOT NULL,
+  `RESERV_DATE` datetime NOT NULL,
+  `DESIGNER_ID` varchar(45) NOT NULL,
+  `RESERV_LOC` varchar(45) NOT NULL,
+  `RESERV_MSG` varchar(2000) NOT NULL,
   `CREATED_DATE` datetime DEFAULT NULL,
   `UPDATE_DATE` datetime DEFAULT NULL,
   `CHANGE_COUNT` int(11) DEFAULT NULL,
