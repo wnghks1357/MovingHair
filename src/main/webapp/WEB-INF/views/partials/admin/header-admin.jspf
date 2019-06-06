@@ -1,0 +1,71 @@
+<%@ page pageEncoding="utf-8"%>
+ 
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content=kr name=content-language>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="keywords" content="무빙헤어, 헤어, moving, movinghair">
+<meta http-equiv="Cache-Control"  content="No-Cache">
+<meta http-equiv="Pragma" content="No-Cache">
+<meta http-equiv="Expire" content="-1">
+<meta content="1 Days" name="revisit-after">
+<meta content="ALL" name="ROBOTS">
+<meta http-equiv="imagetoolbar" content="no">
+
+<title>서울우유 파트너센터</title>
+ 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<jsp:useBean id="toDay" class="java.util.Date" />
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/admin-reset.css?01'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/jquery-ui.css'/>" />
+<link rel="stylesheet" type="text/css" href="/css/new-admin.css?<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd HH:mm:ss"/>" />
+
+<script src="<c:url value='/js/jquery-1.12.0.min.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/js/bootstrap.js'/>"></script>  
+<script src="<c:url value='/js/jqueryForm.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/js/jquery-ui.js'/>" charset="utf-8"></script> 
+<script src="<c:url value='/js/form.js'/>" charset="utf-8"></script> 
+
+<!-- 추가된 js 파일 -->
+<script src="<c:url value='/js/selectivizr-min.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/js/placeholder.js'/>" charset="utf-8"></script>
+<script src="/js/admin.js?<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd HH:mm:ss"/>" charset="utf-8"></script>
+
+<script>
+var getContextPath = '<c:out value="${pageContext.request.contextPath}" />';
+var getDomainName = '<c:out value="${pageContext.request.getServerName()}"/>';
+var getDomain =getDomainName+":8081"; // 서버에 올릴땐 수정하기
+
+if(getDomainName == "http://www.na100mall.com"){
+	location.href="http://www.na100shop.com/admin";
+}
+</script>
+
+
+<c:set var="mobileArrVar">010,011,016,017,018,019,02,031,032,033,041,042,043,051,052,053,054,055,061,062,063,064</c:set>
+<c:set var="telArrVar">031,032,033,041,042,043,051,052,053,054,055,061,062,063,064</c:set>
+
+<c:set var="cateogryTypeArrVar">주문취소,교환문의,배송문의,회원문의,결제문의,상품문의,이용문의,기타문의</c:set>
+<c:set var="emailArrVar">naver.com,hanmail.net,hotmail.com,daum.net,nate.com,yahoo.co.kr,empas.com,dreamwiz.com,freechal.com,lycos.co.kr,korea.com,gmail.com,hanmir.com,paran.com</c:set>
+
+<c:set var="cart_status">1,11,2,3,4,5,51,6,61,62,63,7,71,72,8,81,82,83</c:set>
+<c:set var="cart_status_msg">입금대기중,추가입금필요,결제완료,배송준비중,배송중,배송완료,배송불가,주문취소 완료,주문취소 신청,주문취소 완료(시스템),주문취소 완료(관리자),교환완료,교환신청,교환처리중,반품,반품신청,반품처리중,반품보류</c:set>
+
+<c:set var="arr_bank_code">02,03,04,05,06,07,11,12,16,20,21,22,23,24,25,26,27,31,32,34,35,37,38,39,41,45,48,50,53,54,55,56,57,59,60,64,70,71,81,83,87,88,D1,D2,D3,D4,D5,D6,D7,D8,D9,DA,DB,DC,DD,DE,DF,DG,DH,DI,DJ,DK,DL,DM,DN,DO,DP</c:set>
+<c:set var="arr_bank_name">한국산업은행,기업은행,국민은행,하나은행(구외환),국민은행(구주택),수협중앙회,농협중앙회,단위농협,축협중앙회,우리은행,구)조흥은행,상업은행,SC제일은행,한일은행,서울은행,구)신한은행,한국씨티은행(구한미),대구은행,부산은행,광주은행,제주은행,전북은행,강원은행,경남은행,비씨카드,새마을금고,신용협동조합중앙회,상호저축은행,한국씨티은행,홍콩상하이은행,도이치은행,ABN암로,JP모건,미쓰비시도쿄은행,BOA(BankofAmerica),산림조합,신안상호저축은행,우체국,하나은행,평화은행,신세계,신한(통합)은행,유안타증권(구동양증권),현대증권,미래에셋증권,한국투자증권,우리투자증권,하이투자증권,HMC투자증권,SK증권,대신증권,하나대투증권,굿모닝신한증권,동부증권,유진투자증권,메리츠증권,신영증권,대우증권,삼성증권,교보증권,키움증권,이트레이드,솔로몬증권,한화증권,NH증권,부국증권,LIG증권</c:set>
+
+<style>	
+					
+/* 추가 tableBottom */
+.tableBottom { position:relative;line-heigth:400px;}
+.tableBottom .btn_left{display:inline-block; overflow:hidden; padding:0 5px; height:23px; 
+						 line-height:21px; text-align:center; color:#4f4f4f; font-size:12px; 
+						 border:1px solid #bdbdbd; background-color:#f0f0f0;}
+.tableBottom.btm { padding:15px 0; }
+</style>
