@@ -20,11 +20,11 @@
 					<div class="col-md-6"><input type="time" class="contact_input" id="rTime" name="rTime" placeholder="예약 시간" required="required"></div>
 				</div>
 				
-				<div style="margin-bottom: 10px;">이름</div>
+				<!-- <div style="margin-bottom: 10px;">이름</div>
 				<div class="row contact_row">
 					<div class="col-md-6"><input type="text" class="contact_input" placeholder="이름" required="required"></div>
-				</div>
-				<div class="form-label-group">
+				</div> -->
+				<!-- <div class="form-label-group">
 	                <div style="margin-bottom: 10px;">휴대폰 번호</div>
 	                <select id="txtMobile1" required style="float: left; display: block; width: 21%; padding:  .75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
 	                    <option value="010">010</option>
@@ -37,10 +37,10 @@
 	                <input type="text" id="txtMobile2" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
 	                <span style="text-align: center">-</span>
 	                <input type="text" id="txtMobile3" size="4" maxlength="4" minlength="3" onkeypress="return ageChkNumber(event,'numbers');" required>
-	                <!-- <input type="button" value="중복확인" onclick="fnJungbokPhone();" class="btn btn-primary" style="margin-bottom: 20px; padding-bottom: 13px;"/>
-	                <span id="phoneMessageBox"></span> -->
+	                <input type="button" value="중복확인" onclick="fnJungbokPhone();" class="btn btn-primary" style="margin-bottom: 20px; padding-bottom: 13px;"/>
+	                <span id="phoneMessageBox"></span>
 	                <input type="hidden" id="userPhone" name="userPhone"/>
-              </div>
+              </div> -->
               
               <div style="margin-top: 30px;">희망 서비스 지역</div>
               <div class="form-label-group">
@@ -62,7 +62,7 @@
 			
 			<form id="submitForm" name="submitForm" action="reservProc.do" method="post">
 				<input type="hidden" id="userId" name="userId" value="${userId }">
-				<input type="hidden" id="reservDate" name="reservDate">
+				<input type="hidden" id="reservDateStr" name="reservDateStr">
 				<input type="hidden" id="designerId" name="designerId">
 				<input type="hidden" id="reservLoc" name="reservLoc">
 				<input type="hidden" id="reservMsg" name="reservMsg">
@@ -86,10 +86,10 @@ function beforSubmit(){
 	var addr2 = $("#sample4_jibunAddress").val();
 	
 	//예약 날짜
-	var reservDateStr = rDate + "T" + rTime;
+	var reservDateStr = rDate + " " + rTime +":00.0";
 	
 	//Timestamp type으로 변환
-	var reservDate =  moment(reservDateStr);
+	var reservDate = moment(reservDateStr);
 	
 	//디자이너 아이디
 	var designerId = $("#designerIdDiv").text();
@@ -100,12 +100,12 @@ function beforSubmit(){
 	var reservMsg = $("#msgTag").val();
 	
 
-	$("#reservDate").val(reservDate);
+	$("#reservDateStr").val(reservDateStr);
 	$("#designerId").val(designerId);
 	$("#reservLoc").val(reservLoc);
 	$("#reservMsg").val(reservMsg);
 	
-	var submitForm =	document.submitForm;
+	var submitForm = document.submitForm;
 	submitForm.submit();
 }
 

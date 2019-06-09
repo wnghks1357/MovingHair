@@ -52,6 +52,18 @@ public class MovingHairService {
 		return movingMapper.insertReservInfo(reservVo);
 	}
 
+	public List<ReservVO> selectMyReservList(ReservVO reservVO) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.selectMyReservList(reservVO);
+		
+	}
+
+	//디자이너에게 예약 신청한 사람들 리스트
+	public List<ReservVO> selectReservList(String designerId) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.selectReservList(designerId);
+	}
+
 	/*public int eventUpdateHitCnt(int eventId) {
 		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
 		return movingMapper.eventUpdateHitCnt(eventId);

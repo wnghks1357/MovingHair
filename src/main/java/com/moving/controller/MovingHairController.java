@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,19 +75,37 @@ public class MovingHairController {
 	}
 	
 	@RequestMapping("/designerMain.do")
-	public ModelAndView designerMain() {
+	public ModelAndView designerMain(HttpSession seesion) {
+		
 		ModelAndView mav = new ModelAndView();
 		
+		String designerId = seesion.getAttribute("userId").toString();
 		
+		//디자이너에게 예약 신청한 사람들 리스트
+		List<ReservVO> reservList = movinghairService.selectReservList(designerId);
+		
+		mav.addObject("reservList", reservList);
 		mav.addObject("mainContent", "designerMain.jsp");
 		mav.setViewName("layout/layout");
 		return mav;
 	}
 	
 	@RequestMapping("/myReservation.do")
-	public ModelAndView myReservation() {
+	public ModelAndView myReservation(HttpSession session, PagingVO paging) {
 		ModelAndView mav = new ModelAndView();
 		
+		String userId = session.getAttribute("userId").toString();
+		
+		ReservVO reservVO = new ReservVO();
+		reservVO.setUserId(userId);
+		
+		List<ReservVO> myReservList = movinghairService.selectMyReservList(reservVO);
+		reservVO.setTotal(myReservList.size());
+		
+		logger.info("myReserList size : " + myReservList.size());
+		
+		mav.addObject("p", reservVO);
+		mav.addObject("myReservList", myReservList);
 		mav.addObject("mainContent", "myReservation.jsp");
 		mav.setViewName("layout/layout");
 		return mav;
@@ -209,19 +231,25 @@ public class MovingHairController {
 	}
 	
 	@RequestMapping("/reservProc.do")
-	public ModelAndView reservProc(ReservVO reservVo) {
+	public String reservProc(ReservVO reservVo) {
 		
 		ModelAndView mav = new ModelAndView();
 	
 		logger.info("reservVo : " + reservVo.toString());
 		
+		String reservDateStr = reservVo.getReservDateStr();
+		
+		Timestamp t = Timestamp.valueOf(reservDateStr);
+
+		reservVo.setReservDate(t);
+		
+		System.out.println("reserDateStr : " + reservVo.getReservDate());
+		
 		int i = movinghairService.insertReservInfo(reservVo);
 		
 		logger.info("insert result : "+ i);
 
-		mav.addObject("mainContent", "myReservation.jsp");
-		mav.setViewName("layout/layout");
-		
-		return mav;
+		return "redirect:/myReservation.do";
+	
 	}
 }

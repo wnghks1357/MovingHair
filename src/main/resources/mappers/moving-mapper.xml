@@ -105,6 +105,26 @@
 			0
 		);
 	</insert>
+	
+	<select id="selectMyReservList" parameterType="reservVo" resultType="reservVo">
+		SELECT 
+			RESERV_ID AS reservId
+			, DESIGNER_ID AS designerId
+			, RESERV_DATE AS reservDate
+			, RESERV_LOC AS reservLoc
+		FROM mh_reserv
+		WHERE USER_ID = #{userId}
+		LIMIT #{start}, #{listCnt}
+	</select>
  	
+ 	<select id="selectReservList" parameterType="java.lang.String" resultType="reservVo">
+ 		SELECT 
+			RESERV_ID AS reservId
+			, USER_ID AS userId
+			, RESERV_DATE AS reservDate
+			, RESERV_LOC AS reservLoc
+		FROM mh_reserv
+		WHERE DESIGNER_ID = #{designerId}
+ 	</select>
  	
 </mapper>

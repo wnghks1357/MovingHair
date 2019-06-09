@@ -26,6 +26,11 @@ public interface MovingMapper {
 
 	int insertReservInfo(ReservVO reservVo);
 
+	List<ReservVO> selectMyReservList(ReservVO reservVO);
+
+	// 디자이너에게 서비스 예약한 고객 리스트
+	List<ReservVO> selectReservList(String designerId);
+
 	//int eventUpdateHitCnt(int eventId);
 	
 
