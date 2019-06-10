@@ -20,6 +20,10 @@ public class ReservVO extends PagingVO{
 	private Date updateDate;
 	private int changeCount;
 	
+	//selectReservDetail return 값 때 필요
+	private String userName;
+	
 	private String reservDateStr;
+	private String reservTime;
 	
 }

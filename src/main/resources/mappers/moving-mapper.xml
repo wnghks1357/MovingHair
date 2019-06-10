@@ -127,4 +127,16 @@
 		WHERE DESIGNER_ID = #{designerId}
  	</select>
  	
+ 	<select id="selectReservDetail" parameterType="java.lang.Integer" resultType="reservVo">
+ 		SELECT 
+ 			R.RESERV_ID AS reservId
+			, R.USER_ID AS userId
+			, U.USER_NAME AS userName
+			, R.RESERV_DATE AS reservDate
+			, R.RESERV_MSG AS reservMsg
+		FROM mh_reserv R, mh_user U
+		WHERE R.USER_ID = U.USER_ID
+		AND R.RESERV_ID = #{reservId}
+ 	</select>
+ 	
 </mapper>

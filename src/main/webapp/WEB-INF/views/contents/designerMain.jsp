@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	<c:forEach items="${reservList}" var="reserv">
 		var json = new Object;
+		
+		json.groupId= "${reserv.reservId}";
 		json.title="${reserv.userId}";
+		
 		//json.start='<fmt:formatDate value="${reserv.reservDate}" pattern="yyyy-MM-dd HH:mm"/>';
 		
 		var reservDate = "${reserv.reservDate}";
@@ -48,8 +51,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		
-		dateClick: function(){
-			alert("joohwan");
+		eventClick: function(arg){
+			
+			//alert(arg.event.groupId);
+			
+			var reservId = arg.event.groupId;
+			
+			popupOpen(reservId);
+			
+			function popupOpen(reservId){
+				
+				var windowSize = {
+					    width: 560,
+					    height: 600,
+				};
+				
+				var windowLocation = {
+					    left:  (window.screen.availLeft + (window.screen.availWidth / 2)) - (windowSize.width / 2),
+					    top: (window.screen.availTop + (window.screen.availHeight / 2)) - (windowSize.height / 2),
+				};
+	
+				var popUrl = "desginerScPopup.do?reservId="+reservId;	//팝업창에 출력될 페이지 URL
+	
+				var popOption = "width="+windowSize.width+", height="+windowSize.height+", left="+windowLocation.left+", top="+windowLocation.top+", resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	
+					window.open(popUrl,"",popOption);
+	
+			}
 		},
 		
 	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],

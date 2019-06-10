@@ -64,6 +64,11 @@ public class MovingHairService {
 		return movingMapper.selectReservList(designerId);
 	}
 
+	public ReservVO selectReservDetail(int reservId) {
+		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
+		return movingMapper.selectReservDetail(reservId);
+	}
+
 	/*public int eventUpdateHitCnt(int eventId) {
 		MovingMapper movingMapper = sqlSession.getMapper(MovingMapper.class);
 		return movingMapper.eventUpdateHitCnt(eventId);

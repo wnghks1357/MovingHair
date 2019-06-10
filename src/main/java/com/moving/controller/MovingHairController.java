@@ -252,4 +252,27 @@ public class MovingHairController {
 		return "redirect:/myReservation.do";
 	
 	}
+	
+	//디자이너 스케쥴 상세 보기 팝업
+	@RequestMapping("/desginerScPopup.do")
+	public ModelAndView desginerScPopup(ReservVO reservVo) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		logger.info("reservId : " + reservVo.getReservId());
+		ReservVO ResultReservVo = movinghairService.selectReservDetail(reservVo.getReservId());
+	
+		String reservDateStr = ResultReservVo.getReservDate().toString();
+		
+		//예약 날짜만 따로 분리하기 위한 
+		ResultReservVo.setReservDateStr(reservDateStr.substring(0, 10));
+		//예약 시간만 따로 분리하기 위한
+		ResultReservVo.setReservTime(reservDateStr.substring(10, 16));
+	
+		
+		mav.addObject("reservVo", ResultReservVo);
+		mav.setViewName("user/desginerScPopup");
+		return mav;
+	
+	}
 }
