@@ -266,7 +266,7 @@ public class MovingHairController {
 		
 		//예약 날짜만 따로 분리하기 위한 
 		ResultReservVo.setReservDateStr(reservDateStr.substring(0, 10));
-		//예약 시간만 따로 분리하기 위한
+		//예약 시간만 따로 분리하기 위한	
 		ResultReservVo.setReservTime(reservDateStr.substring(10, 16));
 	
 		

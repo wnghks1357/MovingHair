@@ -18,8 +18,8 @@
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/moving_hair?useSSL=false&amp;serverTimezone=UTC" />
 		<property name="username" value="root" />
-		<!-- <property name="password" value="e4net123" /> -->
-		<property name="password" value="rkddydrn" />
+		<property name="password" value="e4net123" />
+		<!-- <property name="password" value="rkddydrn" /> -->
 		
 	</bean>
 	
@@ -34,8 +34,12 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
-		destroy-method="clearCache">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 해당 Project에서의 Mapper Package를 value로 적어줘야 합니다. ex) com.example.start.Mapper 이러한 형식으로 말입니다. -->
+		<property name="basePackage" value="com.moving.mapper"/> 
 	</bean>
+	
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+    	<constructor-arg index="0" ref="sqlSessionFactory" /> 
+    </bean>
 </beans>
