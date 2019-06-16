@@ -49,8 +49,10 @@
 								, RECEIVE_EMAIL
 								, RECEIVE_SMS
 								, CREATED_TYPE
-								, REQUIRED_AGREE
-								, SELECT_AGREE
+								, MOVING_AGREE
+								, PRIVATE_INFO_AGREE
+								, LOCATION_AGREE
+								, PROMOTION_AGREE
 								, CREATED__DATE
 								, UPDATE_DATE
 							) VALUES (
@@ -69,8 +71,10 @@
 									, 'Y'
 									, 'Y'
 									, 'M'
-									, 'Y'
-									, 'Y'
+									, #{movingAgree}
+									, #{privateInfoAgree}
+									, #{locationAgree}
+									, #{promotionAgree}
 									, NOW()
 									, NOW()
 								)

@@ -1,4 +1,4 @@
-package com.moving.controller;
+package com.moving.util;
 
 import java.io.BufferedReader;
 import java.math.BigInteger;

@@ -295,6 +295,11 @@ function sample4_execDaumPostcode() {
                 <input type="text" class="form-control" id="sample4_jibunAddress" size="50" placeholder="상세주소를 입력해 주세요." name="userAddr2" maxlength="100" required>
                 <label for="sample4_jibunAddress">상세주소</label>
               </div>
+              
+              <input type="hidden" id="movingAgree" name="movingAgree" value="${ userVO.movingAgree}">
+              <input type="hidden" id="privateInfoAgree" name="privateInfoAgree" value="${ userVO.privateInfoAgree}">
+              <input type="hidden" id="locationAgree" name="locationAgree" value="${ userVO.locationAgree}">
+              <input type="hidden" id="promotionAgree" name="promotionAgree" value="${ userVO.promotionAgree}">
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="newMemberJoinBtn">Join !</button>
               <button id="cancelBtn" class="btn btn-lg btn-primary btn-block text-uppercase" type="button">Back</button>

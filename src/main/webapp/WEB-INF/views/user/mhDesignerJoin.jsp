@@ -332,6 +332,10 @@ function fnAddPreferLoc(){
               </div>
               
               
+              <input type="hidden" id="movingAgree" name="movingAgree" value="${ userVO.movingAgree}">
+              <input type="hidden" id="privateInfoAgree" name="privateInfoAgree" value="${ userVO.privateInfoAgree}">
+              <input type="hidden" id="locationAgree" name="locationAgree" value="${ userVO.locationAgree}">
+              <input type="hidden" id="promotionAgree" name="promotionAgree" value="${ userVO.promotionAgree}">
               
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="newMemberJoinBtn">Join !</button>
               <button id="cancelBtn" class="btn btn-lg btn-primary btn-block text-uppercase" type="button">Back</button>

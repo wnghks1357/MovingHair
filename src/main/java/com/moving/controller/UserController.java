@@ -48,11 +48,32 @@ public class UserController {
 		return mav;
 	}
 	
-	//고객 회원가입 페이지 이동
-	@RequestMapping("/mhUserJoin.do")
-	public ModelAndView mhUserJoin() {
+	//약관 동의 페이지
+	@RequestMapping("/mhCustomerJoinAgree.do")
+	public ModelAndView mhCustomerJoinAgree() {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.setViewName("user/mhCustomerJoinAgree");
+		
+		return mav;
+	}
+	
+	//약관 동의 페이지
+	@RequestMapping("/mhDesignerJoinAgree.do")
+	public ModelAndView mhDesignerJoinAgree() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("user/mhDesignerJoinAgree");
+		
+		return mav;
+	}
+	
+	//고객 회원가입 페이지 이동
+	@RequestMapping("/mhUserJoin.do")
+	public ModelAndView mhUserJoin(UserVO userVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("userVO", userVO);
 		mav.setViewName("user/mhUserJoin");
 		
 		return mav;
@@ -60,9 +81,10 @@ public class UserController {
 	
 	//디자이너 회원가입 페이지 이동
 	@RequestMapping("/mhDesignerJoin.do")
-	public ModelAndView mhDesignerJoin() {
+	public ModelAndView mhDesignerJoin(UserVO userVO) {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("userVO", userVO);
 		mav.setViewName("user/mhDesignerJoin");
 		
 		return mav;

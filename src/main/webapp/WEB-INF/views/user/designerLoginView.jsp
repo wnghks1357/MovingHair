@@ -61,7 +61,7 @@
                   <label class="custom-control-label" for="customCheck1">Remember password</label>
                 </div> -->
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" onclick="fnLoginSubmit();">Sign in</button>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float:left;" onclick="location.href='mhDesignerJoin.do'">Join Us</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float:left;" onclick="location.href='mhDesignerJoinAgree.do'">Join Us</button>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" style="width: 47%; float: right;"  onclick="location.href='idpwSearch.do'">Find ID/PASSWORD</button>
                 <hr class="my-4" style="clear: both;">
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="background-color: #1DDB16"><i></i> Sign in with Naver</button>

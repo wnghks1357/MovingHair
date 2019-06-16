@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.common.CommandMap;
 import com.moving.common.Constants;
-import com.moving.controller.StringUtils;
+import com.moving.util.StringUtils;
 @Controller
 public class AdLoginController implements Constants{
 

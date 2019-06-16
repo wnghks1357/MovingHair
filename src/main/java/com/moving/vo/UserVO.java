@@ -25,8 +25,10 @@ public class UserVO {
 	private char receiveEmail;
 	private char receiveSms;
 	private char createdType;
-	private char requiredAgree;
-	private char secretAgree;
+	private char movingAgree;
+	private char privateInfoAgree;
+	private char locationAgree;
+	private char promotionAgree;
 	private Timestamp createdDate;
 	private Timestamp updateDate;
 	private Timestamp outDate;
