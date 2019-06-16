@@ -1,0 +1,107 @@
+@charset "utf-8";
+html, body {margin: 0; padding: 0;}
+body {-webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+div, p, span, strong,h1, h2, h3, h4, h5,a, button{margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; line-height: 1.5; letter-spacing:0px; vertical-align: middle; word-break: break-all; text-decoration: none; color: #000;}
+strong {font-weight: 600;}
+ul, ol, li {margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; line-height: 1.5; letter-spacing:0px; list-style: none; color: #000;}
+img {display: inline-block; border: 0; vertical-align: middle;}
+table, thead, tbody, tr, th, td {margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; line-height: 1.5; letter-spacing:0px; text-decoration: none; border: 0; word-break: break-all; border-collapse: collapse; color: #000;}
+caption {display: block; width: 0; height: 0; font-size: 0px; text-indent: -9999px; letter-spacing:0px; overflow:hidden;}
+input {margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; line-height: 1.5; letter-spacing:0px; text-decoration: none; vertical-align: middle; border: 1px solid #c3c3c3; border-radius: 0; box-shadow: none; color: #000;}
+input.text, input.password, input.tel {-webkit-appearance: none;-moz-appearance: none;appearance: none;border-radius: 0px;}
+label {margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; letter-spacing:0px; line-height: 1.5; vertical-align: middle; color: #000;}
+select, option {margin: 0; padding: 0; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; letter-spacing:0px; line-height: 1.5; border-radius: 0; text-decoration: none; border: 1px solid #c3c3c3;color: #000;}
+hr {border:0; border-top: 1px solid #000;}
+textarea {display: inline-block; margin: 0; padding: 15px; width: 100%; height: 200px; font-size: 12px; font-family:돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif; font-weight: normal; line-height: 1.5; letter-spacing:0px; text-decoration: none; resize: none;box-sizing: border-box; border: 1px solid #cecece; color: #000;}
+iframe {border: 0;}
+a{cursor: pointer;}
+button {background-color: #fff; border: 0px; cursor: pointer; color: #000;}
+.hide {display: none;}
+.clear:after {display: block; content: ''; clear: both;}
+.btn {background: url('/_tshop/images/common/bg_null.png') repeat;}
+
+.fs0 {font-size: 0 !important;}
+.mgt0 {margin-top:0px !important;}
+.mgt5 {margin-top:5px !important;}
+.mgt10 {margin-top:10px !important;}
+.mgt15 {margin-top:15px !important;}
+.mgt20 {margin-top:20px !important;}
+.mgt25 {margin-top:25px !important;}
+.mgt30 {margin-top:30px !important;}
+.mgt35 {margin-top:35px !important;}
+.mgt40 {margin-top:40px !important;}
+.mgt45 {margin-top:45px !important;}
+.mgt50 {margin-top:50px !important;}
+.mgt70 {margin-top:70px !important;}
+
+.mgr5 {margin-right: 5px !important;}
+.mgr10 {margin-right: 10px !important;}
+.mgr15 {margin-right: 15px !important;}
+.mgr20 {margin-right: 20px !important;}
+.mgr25 {margin-right: 25px !important;}
+.mgr30 {margin-right: 30px !important;}
+.mgr35 {margin-right: 35px !important;}
+.mgr40 {margin-right: 40px !important;}
+.mgr45 {margin-right:45px !important;}
+.mgr50 {margin-right:50px !important;}
+
+.mgb5 {margin-bottom: 5px !important;}
+.mgb10 {margin-bottom: 10px !important;}
+.mgb15 {margin-bottom: 15px !important;}
+.mgb20 {margin-bottom: 20px !important;}
+.mgb25 {margin-bottom: 25px !important;}
+.mgb30 {margin-bottom: 30px !important;}
+.mgb35 {margin-bottom: 35px !important;}
+.mgb40 {margin-bottom: 40px !important;}
+.mgb45 {margin-bottom:45px !important;}
+.mgb50 {margin-bottom:50px !important;}
+
+.mgl0 {margin-left: 0px !important;}
+.mgl5 {margin-left: 5px !important;}
+.mgl10 {margin-left: 10px !important;}
+.mgl15 {margin-left: 15px !important;}
+.mgl20 {margin-left: 20px !important;}
+.mgl25 {margin-left: 25px !important;}
+.mgl30 {margin-left: 30px !important;}
+.mgl35 {margin-left: 35px !important;}
+.mgl40 {margin-left: 40px !important;}
+.mgl45 {margin-left:45px !important;}
+.mgl50 {margin-left:50px !important;}
+
+.pdt5 {padding-top:5px !important;}
+.pdt10 {padding-top:10px !important;}
+.pdt15 {padding-top:15px !important;}
+.pdt20 {padding-top:20px !important;}
+.pdt25 {padding-top:25px !important;}
+.pdt30 {padding-top:30px !important;}
+.pdt35 {padding-top:35px !important;}
+.pdt40 {padding-top:40px !important;}
+
+.pdr5 {padding-right: 5px !important;}
+.pdr10 {padding-right: 10px !important;}
+.pdr15 {padding-right: 15px !important;}
+.pdr20 {padding-right: 20px !important;}
+.pdr25 {padding-right: 25px !important;}
+.pdr30 {padding-right: 30px !important;}
+.pdr35 {padding-right: 35px !important;}
+.pdr40 {padding-right: 40px !important;}
+
+.pdb5 {padding-bottom: 5px !important;}
+.pdb10 {padding-bottom: 10px !important;}
+.pdb15 {padding-bottom: 15px !important;}
+.pdb20 {padding-bottom: 20px !important;}
+.pdb25 {padding-bottom: 25px !important;}
+.pdb30 {padding-bottom: 30px !important;}
+.pdb35 {padding-bottom: 35px !important;}
+.pdb40 {padding-bottom: 40px !important;}
+
+.pdl5 {padding-left: 5px !important;}
+.pdl10 {padding-left: 10px !important;}
+.pdl15 {padding-left: 15px !important;}
+.pdl20 {padding-left: 20px !important;}
+.pdl25 {padding-left: 25px !important;}
+.pdl30 {padding-left: 30px !important;}
+.pdl35 {padding-left: 35px !important;}
+.pdl40 {padding-left: 40px !important;}
+
+

@@ -1,22 +1,15 @@
 <%@ page pageEncoding="utf-8"%>
 			<div class="footer">
-				<h5>서울우유</h5>
+				<h5>무빙헤어</h5>
 				<ul class="link clear">
 					<li><a href="#" target="_blank">판매자 이용약관</a></li>
 					<li><a href="#" target="_blank">개인정보취급방침</a></li>
 				</ul>
 				<p class="txt">상호 : 무빙헤어 / 대표 : 이동기 주소 : [도로명]서울특별시 중랑구 중랑천로 71<br />사업자번호 : 000-00-00000 / 통신판매업 : 신고번호 중랑 제 2019-0000호</p>
 			</div> <!-- footer :: end -->
-
 		</div> <!-- contents :: end -->
-
-	
 	</div> <!-- container :: end -->
-	
 	<div class="blacklayer"></div>
-
 </div> <!-- partnerCenter :: end -->
-
-
 </body>
 </html>
