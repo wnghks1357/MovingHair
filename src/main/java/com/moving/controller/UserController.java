@@ -50,7 +50,7 @@ public class UserController {
 	
 	//고객 회원가입 페이지 이동
 	@RequestMapping("/mhUserJoin.do")
-	public ModelAndView customerJoinView() {
+	public ModelAndView mhUserJoin() {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("user/mhUserJoin");
@@ -60,7 +60,7 @@ public class UserController {
 	
 	//디자이너 회원가입 페이지 이동
 	@RequestMapping("/mhDesignerJoin.do")
-	public ModelAndView designerJoinView() {
+	public ModelAndView mhDesignerJoin() {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("user/mhDesignerJoin");

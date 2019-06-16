@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Major - 5* Hotel template project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="resources/stylesheets/bootstrapTemplate/bootstrap-4.1.2/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/stylesheets/bootstrapTemplate/bootstrap.min.css">
 <link href="resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -24,9 +24,12 @@
 <link rel='stylesheet' href='resources/plugins/fullcalendar/core/main.min.css' />
 <link rel='stylesheet' href='resources/plugins/fullcalendar/daygrid/main.min.css' />
 
+<!-- TimePicki -->
+<link rel='stylesheet' href='resources/stylesheets/timePicki/timepicki.css' />
+
 <script src="resources/javascripts/bootstrap/jquery-3.2.1.min.js"></script>
-<script src="resources/stylesheets/bootstrapTemplate/bootstrap-4.1.2/popper.js"></script>
-<script src="resources/stylesheets/bootstrapTemplate/bootstrap-4.1.2/bootstrap.min.js"></script>
+<script src="resources/javascripts/bootstrap/popper.js"></script>
+<script src="resources/javascripts/bootstrap/bootstrap.min.js"></script>
 <script src="resources/plugins/greensock/TweenMax.min.js"></script>
 <script src="resources/plugins/greensock/TimelineMax.min.js"></script>
 <script src="resources/plugins/scrollmagic/ScrollMagic.min.js"></script>
@@ -53,4 +56,7 @@
 <script src="resources/plugins/fullcalendar/core/main.min.js"></script>
 <script src="resources/plugins/fullcalendar/daygrid/main.min.js"></script>
 <script src="resources/plugins/fullcalendar/interaction/main.min.js"></script>
+
+<!-- TimePicki -->
+<script src="resources/javascripts/timePicki/timepicki.js"></script>
 

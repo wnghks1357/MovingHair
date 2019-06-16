@@ -2,6 +2,104 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script>
+
+/* $(function () {
+	fnListPage();
+});
+
+function fnListPage() {
+	var f = document.form1;
+	
+	$.ajax({
+		url : "myReservation.do",
+		type: "post",
+		data : f,
+		async : false,	// 중복 count로 submit 여부를 결정하기 위한 동기 처리
+		success : function(data){  
+			
+		},error : function(responseData){
+			alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+		}
+	})
+}; */
+
+//기간별(버튼 오늘,일주일, 한달) 구매목록을 조회하기 위한 함수
+function fnSrchMylist(during){
+
+	var ToDay = new Date();
+
+	var y = new Date(ToDay.getFullYear(),ToDay.getMonth(),ToDay.getDate() - during);
+
+	var srchTerm= y.getFullYear() + "/" + (y.getMonth() +1 ) + "/" + y.getDate();
+
+	$("#srchTerm").val(srchTerm);
+	
+	alert(srchTerm);
+	//fnListPage();
+}
+//특정 기간 구매목록 조회 함수
+function fnSrchDuring(){
+	
+	//현재 일자를 구해오는 코드
+	var Now = new Date();
+	var curYear = Now.getFullYear();
+	var curMonth = Number(Now.getMonth())+1;
+	var curDate = Now.getDate();
+	var curDateCompare = new Date(curYear, curMonth, curDate);
+	//현재 일자를 구해오는 코드//
+	
+	var searchStartDate = $("#sDate").val();
+	var searchStartDateArr = searchStartDate.split("-");
+	
+	var srchStartDateCompare = new Date(searchStartDateArr[0], searchStartDateArr[1], searchStartDateArr[2]);
+	
+	var srchEndDate = $("#eDate").val();
+	var srchEndDateArr = srchEndDate.split("-");
+	
+	var srchEndDateCompare = new Date(srchEndDateArr[0], srchEndDateArr[1], srchEndDateArr[2]);
+	
+	if(srchStartDateCompare.getTime() > srchEndDateCompare.getTime()){
+		alert("검색 시작일자를 최종일자 이전으로 해주세요.");
+		$("#sDate").val("");
+		$("#eDate").val("");
+		return;
+	}
+	
+	if(srchEndDateCompare.getTime() > curDateCompare.getTime()){
+		alert("검색 최종일자를 오늘 이전으로 해주세요.");
+		$("#sDate").val("");
+		$("#eDate").val("");
+		return;
+	}
+	
+	if($("#sDate").val() == "" || $("#eDate").val() == ""){
+		alert("검색 날짜를 확인하세요.");
+		$("#sDate").val("");
+		$("#eDate").val("");
+		return;
+	}
+	
+	var sDateArr = $("#sDate").val().split("-");
+	var sDate = sDateArr[0] + "/" + sDateArr[1] + "/" + sDateArr[2];
+	var eDateArr = $("#eDate").val().split("-");
+	var eDate = eDateArr[0] + "/" + eDateArr[1] + "/" + eDateArr[2];
+	
+	$("#startDate").val(sDate);
+	$("#endDate").val(eDate);
+	
+	alert(sDate);
+	alert(eDate);
+	
+	//fnListPage();
+	$("#sDate").val("");
+	$("#eDate").val("");
+	$("#startDate").val("");
+	$("#endDate").val("");
+	
+}
+</script>
+
 <div class="card card-signin my-5" style="width:1000px;">
 	<div class="card-body">
 		<div class="container">
@@ -11,7 +109,7 @@
 			
 					<div id="myOrderListDiv" style="width: 80%; margin-top: 35px;">
 						<br/>
-						<!-- <form method="post" id="form1" name="form1">
+						<form method="post" id="form1" name="form1">
 							<input type="hidden" name="srchTerm" id="srchTerm"/>
 							<input type="hidden" name="startDate" id="startDate">
 							<input type="hidden" name="endDate" id="endDate">
@@ -27,7 +125,7 @@
 							<input type="date" id="eDate" name="eDate">
 							<input type="button" value="조회" onclick="fnSrchDuring();" class="btn btn-primary" style="float: right;">
 						</div>
-						<br/> -->
+						<br/>
 						<div id="divListPage" class="form-label-group">
 				
 							<table border="1" id="myOrderListTb" class="table table-hover" style="text-align: center;">

@@ -90,6 +90,8 @@ public class MovingHairController {
 		return mav;
 	}
 	
+	//나의 예약 내역 확인
+	@ResponseBody
 	@RequestMapping("/myReservation.do")
 	public ModelAndView myReservation(HttpSession session, PagingVO paging) {
 		ModelAndView mav = new ModelAndView();
@@ -271,7 +273,7 @@ public class MovingHairController {
 	
 		
 		mav.addObject("reservVo", ResultReservVo);
-		mav.setViewName("user/desginerScPopup");
+		mav.setViewName("contents/desginerScPopup");
 		return mav;
 	
 	}

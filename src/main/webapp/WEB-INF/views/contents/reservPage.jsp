@@ -17,7 +17,7 @@
 				<div style="margin-bottom: 10px">예약 날짜</div>
 				<div class="row contact_row">
 					<div class="col-md-6"><input type="date" class="contact_input" id="rDate" name="rDate" placeholder="예약 날짜" required="required"></div>
-					<div class="col-md-6"><input type="time" class="contact_input" id="rTime" name="rTime" placeholder="예약 시간" required="required"></div>
+					<div class="col-md-6"><input type="text" class="contact_input" id="timepicker1" name="rTime" placeholder="예약 시간" required="required"></div>
 				</div>
 				
 				<!-- <div style="margin-bottom: 10px;">이름</div>
@@ -75,6 +75,8 @@
 $(function(){
 	var today = moment().format('YYYY-MM-DD');
 	document.getElementById("rDate").value = today;
+	
+	$('#timepicker1').timepicki();
 })
 
 function beforSubmit(){
