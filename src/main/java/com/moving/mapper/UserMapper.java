@@ -32,4 +32,6 @@ public interface UserMapper {
 
 	public int updateLoginDate(String userId);
 
+	public int outMember(UserVO userVO);
+
 }

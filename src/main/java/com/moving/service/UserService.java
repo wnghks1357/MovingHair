@@ -78,4 +78,8 @@ public class UserService {
 		
 	}
 
+	public int outMember(UserVO userVO) {
+		return userMapper.outMember(userVO);
+	}
+
 }

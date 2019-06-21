@@ -142,13 +142,13 @@
 				},error : function(responseData){
 					alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 				}
-			});
-			
-			
-			
-			
-			
+			});			
 		});
+		
+		//회원 탈퇴 버튼 클릭
+		$("#userOutBtn").click(function(){
+			location.href= 'outMemberPage.do';
+		})
 	});
 	
 	//숫자만 입력 가능하도록 하기 위한 함수
@@ -288,7 +288,10 @@
 				<label for="userPwdCheck">비밀번호 확인</label>
 			</div>
 			<input type="hidden" name="userId" value="${userInfo.userId }">
+			
+			<button type="button" id="userOutBtn" class="btn btn-warning" style="float: right; margin-right: 10px;">회원 탈퇴</button>
 			<button type="button" id="pwdConfirmBtn" class="btn btn-primary" style="float: right; margin-right: 10px;">저장</button>
+			
 		</form>
 	</div>
 </div>

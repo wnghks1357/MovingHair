@@ -54,6 +54,10 @@
 			
 		});
 		
+		$("#noAgreeBtn").click(function () {
+			history.back();
+		});
+		
 		$("#chk_all").click(function(){
 			var chk = $(this).is(":checked");//.attr('checked'); class="input_chk"
 			if(chk) $(".input_chk").prop('checked', true);

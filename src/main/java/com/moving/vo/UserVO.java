@@ -32,6 +32,7 @@ public class UserVO {
 	private Timestamp createdDate;
 	private Timestamp updateDate;
 	private Timestamp outDate;
+	private String outReason;
 	private Timestamp loginDate;
 	
 	//패스워드 변경 시 사용할 column

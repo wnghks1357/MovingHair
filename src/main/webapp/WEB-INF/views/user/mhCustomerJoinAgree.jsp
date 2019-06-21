@@ -54,6 +54,11 @@
 			
 		});
 		
+		$("#noAgreeBtn").click(function () {
+			history.back();
+		});
+			
+		//전체 선택 시
 		$("#chk_all").click(function(){
 			var chk = $(this).is(":checked");//.attr('checked'); class="input_chk"
 			if(chk) $(".input_chk").prop('checked', true);

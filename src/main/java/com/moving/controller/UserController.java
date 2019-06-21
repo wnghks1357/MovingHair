@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.UUID;
 
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -176,12 +177,14 @@ public class UserController {
 		String requestPage ="";
 		
 		//로그인 정상 처리
-		if( userRvo != null ) {
+		//아이디 패스워드 일치 and 계정 상태 활동 'A'
+		if( userRvo != null && userRvo.getUserStatus() =='A') {
 			
 			//로그인 정상 처리시 session 저장
 			session.setAttribute("userId", userRvo.getUserId());
 			
-			int result = userService.updateLoginDate(userRvo.getUserId());
+			//사용자 로그인 시간 업데이트
+			userService.updateLoginDate(userRvo.getUserId());
 			
 			
 			//사용자인 경우
@@ -311,6 +314,45 @@ public class UserController {
 		mav.setViewName("layout/layout");
 		return mav;
 	}	
+	
+	//회원탈퇴 페이지
+	@RequestMapping("/outMemberPage.do")
+	public ModelAndView outMemberPage(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String userId = "";
+		
+		if(session.getAttribute("userId") != null) {
+			userId = (String)session.getAttribute("userId");	
+		}
+
+		
+		mav.addObject("userId", userId);
+		mav.addObject("mainContent", "outMember.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+	}
+	
+	//회원탈퇴 페이지
+	@RequestMapping("/outMemberProc.do")
+	public String outMemberProc(UserVO userVO) {
+		
+		int outResult = userService.outMember(userVO);
+		
+		String requestPage = "";
+		
+		//정상 탈퇴시
+		if(outResult > 0) {
+			requestPage=  "redirect:/customerLoginView.do";
+			
+		//탈퇴 실패시
+		}else {
+			requestPage = "redirect:/outMemberPage.do";
+		}
+			
+		return requestPage;
+	}
 	
 	//마이페이지에서 정보 수정
 	@RequestMapping("/userInfoUpdate.do")

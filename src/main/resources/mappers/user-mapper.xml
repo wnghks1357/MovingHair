@@ -103,11 +103,24 @@
 	</insert>
 
 	<select id="loginProc" parameterType="userVo" resultType="userVo">
-		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
+		SELECT USER_ID AS userId, USER_TYPE AS userType, USER_STATUS AS userStatus FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
 	
 	<update id="updateLoginDate" parameterType="java.lang.String">
 		UPDATE mh_user SET LOGIN_DATE = NOW() WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<update id="outMember" parameterType="userVo">
+		UPDATE mh_user
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="outReason != null and outReason != ''">
+					USER_STATUS = 'O',
+					OUT_REASON = #{outReason},
+					OUT_DATE = NOW()
+				</if>
+			</trim>
+		WHERE USER_ID = #{userId}
 	</update>
  
  	<!-- <select id="reservList" resultType="reservVo">
