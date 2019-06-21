@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -168,7 +169,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/loginProc.do")
-	public String loginProc(UserVO userVo, HttpSession session, HttpServletResponse response) {
+	public String loginProc(UserVO userVo, HttpSession session, ModelMap map ) {
 		
 		UserVO userRvo = userService.loginProc(userVo);
 		
@@ -180,6 +181,8 @@ public class UserController {
 			//로그인 정상 처리시 session 저장
 			session.setAttribute("userId", userRvo.getUserId());
 			
+			int result = userService.updateLoginDate(userRvo.getUserId());
+			
 			
 			//사용자인 경우
 			if(userRvo.getUserType() == 'U') {
@@ -189,6 +192,8 @@ public class UserController {
 				requestPage =  "redirect:/designerMain.do";
 			}
 		}else {
+			
+			map.addAttribute("loginFail",true);
 
 			logger.info("로그인 실패");
 			logger.debug("id : " + userVo.getUserId());
@@ -200,7 +205,7 @@ public class UserController {
 	}	
 	
 	@RequestMapping("/logoutProc.do")
-	public String logoutProc(UserVO userVo, HttpSession session, HttpServletResponse response) {
+	public String logoutProc(UserVO userVo, HttpSession session) {
 		
 
 		session.removeAttribute("userId");

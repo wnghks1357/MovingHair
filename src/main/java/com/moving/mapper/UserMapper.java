@@ -30,4 +30,6 @@ public interface UserMapper {
 
 	public int regDesignLounge(DesignLoungeVO designLoungeVO);
 
+	public int updateLoginDate(String userId);
+
 }

@@ -105,6 +105,10 @@
 	<select id="loginProc" parameterType="userVo" resultType="userVo">
 		SELECT USER_ID AS userId, USER_TYPE AS userType FROM mh_user WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
+	
+	<update id="updateLoginDate" parameterType="java.lang.String">
+		UPDATE mh_user SET LOGIN_DATE = NOW() WHERE USER_ID = #{userId}
+	</update>
  
  	<!-- <select id="reservList" resultType="reservVo">
  		SELECT RESERV_ID AS reservId, DESIGNER_ID AS designerId, RESERV_DATE AS reservDate, CHANGE_COUNT AS changeCount FROM mh_reserv

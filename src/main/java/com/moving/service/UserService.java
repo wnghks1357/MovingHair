@@ -73,4 +73,9 @@ public class UserService {
 		
 	}
 
+	public int updateLoginDate(String userId) {
+		return userMapper.updateLoginDate(userId);
+		
+	}
+
 }

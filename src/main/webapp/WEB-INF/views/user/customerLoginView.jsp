@@ -9,6 +9,14 @@
     <script src="resources/javascripts/bootstrap/jquery-3.2.1.min.js" charset="utf-8"></script>
     <script src="resources/javascripts/sha512.js"></script>
     <script>
+    
+    $(function(){
+    	
+    	
+    	if($("#loginResult").val()){
+    		alert("패스워드 불일치");
+    	}
+    })
       
 	function fnLoginSubmit(){
     	  
@@ -34,7 +42,7 @@
 
   <body>
     <img src="resources/images/movinghair/movinghairLogo.PNG" style="margin-left: 43%; margin-top: 30px;" onclick="location.href='customerMain.do'">
-
+	
    
     <div class="container">
       <div class="row">
@@ -68,6 +76,9 @@
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="background-color: #1DDB16"><i></i> Sign in with Naver</button>
                 <!-- <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                 <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit" style="background-color: #ffe812; color:black;"><i class="fab fa-facebook-f mr-2"></i> Sign in with Kakao</button>
+                
+                <!-- 로그인 실패 여부 실패 시 true 반환 -->
+                <input type="hidden" value="${loginFail }" id="loginResult">
               </form>
             </div>
           </div>
