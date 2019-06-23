@@ -314,6 +314,25 @@ public class UserController {
 		return mav;
 	}	
 	
+	//마이페이지
+	@RequestMapping("/myPoint.do")
+	public ModelAndView myPoint(HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		String userId = "";
+		
+		if(session.getAttribute("userId") != null) {
+			userId = (String)session.getAttribute("userId");	
+		}		
+		
+		UserVO userInfo = userService.getUserInfo(userId);
+		
+		mav.addObject("userInfo", userInfo);
+		mav.addObject("mainContent", "myPoint.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+	}
+	
 	//회원탈퇴 페이지
 	@RequestMapping("/outMemberPage.do")
 	public ModelAndView outMemberPage(HttpSession session) {

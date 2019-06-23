@@ -92,7 +92,7 @@ a:hover{
 	display: none;
 }
 
-.main_nav ul li:hover >ul{
+.main_nav ul li:hover > ul{
 	display: block;
 }
 /* 네비게이션 바 */
