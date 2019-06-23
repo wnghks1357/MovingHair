@@ -31,7 +31,7 @@
 			<mvc:mapping path="/home.do"/>
 			<mvc:mapping path="/customerMain.do"/>
 			<mvc:mapping path="/designerMain.do"/>
-			<mvc:mapping path="/myReservation.do"/>
+			<mvc:mapping path="/myReservationPage.do"/>
 			<mvc:mapping path="/myPage.do"/>
 			<mvc:mapping path="/csNotice.do"/>
 			<mvc:mapping path="/eventList.do"/>

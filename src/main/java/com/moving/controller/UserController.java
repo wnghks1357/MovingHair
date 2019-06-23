@@ -314,7 +314,7 @@ public class UserController {
 		return mav;
 	}	
 	
-	//마이페이지
+	//마이포인트
 	@RequestMapping("/myPoint.do")
 	public ModelAndView myPoint(HttpSession session) {
 

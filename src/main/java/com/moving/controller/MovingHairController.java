@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,27 +91,37 @@ public class MovingHairController {
 		return mav;
 	}
 	
-	//나의 예약 내역 확인
-	@ResponseBody
-	@RequestMapping("/myReservation.do")
-	public ModelAndView myReservation(HttpSession session, PagingVO paging) {
+	@RequestMapping("/myReservationPage.do")
+	public ModelAndView myReservationPage() {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("mainContent", "myReservation.jsp");
+		mav.setViewName("layout/layout");
+		return mav;
+	}
+	
+	//나의 예약 내역 확인
+	
+	@RequestMapping("/myReservation.do")
+	public @ResponseBody List<ReservVO> myReservation(HttpSession session, ReservVO reservVO ,Model model) {
 		
 		String userId = session.getAttribute("userId").toString();
 		
-		ReservVO reservVO = new ReservVO();
 		reservVO.setUserId(userId);
 		
 		List<ReservVO> myReservList = movinghairService.selectMyReservList(reservVO);
-		reservVO.setTotal(myReservList.size());
+		//reservVO.setTotal(myReservList.size());
 		
 		logger.info("myReserList size : " + myReservList.size());
 		
+		return myReservList;
+	/*	
 		mav.addObject("p", reservVO);
 		mav.addObject("myReservList", myReservList);
 		mav.addObject("mainContent", "myReservation.jsp");
 		mav.setViewName("layout/layout");
 		return mav;
+	*/
 	}
 	
 	@RequestMapping("/eventList.do")
@@ -251,7 +262,7 @@ public class MovingHairController {
 		
 		logger.info("insert result : "+ i);
 
-		return "redirect:/myReservation.do";
+		return "redirect:/myReservationPage.do";
 	
 	}
 	

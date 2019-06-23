@@ -26,4 +26,9 @@ public class ReservVO extends PagingVO{
 	private String reservDateStr;
 	private String reservTime;
 	
+	//기간 조회를 위한 변수 추가
+	private String srchTerm;
+	private String startDate;
+	private String endDate;
+	
 }

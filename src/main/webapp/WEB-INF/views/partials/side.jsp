@@ -15,7 +15,7 @@
           <nav class="main_nav">
             <ul class="d-flex flex-row align-items-center justify-content-start">
               <li class="active"><a href="/home.do">홈</a></li>
-              <li><a href="/myReservation.do">예약 관리</a></li>
+              <li><a href="/myReservationPage.do">예약 관리</a></li>
               <li><a href="/eventList.do">이벤트</a></li>
               <li><a href="#">회원 서비스</a>
               	<ul>
@@ -51,7 +51,7 @@
   <div class="menu_content d-flex flex-column align-items-center justify-content-center">
     <ul class="menu_nav_list text-center">
       <li><a href="/home.do">홈</a></li>
-      <li><a href="/myReservation.do">예약 관리</a></li>
+      <li><a href="/myReservationPage.do">예약 관리</a></li>
       <li><a href="/eventList.do">이벤트</a></li>
       <li><a href="/myPage.do">회원 정보 수정</a></li>
       <li><a href="/myPage.do">나의 포인트 내역</a></li>

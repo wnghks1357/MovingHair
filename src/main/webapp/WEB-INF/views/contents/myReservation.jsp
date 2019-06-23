@@ -4,25 +4,59 @@
 
 <script>
 
-/* $(function () {
+$(function () {
 	fnListPage();
 });
 
 function fnListPage() {
-	var f = document.form1;
+	//var f = document.form1;
+	var f = $("#form1").serialize();
 	
 	$.ajax({
 		url : "myReservation.do",
 		type: "post",
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 		data : f,
-		async : false,	// 중복 count로 submit 여부를 결정하기 위한 동기 처리
-		success : function(data){  
+		//async : false,	// 중복 count로 submit 여부를 결정하기 위한 동기 처리
+		success : function(data){
+			
+			//TODO 페이징 처리 추가해야 함.
+			$("#listBody").empty();
+			
+			if(data.length == 0){
+				
+				var emptyList = [];
+				emptyList.push("<tr>");
+				emptyList.push("<td colspan='5'>예약 내역이 없습니다.</td>");
+				emptyList.push("</tr>");
+				$("#listBody").append($(emptyList.join("")));
+				
+				
+				
+			}else{	
+				
+				var reservList = [];
+				
+				$(data).each(function(index, item){
+					
+					reservList.push("<tr>");
+					reservList.push("<td>"+ item.reservId +"</td>");
+					reservList.push("<td>"+ item.reservDateStr +"</td>");
+					reservList.push("<td>"+ item.designerId +"</td>");
+					reservList.push("<td>"+ item.reservLoc +"</td>");
+					reservList.push("<td>"+ item.changeCount +"</td>");
+					reservList.push("</tr>");
+					
+					$("#listBody").append($(reservList.join("")));
+				});
+				
+			}
 			
 		},error : function(responseData){
 			alert('처리 중 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 		}
 	})
-}; */
+};
 
 //기간별(버튼 오늘,일주일, 한달) 구매목록을 조회하기 위한 함수
 function fnSrchMylist(during){
@@ -35,8 +69,8 @@ function fnSrchMylist(during){
 
 	$("#srchTerm").val(srchTerm);
 	
-	alert(srchTerm);
-	//fnListPage();
+	//alert(srchTerm);
+	fnListPage();
 }
 //특정 기간 구매목록 조회 함수
 function fnSrchDuring(){
@@ -88,10 +122,10 @@ function fnSrchDuring(){
 	$("#startDate").val(sDate);
 	$("#endDate").val(eDate);
 	
-	alert(sDate);
-	alert(eDate);
+	/* alert(sDate);
+	alert(eDate); */
 	
-	//fnListPage();
+	fnListPage();
 	$("#sDate").val("");
 	$("#eDate").val("");
 	$("#startDate").val("");
@@ -143,7 +177,10 @@ function fnSrchDuring(){
 									<th>예약 장소</th>
 									<th>변경 횟수</th>
 								</thead>
-								<c:if test="${!empty myReservList}">
+								<tbody id="listBody">
+								
+								</tbody>
+								<%-- <c:if test="${!empty myReservList}">
 									<c:forEach var="r" items="${myReservList }">
 										<tr>
 											<td>${r.reservId }</td>
@@ -160,7 +197,7 @@ function fnSrchDuring(){
 									<tr>
 										<td colspan="5">예약 내역이 없습니다.</td>
 									</tr>
-								</c:if>
+								</c:if> --%>
 							</table>
 							
 						</div>

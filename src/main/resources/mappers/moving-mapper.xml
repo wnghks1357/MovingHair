@@ -110,11 +110,18 @@
 		SELECT 
 			RESERV_ID AS reservId
 			, DESIGNER_ID AS designerId
-			, RESERV_DATE AS reservDate
+			, DATE_FORMAT(RESERV_DATE, "%Y.%m.%d %H:%i") AS reservDateStr
 			, RESERV_LOC AS reservLoc
 		FROM mh_reserv
 		WHERE USER_ID = #{userId}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND RESERV_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="srchTerm != null and srchTerm != '' and startDate == '' and endDate ==''">
+			 AND RESERV_DATE >= #{srchTerm}
+		</if>
 		LIMIT #{start}, #{listCnt}
+		
 	</select>
  	
  	<select id="selectReservList" parameterType="java.lang.String" resultType="reservVo">
