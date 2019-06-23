@@ -186,7 +186,6 @@ public class UserController {
 			//사용자 로그인 시간 업데이트
 			userService.updateLoginDate(userRvo.getUserId());
 			
-			
 			//사용자인 경우
 			if(userRvo.getUserType() == 'U') {
 				requestPage =  "redirect:/customerMain.do";
