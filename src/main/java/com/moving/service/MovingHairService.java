@@ -52,7 +52,6 @@ public class MovingHairService {
 	public List<ReservVO> selectMyReservList(ReservVO reservVO) {
 
 		return movingMapper.selectMyReservList(reservVO);
-		
 	}
 
 	//디자이너에게 예약 신청한 사람들 리스트
@@ -64,6 +63,10 @@ public class MovingHairService {
 	public ReservVO selectReservDetail(int reservId) {
 
 		return movingMapper.selectReservDetail(reservId);
+	}
+
+	public int myReservListCnt(ReservVO reservVO) {
+		return movingMapper.myReservListCnt(reservVO);
 	}
 
 	/*public int eventUpdateHitCnt(int eventId) {

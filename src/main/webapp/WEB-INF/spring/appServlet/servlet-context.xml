@@ -35,6 +35,7 @@
 			<mvc:mapping path="/myPage.do"/>
 			<mvc:mapping path="/csNotice.do"/>
 			<mvc:mapping path="/eventList.do"/>
+			<mvc:mapping path="/reservPage.do"/>
 			
 			<beans:bean id="movingInterceptors" class="com.moving.interceptors.MovingInterceptors"></beans:bean>
 		</mvc:interceptor>

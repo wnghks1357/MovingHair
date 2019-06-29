@@ -106,11 +106,13 @@
 		);
 	</insert>
 	
+	<!-- 사용자의 본인 예약 내역 -->
 	<select id="selectMyReservList" parameterType="reservVo" resultType="reservVo">
 		SELECT 
 			RESERV_ID AS reservId
 			, DESIGNER_ID AS designerId
-			, DATE_FORMAT(RESERV_DATE, "%Y.%m.%d %H:%i") AS reservDateStr
+			<!-- , DATE_FORMAT(RESERV_DATE, "%Y.%m.%d %H:%i") AS reservDateStr -->
+			, RESERV_DATE AS reservDate
 			, RESERV_LOC AS reservLoc
 		FROM mh_reserv
 		WHERE USER_ID = #{userId}
@@ -121,9 +123,22 @@
 			 AND RESERV_DATE >= #{srchTerm}
 		</if>
 		LIMIT #{start}, #{listCnt}
-		
+	</select>
+	
+	<select id="myReservListCnt" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM mh_reserv
+	 WHERE USER_ID = #{userId}
+	 <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		AND RESERV_DATE BETWEEN #{startDate} AND #{endDate}
+	</if>
+	<if test="srchTerm != null and srchTerm != '' and startDate == '' and endDate ==''">
+		 AND RESERV_DATE >= #{srchTerm}
+	</if>
 	</select>
  	
+ 	<!-- 디자이너의 사용자 예약 내역 -->
  	<select id="selectReservList" parameterType="java.lang.String" resultType="reservVo">
  		SELECT 
 			RESERV_ID AS reservId

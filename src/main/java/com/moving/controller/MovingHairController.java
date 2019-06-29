@@ -91,41 +91,61 @@ public class MovingHairController {
 		return mav;
 	}
 	
-	@RequestMapping("/myReservationPage.do")
-	public ModelAndView myReservationPage() {
+	/*@RequestMapping("/myReservation.do")
+	public ModelAndView myReservation(HttpSession session, ReservVO reservVO) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("mainContent", "myReservation.jsp");
-		mav.setViewName("layout/layout");
-		return mav;
-	}
-	
-	//나의 예약 내역 확인
-	
-	@RequestMapping("/myReservation.do")
-	public @ResponseBody List<ReservVO> myReservation(HttpSession session, ReservVO reservVO ,Model model) {
 		
 		String userId = session.getAttribute("userId").toString();
 		
 		reservVO.setUserId(userId);
 		
 		List<ReservVO> myReservList = movinghairService.selectMyReservList(reservVO);
-		//reservVO.setTotal(myReservList.size());
+		reservVO.setTotal(movinghairService.myReservListCnt(userId));
 		
 		logger.info("myReserList size : " + myReservList.size());
-		
-		return myReservList;
-	/*	
+
+	
 		mav.addObject("p", reservVO);
 		mav.addObject("myReservList", myReservList);
 		mav.addObject("mainContent", "myReservation.jsp");
 		mav.setViewName("layout/layout");
+		
 		return mav;
-	*/
+	}*/
+	@RequestMapping("/myReservationPage.do")
+	public ModelAndView myReservationPage(HttpSession session, ReservVO reservVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("p", reservVO);
+		mav.addObject("mainContent", "myReservation.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	//예약 내역 list ajax 페이지에 뿌려 주는 rest
+	@RequestMapping("/myReservationListAjax.do")
+	public @ResponseBody ModelAndView myReservationListAjax(HttpSession session, ReservVO reservVO) {
+		ModelAndView mav = new ModelAndView("contents/myReservationPart");
+		
+		String userId = session.getAttribute("userId").toString();
+		
+		reservVO.setUserId(userId);
+		
+		List<ReservVO> myReservList = movinghairService.selectMyReservList(reservVO);
+		reservVO.setTotal(movinghairService.myReservListCnt(reservVO));
+		
+		logger.info("myReserList size : " + myReservList.size());
+
+	
+		mav.addObject("p", reservVO);
+		mav.addObject("myReservList", myReservList);
+		
+		return mav;
 	}
 	
 	@RequestMapping("/eventList.do")
-	public ModelAndView event(PagingVO paging) {
+	public ModelAndView eventList(PagingVO paging) {
 		
 		ModelAndView mav = new ModelAndView();
 

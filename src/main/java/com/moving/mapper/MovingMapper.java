@@ -33,6 +33,8 @@ public interface MovingMapper {
 
 	ReservVO selectReservDetail(int reservId);
 
+	int myReservListCnt(ReservVO reservVO);
+
 	//int eventUpdateHitCnt(int eventId);
 	
 

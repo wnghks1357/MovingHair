@@ -82,7 +82,22 @@ $(function(){
 function beforSubmit(){
 	
 	var rDate = $("#rDate").val();
-	var rTime = $("#rTime").val();
+	var rTime = $("#timepicker1").val();
+	
+	var [time, modifier] = rTime.split(' ');
+
+	var [hours, minutes] = time.split(':');
+
+	if (hours === '12') {
+		hours = '00';
+	}
+
+	if (modifier === 'PM') {
+		hours = parseInt(hours, 10) + 12;
+	}
+	
+	rTime = hours + ":" + minutes;
+	
 	
 	var addr1 = $("#sample4_roadAddress").val();
 	var addr2 = $("#sample4_jibunAddress").val();
