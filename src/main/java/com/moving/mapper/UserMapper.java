@@ -1,8 +1,12 @@
 package com.moving.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.moving.vo.DesignLoungeVO;
+import com.moving.vo.PointVO;
+import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
 @Repository
@@ -28,10 +32,18 @@ public interface UserMapper {
 
 	public int checkUserPwd(UserVO userVo);
 
-	public int regDesignLounge(DesignLoungeVO designLoungeVO);
+	public int insertRegDesignLounge(DesignLoungeVO designLoungeVO);
 
 	public int updateLoginDate(String userId);
 
 	public int outMember(UserVO userVO);
+
+	public List<ReservVO> selectMyPointList(PointVO pointVO);
+
+	public int myPointListCnt(PointVO pointVO);
+
+	public int insertJoinPoint(UserVO userVo);
+
+	public int selectUserNo(String userId);
 
 }

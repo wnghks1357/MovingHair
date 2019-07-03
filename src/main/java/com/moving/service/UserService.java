@@ -1,10 +1,14 @@
 package com.moving.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moving.mapper.UserMapper;
 import com.moving.vo.DesignLoungeVO;
+import com.moving.vo.PointVO;
+import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
 
@@ -67,9 +71,9 @@ public class UserService {
 		return userMapper.checkUserPwd(userVo);
 	}
 
-	public int regDesignLounge(DesignLoungeVO designLoungeVO) {
+	public int insertRegDesignLounge(DesignLoungeVO designLoungeVO) {
 		
-		return userMapper.regDesignLounge(designLoungeVO);
+		return userMapper.insertRegDesignLounge(designLoungeVO);
 		
 	}
 
@@ -80,6 +84,22 @@ public class UserService {
 
 	public int outMember(UserVO userVO) {
 		return userMapper.outMember(userVO);
+	}
+
+	public List<ReservVO> selectMyPointList(PointVO pointVO) {
+		return userMapper.selectMyPointList(pointVO);
+	}
+
+	public int myPointListCnt(PointVO pointVO) {
+		return userMapper.myPointListCnt(pointVO);
+	}
+
+	public int insertJoinPoint(UserVO userVo) {
+		return userMapper.insertJoinPoint(userVo);
+	}
+
+	public int selectUserNo(String userId) {
+		return userMapper.selectUserNo(userId);
 	}
 
 }

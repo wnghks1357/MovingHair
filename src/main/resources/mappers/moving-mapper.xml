@@ -129,13 +129,13 @@
 		SELECT 
 			COUNT(*)
 		FROM mh_reserv
-	 WHERE USER_ID = #{userId}
-	 <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
-		AND RESERV_DATE BETWEEN #{startDate} AND #{endDate}
-	</if>
-	<if test="srchTerm != null and srchTerm != '' and startDate == '' and endDate ==''">
-		 AND RESERV_DATE >= #{srchTerm}
-	</if>
+		WHERE USER_ID = #{userId}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND RESERV_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="srchTerm != null and srchTerm != '' and startDate == '' and endDate ==''">
+			 AND RESERV_DATE >= #{srchTerm}
+		</if>
 	</select>
  	
  	<!-- 디자이너의 사용자 예약 내역 -->

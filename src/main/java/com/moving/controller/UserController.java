@@ -2,6 +2,7 @@ package com.moving.controller;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.List;
 import java.util.UUID;
 
 import javax.jws.WebParam.Mode;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moving.service.UserService;
 import com.moving.util.MailSenderUtil;
 import com.moving.vo.DesignLoungeVO;
+import com.moving.vo.PointVO;
+import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
 @Controller
@@ -117,9 +120,6 @@ public class UserController {
 	/**
 	 * TODO 협의 후 컬럼 추가 필요
 	 * @description 필수 항목들을 체크하기 위한 requestParam 사용
-	 * @param userId
-	 * @param userPwd
-	 * @param userName
 	 * @param UserVO
 	 * @return
 	 */
@@ -130,24 +130,32 @@ public class UserController {
 		
 		logger.debug("join proc result : " + count);
 		
-		int loungeCnt =0;
+		int loungeResult =0;
 		
-		//회원정보 테이블 insert 성공 and user가 디자이너인 경우
+		//회원정보 테이블 insert 성공 and user가 디자이너인 경우 디자이너의 선호지역 insert
 		if(count > 0 && userVo.getUserType() == 'D') {
 			
-			loungeCnt = userService.regDesignLounge(designLoungeVO);
-			logger.debug("regDesignLounge result : " + loungeCnt);
+			loungeResult = userService.insertRegDesignLounge(designLoungeVO);
+			logger.debug("insert RegDesign Lounge result : " + loungeResult);
 		}
 		
 		if( count > 0 ) {
+			//userNo를 session에 넣기 위한 select
+			int userNo = userService.selectUserNo(userVo.getUserId());
 			session.setAttribute("userId", userVo.getUserId());
+			session.setAttribute("userNo", userNo);
 		}
 		
 		// 사용자 유형(사용자, 디자이너)에 따라 페이지 이동
 		String requestPage = "";
 		
-		// 사용자이고 회원가입 성공한 경우
+		// 사용자이고 회원가입 성공한 경우, 1000포인트 지급 후 페이지 이동
 		if( userVo.getUserType() == 'U' && count != 0) {
+			
+			//포인트 지급
+			int insertPointResult = userService.insertJoinPoint(userVo);
+			logger.debug("insert Point Result : " + insertPointResult);
+			
 			requestPage=  "redirect:/customerMain.do";
 		//디자이너이고 회원가입 성공한 경우
 		}else if( userVo.getUserType() == 'D' && count != 0){
@@ -182,6 +190,7 @@ public class UserController {
 			
 			//로그인 정상 처리시 session 저장
 			session.setAttribute("userId", userRvo.getUserId());
+			session.setAttribute("userNo", userRvo.getUserNo());
 			
 			//사용자 로그인 시간 업데이트
 			userService.updateLoginDate(userRvo.getUserId());
@@ -211,6 +220,7 @@ public class UserController {
 		
 
 		session.removeAttribute("userId");
+		session.removeAttribute("userNo");
 		session.invalidate();
 		
 		return "user/customerLoginView";
@@ -315,21 +325,39 @@ public class UserController {
 	}	
 	
 	//마이포인트
-	@RequestMapping("/myPoint.do")
-	public ModelAndView myPoint(HttpSession session) {
+	@RequestMapping("/myPointPage.do")
+	public ModelAndView myPointPage(HttpSession session, PointVO pointVO) {
 
 		ModelAndView mav = new ModelAndView();
 		String userId = "";
-		
 		if(session.getAttribute("userId") != null) {
 			userId = (String)session.getAttribute("userId");	
-		}		
+		}	
 		
-		UserVO userInfo = userService.getUserInfo(userId);
-		
-		mav.addObject("userInfo", userInfo);
+		mav.addObject("p", pointVO);
 		mav.addObject("mainContent", "myPoint.jsp");
 		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/myPointListAjax.do")
+	public @ResponseBody ModelAndView myReservationListAjax(HttpSession session, PointVO pointVO) {
+		ModelAndView mav = new ModelAndView("contents/myPointPart");
+		
+		int userNo = Integer.parseInt(session.getAttribute("userNo").toString());
+		
+		pointVO.setUserNo(userNo);
+		
+		List<ReservVO> myPointList = userService.selectMyPointList(pointVO);
+		pointVO.setTotal(userService.myPointListCnt(pointVO));
+		
+		logger.info("myPointList size : " + myPointList.size());
+
+	
+		mav.addObject("p", pointVO);
+		mav.addObject("myPointList", myPointList);
+		
 		return mav;
 	}
 	
