@@ -24,11 +24,11 @@
 	</select>
 	
 	<!-- 페이징 처리를 위한 count 조회 -->
-	<select id="eventListCnt" resultType="java.lang.Integer">
+	<select id="eventListCnt" resultType="Integer">
 		SELECT COUNT(*) FROM mh_event
 	</select>
 	
-	<select id="eventDetail" parameterType="java.lang.Integer" resultType="eventVo">
+	<select id="eventDetail" parameterType="Integer" resultType="eventVo">
 		SELECT 
 				EVENT_ID AS eventId
 				, EVENT_TITLE AS eventTitle
@@ -45,7 +45,7 @@
 		WHERE EVENT_ID = #{eventId}
 	</select>
 	
-<!-- 	<select id="eventDetail" parameterType="java.lang.Integer" resultType="eventVo">
+<!-- 	<select id="eventDetail" parameterType="Integer" resultType="eventVo">
 		UPDATE mh_event
 		SET
 			HIT_CNT = IFNULL(HIT_CNT, 0) + 1
@@ -68,11 +68,61 @@
 				LIMIT #{start}, #{listCnt}
 	</select>
 	
-	<select id="noticeListCnt" resultType="java.lang.Integer">
+	<select id="noticeListCnt" resultType="Integer">
  		SELECT COUNT(*) FROM mh_notice
 	</select>
 	
-	<select id="designerLoungeList" parameterType="java.lang.String" resultType="java.lang.String">
+	<select id="noticeDetail" parameterType="Integer" resultType="noticeVo">
+		SELECT 
+				NOTICE_ID AS noticeId
+				, NOTICE_TITLE AS noticeTitle
+				, NOTICE_CONTENT AS noticeContent
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_notice
+		WHERE NOTICE_ID = #{noticeId}
+	</select>
+	
+	<select id="faqList" parameterType="pagingVo" resultType="faqVo">
+ 	
+ 			SELECT
+				FAQ_ID AS faqId
+				, FAQ_TITLE AS faqTitle
+				, FAQ_CONTENT AS faqContent
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_faq
+				LIMIT #{start}, #{listCnt}
+	</select>
+	
+	<select id="faqListCnt" resultType="Integer">
+ 		SELECT COUNT(*) FROM mh_faq
+	</select>
+	
+	<select id="faqDetail" parameterType="Integer" resultType="faqVo">
+		SELECT 
+				FAQ_ID AS faqId
+				, FAQ_TITLE AS faqTitle
+				, FAQ_CONTENT AS faqContent
+				, USER_ID AS userId
+				, USER_NAME AS userName
+				, ATTACH_PATH AS attachPath
+				, ATTACH_NAME AS attachName
+				, WRITE_DATE AS writeDate
+				, UPDATE_DATE AS updateDate
+				FROM mh_faq
+		WHERE FAQ_ID = #{faqId}
+	</select>
+	
+	<select id="designerLoungeList" parameterType="String" resultType="String">
  		SELECT 
  			USER_ID AS userId
  		FROM mh_design_lounge
@@ -125,7 +175,7 @@
 		LIMIT #{start}, #{listCnt}
 	</select>
 	
-	<select id="myReservListCnt" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<select id="myReservListCnt" parameterType="String" resultType="Integer">
 		SELECT 
 			COUNT(*)
 		FROM mh_reserv
@@ -139,7 +189,7 @@
 	</select>
  	
  	<!-- 디자이너의 사용자 예약 내역 -->
- 	<select id="selectReservList" parameterType="java.lang.String" resultType="reservVo">
+ 	<select id="selectReservList" parameterType="String" resultType="reservVo">
  		SELECT 
 			RESERV_ID AS reservId
 			, USER_ID AS userId
@@ -149,7 +199,7 @@
 		WHERE DESIGNER_ID = #{designerId}
  	</select>
  	
- 	<select id="selectReservDetail" parameterType="java.lang.Integer" resultType="reservVo">
+ 	<select id="selectReservDetail" parameterType="Integer" resultType="reservVo">
  		SELECT 
  			R.RESERV_ID AS reservId
 			, R.USER_ID AS userId

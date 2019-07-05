@@ -79,19 +79,14 @@
 	    $("#listCnt").val($("#listCount").val());
 	    frmPaging();
 	}
-	
-	//디테일 팝업창 함수
-	function fnDetailPopup(eventId){
-		window.open('noticeDetail.do?noticeId=' + noticeId, "_black",
-				"toolbar=yes,menubar=yes,width=700,height=500").focus();
-	}
 </script>
 
 <div class="card card-signin my-5" style="width:1000px;">
 	<div class="card-body">
-		<div class="noticeContainer">
 		
-			<h2>무빙 헤어 공지사항</h2>
+		<div class="faqContainer">
+		
+			<h2>무빙 헤어 FAQ</h2>
 			<table border="1" style="margin-top: 30px;" class="table table-striped" >
 				<colgroup>
 					<col width="10%"/>
@@ -102,30 +97,31 @@
 					<tr>
 						<th>번호</th>
 						<th>등록 날짜</th>
-						<th style="text-align: center;">공지사항</th>
+						<th style="text-align: center;">FAQ</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${!empty list}">
-						<c:forEach var="e" items="${list }">
+						<c:forEach var="f" items="${list }">
 							<tr>
-								<td>${e.noticeId }</td>
-								<td class="titleTd"><a href="csNoticeDetail.do?noticeId=${e.noticeId }">${e.noticeTitle }</a></td>
+								<td>${f.faqId }</td>
+							
+								<td class="titleTd"><a href="csFaqDetail.do?faqId=${f.faqId }">${f.faqTitle }</a></td>
 								<td>
-									<fmt:formatDate value="${e.writeDate }" pattern="yyyy.MM.dd"/>
+									<fmt:formatDate value="${f.writeDate }" pattern="yyyy.MM.dd"/>
 								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="6" style="text-align: center;">등록된 공지사항이 없습니다.</td>
+							<td colspan="6" style="text-align: center;">등록된 FAQ가 없습니다.</td>
 						</tr>
 					</c:if>
 				</tbody>
 			</table>
 		
-			<div class="pagingContainer">
+			<div class="container">
 				<div class="row">
 					<div class="col">
 						<!-- 5. paging view -->    
@@ -149,7 +145,7 @@
 								<li class="page-item"><a class="page-link" onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>끝으로</a></li>
 							</c:if>
 						</ul>
-						<form action="noticeList.do" method="post" id='frmPaging'>
+						<form action="eventList.do" method="post" id='frmPaging'>
 							<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 							<input type='hidden' name='index' id='index' value='${p.index}'>
 							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'>
@@ -159,5 +155,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 </div>

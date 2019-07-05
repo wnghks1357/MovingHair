@@ -23,23 +23,23 @@
 		        <tbody>
 		            <tr>
 		                <th>제목</th>
-		                <td colspan="3" style="text-align: center;">${eventVo.eventTitle}</td>
+		                <td colspan="3" style="text-align: center;">${fv.faqTitle}</td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${eventVo.userId }</td>
+		                <td>${fv.userId }</td>
 		                <th>작성시간</th>
-		                <td>${eventVo.writeDate }</td>
+		                <td>${fv.writeDate }</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td colspan="3">
-		                    ${eventVo.eventContent }
+		                    ${fv.faqContent }
 		                </td>
 		            </tr>
 		        </tbody>
 		    </table>
-		    <a href="eventList.do" id="list" class="btn">목록으로</a>
+		    <a href="csFaq.do" id="list" class="btn">목록으로</a>
 		
 		</div>
 		

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.moving.mapper.MovingMapper;
 import com.moving.vo.EventVO;
+import com.moving.vo.FaqVO;
 import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
 import com.moving.vo.ReservVO;
@@ -67,6 +68,25 @@ public class MovingHairService {
 
 	public int myReservListCnt(ReservVO reservVO) {
 		return movingMapper.myReservListCnt(reservVO);
+	}
+
+	public NoticeVO noticeDetail(int noticeId) {
+		return movingMapper.noticeDetail(noticeId);
+	}
+
+	public List<FaqVO> faqList(PagingVO paging) {
+		// TODO Auto-generated method stub
+		return movingMapper.faqList(paging);
+	}
+
+	public int faqListCnt() {
+		// TODO Auto-generated method stub
+		return movingMapper.faqListCnt();
+	}
+
+	public FaqVO faqDetail(int faqId) {
+		// TODO Auto-generated method stub
+		return movingMapper.faqDetail(faqId);
 	}
 
 	/*public int eventUpdateHitCnt(int eventId) {

@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moving.service.MovingHairService;
 import com.moving.service.UserService;
 import com.moving.vo.EventVO;
+import com.moving.vo.FaqVO;
 import com.moving.vo.NoticeVO;
 import com.moving.vo.PagingVO;
 import com.moving.vo.ReservVO;
@@ -164,7 +165,7 @@ public class MovingHairController {
 	}
 	
 	@RequestMapping("/eventDetail.do")
-	public ModelAndView eventDetail(int eventId) {
+	public ModelAndView eventDetail(@RequestParam int eventId) {
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -199,6 +200,68 @@ public class MovingHairController {
 		mav.addObject("p", paging);
 
 		mav.addObject("mainContent", "csNotice.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/csNoticeDetail.do")
+	public ModelAndView csNoticeDetail(@RequestParam int noticeId) {
+		
+		ModelAndView mav = new ModelAndView();
+
+		logger.info("noticeId : " + noticeId);
+		
+		//TODO 조회수 증가
+		//movinghairService.eventUpdateHitCnt(eventId);
+		
+		NoticeVO noticeVO = movinghairService.noticeDetail(noticeId);
+		
+		logger.info("noticeVO : " + noticeVO.toString());
+		
+		
+		mav.addObject("noticeVO", noticeVO);
+		
+		mav.addObject("mainContent", "csNoticeDetail.jsp");
+		
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/csFaq.do")
+	public ModelAndView csFaq(PagingVO paging) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<FaqVO> list = movinghairService.faqList(paging);
+		paging.setTotal(movinghairService.faqListCnt());
+		
+		mav.addObject("list", list);
+		mav.addObject("p", paging);
+
+		mav.addObject("mainContent", "faqPage.jsp");
+		mav.setViewName("layout/layout");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/csFaqDetail.do")
+	public ModelAndView csFaqDetail(@RequestParam int faqId) {
+		
+		ModelAndView mav = new ModelAndView();
+
+		logger.info("faqId : " + faqId);
+		
+		FaqVO faqVO = movinghairService.faqDetail(faqId);
+		
+		logger.info("faqVO : " + faqVO.toString());
+		
+		
+		mav.addObject("fv", faqVO);
+		
+		mav.addObject("mainContent", "faqDetail.jsp");
+		
 		mav.setViewName("layout/layout");
 		
 		return mav;

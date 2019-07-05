@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.vo.PagingVO" alias="pagingVo"/>
 		<typeAlias type="com.moving.vo.DesignLoungeVO" alias="designLoungeVo"/>
 		<typeAlias type="com.moving.vo.PointVO" alias="pointVo"/>
+		<typeAlias type="com.moving.vo.FaqVO" alias="faqVo"/>
 	</typeAliases>
 	
 </configuration>
