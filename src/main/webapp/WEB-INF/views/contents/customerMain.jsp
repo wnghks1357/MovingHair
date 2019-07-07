@@ -12,7 +12,7 @@
 			         <select class="radius10" id="selGugun"><option>시/구/군</option></select>
 			         <input type="text" class="radius10" id="keyword" style="ime-mode:active;" placeholder="동/읍/면"/>
 		      </div>
-      				<button type="submit" class="radius10" id="Btn조회하기">조회하기</button>
+      				<button type="submit" class="radius10">조회하기</button>
 		      </form>
 		   </div>
 		</section>
@@ -38,12 +38,14 @@
 		<table border="1" style="margin-top: 30px; margin-left: auto; margin-right: auto; width: 95%;" id="designerListTb" class="table table-striped" >
 			<colgroup>
 				<col width="*"/>
+				<col width="14%"/>
 				<col width="7%"/>
 			</colgroup>
 			<thead>
 				<tr>
-					<th id="designerListThead"></th>
-					<th>신청</th>
+					<th id="designerListThead" style="text-align: center;"></th>
+					<th style="text-align: center;">1:1 질문하기</th>
+					<th style="text-align: center;">신청</th>
 				</tr>
 			</thead>
 			<tbody id="designerListTbody">
@@ -59,6 +61,26 @@
 
 function fnReserv(designerId){
 	location.href='reservPage.do?designerId='+designerId;
+}
+
+function fnPopupModal(designerId){
+	
+	var windowSize = {
+		    width: 560,
+		    height: 600,
+	};
+	
+	var windowLocation = {
+		    left:  (window.screen.availLeft + (window.screen.availWidth / 2)) - (windowSize.width / 2),
+		    top: (window.screen.availTop + (window.screen.availHeight / 2)) - (windowSize.height / 2),
+	};
+
+	var popUrl = "userQnaPopup.do?designerId="+designerId;	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width="+windowSize.width+", height="+windowSize.height+", left="+windowLocation.left+", top="+windowLocation.top+", resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
+
 }
 
 //도시 select box 변경시
@@ -168,6 +190,7 @@ function searchPlaces() {
 	    		for( var i = 0; i < designerList.length; i++){
 	    			designerEl += '<tr>';
 	    			designerEl += '<td>'+designerList[i]+'</td>';
+	    			designerEl += '<td style="text-align:center;"><button class="btn btn-primary btn-rounded" onclick="fnPopupModal(\''+designerList[i]+'\');">질문</button></td>';
 	    			designerEl += '<td><button class="btn btn-primary btn-rounded" onclick="fnReserv(\''+designerList[i]+'\');">신청</button></td>';
 	    			designerEl += '</tr>';
 	    		}

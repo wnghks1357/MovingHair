@@ -7,15 +7,15 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class FaqVO {
+public class QnaVO {
 	
-	private int faqId;
-	private String faqTitle;
-	private String faqContent;
+	private int qnaId;
 	private String userId;
-	private String userName;
-	private String attachPath;
-	private String attachName;
+	private String designerId;
+	private String qnaContents;
+	private int qnaSno;
+	private int qnaLev;
+	private int upprSno;
 	private Timestamp writeDate;
 	private Timestamp updateDate;
 }

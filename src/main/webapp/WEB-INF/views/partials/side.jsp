@@ -21,6 +21,7 @@
               	<ul>
               		<li><a href="/myPage.do">회원 정보 수정</a>
               		<li><a href="/myPointPage.do">나의 포인트 내역</a>
+              		<li><a href="/myQna.do">나의 질문</a>
               	</ul>
               </li>
               <li><a href="#">고객센터</a>
@@ -55,6 +56,7 @@
       <li><a href="/eventList.do">이벤트</a></li>
       <li><a href="/myPage.do">회원 정보 수정</a></li>
       <li><a href="/myPointPage.do">나의 포인트 내역</a></li>
+      <li><a href="/myQna.do">나의 질문</a>
       <li><a href="/csNotice.do">공지사항</a></li>
       <li><a href="/csFaq.do">FAQ</a></li>      
     </ul>

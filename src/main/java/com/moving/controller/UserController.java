@@ -23,6 +23,7 @@ import com.moving.service.UserService;
 import com.moving.util.MailSenderUtil;
 import com.moving.vo.DesignLoungeVO;
 import com.moving.vo.PointVO;
+import com.moving.vo.QnaVO;
 import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
@@ -342,14 +343,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/myPointListAjax.do")
-	public @ResponseBody ModelAndView myReservationListAjax(HttpSession session, PointVO pointVO) {
+	public @ResponseBody ModelAndView myPointListAjax(HttpSession session, PointVO pointVO) {
 		ModelAndView mav = new ModelAndView("contents/myPointPart");
 		
 		int userNo = Integer.parseInt(session.getAttribute("userNo").toString());
 		
 		pointVO.setUserNo(userNo);
 		
-		List<ReservVO> myPointList = userService.selectMyPointList(pointVO);
+		List<PointVO> myPointList = userService.selectMyPointList(pointVO);
 		pointVO.setTotal(userService.myPointListCnt(pointVO));
 		
 		logger.info("myPointList size : " + myPointList.size());
@@ -431,5 +432,35 @@ public class UserController {
 		logger.info("update user pwd result : " + result);
 		return "redirect:/myPage.do";
 	}
+	
+	//디자이너에게 1:1 질문하기 팝업
+	@RequestMapping("/userQnaPopup.do")
+	public ModelAndView userQnaPopup(QnaVO qnaVo) {
+	
+		ModelAndView mav = new ModelAndView();
+		
+		logger.info("designerId : " + qnaVo.getDesignerId());
+		
+		mav.addObject("qnaVo", qnaVo);
+		mav.setViewName("contents/userQnaPopup");
+		return mav;
+	}
+	
+	//디자이너 1:1 질문 등록
+	@RequestMapping(value = "/regQna.do", produces="application/text;charset=utf-8")
+	public @ResponseBody String regQna(QnaVO qnaVo, HttpSession session) {
+		
+		qnaVo.setUserId(session.getAttribute("userId").toString());
+		
+		logger.info("userId : " + qnaVo.getUserId());
+		
+		int regQnaResult = userService.insertMyQna(qnaVo);
+		
+		logger.info("regQnaResult : " + regQnaResult);
+		
+		return regQnaResult+"";		
+	}
+	
+	
 	
 }

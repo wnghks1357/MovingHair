@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.moving.mapper.UserMapper;
 import com.moving.vo.DesignLoungeVO;
 import com.moving.vo.PointVO;
+import com.moving.vo.QnaVO;
 import com.moving.vo.ReservVO;
 import com.moving.vo.UserVO;
 
@@ -86,7 +87,7 @@ public class UserService {
 		return userMapper.outMember(userVO);
 	}
 
-	public List<ReservVO> selectMyPointList(PointVO pointVO) {
+	public List<PointVO> selectMyPointList(PointVO pointVO) {
 		return userMapper.selectMyPointList(pointVO);
 	}
 
@@ -100,6 +101,10 @@ public class UserService {
 
 	public int selectUserNo(String userId) {
 		return userMapper.selectUserNo(userId);
+	}
+
+	public int insertMyQna(QnaVO qnaVo) {
+		return userMapper.insertMyQna(qnaVo);
 	}
 
 }

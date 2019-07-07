@@ -234,6 +234,29 @@
  	
  	</update>
  	
+ 	<insert id="insertMyQna" parameterType="qnaVo">
+ 		INSERT INTO mh_qna(
+ 			USER_ID
+ 			, DESIGNER_ID
+ 			, QNA_CONTENTS
+ 			, QNA_SNO
+ 			, QNA_LEV
+ 			, UPPR_SNO
+ 			, WRITE_DATE
+ 			, UPDATE_DATE
+ 		) VALUES (
+ 			#{userId}
+ 			, #{designerId}
+ 			, #{qnaContents}
+ 			, 0
+ 			, 0
+ 			, 0
+ 			, now()
+ 			, now()
+ 		)
+ 		
+ 	</insert>
+ 	
  	
  	
 </mapper>
