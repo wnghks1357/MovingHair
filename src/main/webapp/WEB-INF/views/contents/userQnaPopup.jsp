@@ -76,7 +76,7 @@ input[type=submit]:hover {
 
 	function fnRegMyQna(){
 		
-		
+		  
 		var data = $("#form1").serialize();
 	
 		$.ajax({
