@@ -56,7 +56,7 @@
     <div class="indexContainer">
     <!-- <button><a href="/home">home</a></button>
     <button><a href="/about">about</a></button> -->
-    <img src="resources/images/movinghair/movinghairLogo.PNG">
+    <!-- <img src="resources/images/movinghair/movinghairLogo.PNG"> -->
     <div class="btnContainer">
     	<div class="circle1" onclick="javascript:location.href='customerLoginView.do';">이용자
         	<!-- <button id="userBtn" onclick="location.href='customerLoginView.do'">이용자</button> -->

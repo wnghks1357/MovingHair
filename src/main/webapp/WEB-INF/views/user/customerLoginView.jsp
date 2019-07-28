@@ -41,7 +41,7 @@
   </head>
 
   <body>
-    <img src="resources/images/movinghair/movinghairLogo.PNG" style="margin-left: 43%; margin-top: 30px;" onclick="location.href='customerMain.do'">
+    <!-- <img src="resources/images/movinghair/movinghairLogo.PNG" style="margin-left: 43%; margin-top: 30px;" onclick="location.href='customerMain.do'"> -->
 	
    
     <div class="container">

@@ -4,7 +4,7 @@
   }
   
   body {
-    /* background-image: url("../../images/bootstrapTemplate/index.jpg"); */
+    background-image: url("../../images/bootstrapTemplate/index.jpg");
     
   }
   
@@ -21,7 +21,7 @@
   }
   
   .card-signin .card-body {
-    background-color: skyblue;
+    /* background-color: skyblue; */
     padding: 2rem;
   }
   
