@@ -1,4 +1,4 @@
-# myMovingHair
+# MovingHair
 
 헤어 디자이너와 사용자간의 서비스를 연결해주는 예약 프로그램
 
